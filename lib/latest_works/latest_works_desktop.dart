@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/utilities/constants.dart';
 
 class LatestWorksDesktop extends StatefulWidget {
   @override
@@ -52,10 +53,73 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                     width: MediaQuery.of(context).size.height / 1.5,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      gradient: LinearGradient(colors: [
-                        Color(0xFF16191E),
-                        Color(0xFF272729),
-                      ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                      gradient: LinearGradient(
+                        colors: [
+                          Color(0xFF16191E),
+                          Color(0xFF272729),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          height: MediaQuery.of(context).size.height / 6,
+                          width: MediaQuery.of(context).size.height / 1.5,
+                          child: Row(
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.height / 3,
+                                child: Center(
+                                  child: Text(
+                                    'Portfolio',
+                                    style: TextStyle(fontSize: 25),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.height / 3,
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        color: kPrimaryColor,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 8),
+                                          child: Text(
+                                            'Dart',
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Container(
+                                        color: kPrimaryColor,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 8),
+                                          child: Text(
+                                            'Flutter',
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 40),
+                          child: Image(
+                            image: AssetImage('assets/images/portfolio.png'),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Container(
@@ -103,6 +167,60 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                       borderRadius: BorderRadius.circular(8),
                       color: Color(0xFF2D3037),
                     ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          height: MediaQuery.of(context).size.height / 6,
+                          width: MediaQuery.of(context).size.height / 1.5,
+                          child: Row(
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.height / 3,
+                                child: Center(
+                                  child: Text(
+                                    'Cardify',
+                                    style: TextStyle(
+                                        fontSize: 25, color: Colors.green),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.height / 3,
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        color: kPrimaryColor,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 8),
+                                          child: Text(
+                                            'Dart',
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Container(
+                                        color: kPrimaryColor,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 8),
+                                          child: Text(
+                                            'Flutter',
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   Container(
                     height: MediaQuery.of(context).size.height / 1.5,
@@ -110,6 +228,61 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       color: Color(0xFF181B2C),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          height: MediaQuery.of(context).size.height / 6,
+                          width: MediaQuery.of(context).size.height / 1.5,
+                          child: Row(
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.height / 3,
+                                child: Center(
+                                  child: Text(
+                                    'Formatics',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.height / 3,
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        color: kPrimaryColor,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 8),
+                                          child: Text(
+                                            'Dart',
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Container(
+                                        color: kPrimaryColor,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 8),
+                                          child: Text(
+                                            'Flutter',
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
