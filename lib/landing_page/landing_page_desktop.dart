@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hovering/hovering.dart';
 
 class LandingPageDesktop extends StatefulWidget {
   @override
@@ -67,13 +68,91 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
           Container(
             width: MediaQuery.of(context).size.width / 2,
             height: MediaQuery.of(context).size.height - 80,
-            child: Center(
-              child: CircleAvatar(
-                backgroundColor: Colors.transparent,
-                backgroundImage:
-                    AssetImage('assets/images/profile picture.jpg'),
-                radius: MediaQuery.of(context).size.height / 2.7,
-              ),
+            child: Stack(
+              children: [
+                Center(
+                  child: CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    backgroundImage:
+                        AssetImage('assets/images/profile picture.jpg'),
+                    radius: MediaQuery.of(context).size.height / 2.7,
+                  ),
+                ),
+                Positioned(
+                  right: 180,
+                  top: 60,
+                  child: CircleAvatar(
+                    radius: 12,
+                    backgroundColor: Colors.green,
+                  ),
+                ),
+                Positioned(
+                  right: 30,
+                  bottom: 350,
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Color(0xFF25262A),
+                  ),
+                ),
+                Positioned(
+                  right: 65,
+                  bottom: 35,
+                  child: HoverAnimatedContainer(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFF25262A),
+                    ),
+                    height: MediaQuery.of(context).size.height / 4,
+                    width: MediaQuery.of(context).size.height / 4,
+                    hoverDecoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFF25262A),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0xFF25262A),
+                          blurRadius: 5.0, // soften the shadow
+                          spreadRadius: 5.0, //extend the shadow
+                        ),
+                      ],
+                    ),
+                    duration: Duration(milliseconds: 120),
+                    child: Center(
+                      child: Image(
+                        image: AssetImage('assets/icons/dart.png'),
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: 0,
+                  bottom: 220,
+                  child: HoverAnimatedContainer(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFF25262A),
+                    ),
+                    height: MediaQuery.of(context).size.height / 5,
+                    width: MediaQuery.of(context).size.height / 5,
+                    hoverDecoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFF25262A),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0xFF25262A).withOpacity(0.8),
+                          blurRadius: 5.0, // soften the shadow
+                          spreadRadius: 5.0, //extend the shadow
+                        ),
+                      ],
+                    ),
+                    duration: Duration(milliseconds: 100),
+                    child: Center(
+                      child: Image(
+                        image: AssetImage('assets/icons/flutter.png'),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
