@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
 import 'package:portfolio/navigation_bar/nav_bar_items.dart';
+import 'package:portfolio/theme/theme_switcher.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NavigationBarDesktop extends StatefulWidget {
@@ -34,47 +35,72 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
           ),
           Row(
             children: [
-              Container(
-                width: MediaQuery.of(context).size.width / 16,
-                child: Center(
-                  child: GestureDetector(
-                    onTap: () => launch("https://twitter.com/AmarjitM13"),
-                    child: HoverCrossFadeWidget(
-                      firstCurve: Curves.linear,
-                      secondCurve: Curves.linearToEaseOut,
-                      sizeCurve: Curves.linear,
-                      alignmentry: Alignment.center,
-                      reverseDuration: Duration(milliseconds: 125),
-                      duration: Duration(milliseconds: 150),
-                      firstChild: CircleAvatar(
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image(
-                              height: 48,
-                              width: 48,
-                              image: AssetImage('assets/icons/twitter.png'),
-                            ),
+              GestureDetector(
+                onTap: () => launch("https://twitter.com/AmarjitM13"),
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  width: MediaQuery.of(context).size.width / 16,
+                  child: Center(
+                    child: ThemeSwitcher.of(context).isDarkModeOn
+                        ? Image(
+                            image: AssetImage('assets/icons/twitter_white.png'),
+                            height: 20,
+                            width: 20,
+                          )
+                        : Image(
+                            image: AssetImage('assets/icons/twitter_black.png'),
+                            height: 20,
+                            width: 20,
                           ),
-                        ),
-                        backgroundColor: Colors.transparent,
-                        radius: 20,
-                      ),
-                      secondChild: CircleAvatar(
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Image(
-                              height: 48,
-                              width: 48,
-                              image: AssetImage('assets/icons/twitter.png'),
-                            ),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () => launch("https://github.com/AmarjitM13"),
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  width: MediaQuery.of(context).size.width / 16,
+                  child: Center(
+                    child: ThemeSwitcher.of(context).isDarkModeOn
+                        ? Image(
+                            image: AssetImage('assets/icons/github_white.png'),
+                            height: 22,
+                            width: 22,
+                          )
+                        : Image(
+                            image: AssetImage('assets/icons/github_black.png'),
+                            height: 22,
+                            width: 22,
                           ),
-                        ),
-                        backgroundColor: Colors.transparent,
-                        radius: 20,
-                      ),
-                    ),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () => launch(
+                    "https://www.linkedin.com/in/amarjit-mallick-53a89a187/"),
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  width: MediaQuery.of(context).size.width / 16,
+                  child: Center(
+                    child: ThemeSwitcher.of(context).isDarkModeOn
+                        ? Image(
+                            image:
+                                AssetImage('assets/icons/linkedin_white.png'),
+                            height: 20,
+                            width: 20,
+                          )
+                        : Image(
+                            image:
+                                AssetImage('assets/icons/linkedin_black.png'),
+                            height: 20,
+                            width: 20,
+                          ),
                   ),
                 ),
               ),
@@ -82,93 +108,16 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
                 width: MediaQuery.of(context).size.width / 16,
                 child: Center(
                   child: GestureDetector(
-                    onTap: () => launch("https://github.com/AmarjitM13"),
-                    child: HoverCrossFadeWidget(
-                      firstCurve: Curves.linear,
-                      secondCurve: Curves.linearToEaseOut,
-                      sizeCurve: Curves.linear,
-                      alignmentry: Alignment.center,
-                      reverseDuration: Duration(milliseconds: 125),
-                      duration: Duration(milliseconds: 150),
-                      firstChild: CircleAvatar(
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image(
-                              height: 48,
-                              width: 48,
-                              image: AssetImage('assets/icons/github.png'),
-                            ),
+                    onTap: () => ThemeSwitcher.of(context).switchDarkMode(),
+                    child: ThemeSwitcher.of(context).isDarkModeOn
+                        ? Icon(Icons.wb_sunny_rounded)
+                        : Image(
+                            image: AssetImage('assets/icons/dark.png'),
+                            height: 24,
+                            width: 24,
                           ),
-                        ),
-                        backgroundColor: Colors.transparent,
-                        radius: 20,
-                      ),
-                      secondChild: CircleAvatar(
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Image(
-                              height: 48,
-                              width: 48,
-                              image: AssetImage('assets/icons/github.png'),
-                            ),
-                          ),
-                        ),
-                        backgroundColor: Colors.transparent,
-                        radius: 20,
-                      ),
-                    ),
                   ),
                 ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width / 16,
-                child: Center(
-                  child: GestureDetector(
-                    onTap: () => launch(
-                        "https://www.google.com/intl/en-GB/gmail/about/#"),
-                    child: HoverCrossFadeWidget(
-                      firstCurve: Curves.linear,
-                      secondCurve: Curves.linearToEaseOut,
-                      sizeCurve: Curves.linear,
-                      alignmentry: Alignment.center,
-                      reverseDuration: Duration(milliseconds: 125),
-                      duration: Duration(milliseconds: 150),
-                      firstChild: CircleAvatar(
-                        child: Center(
-                          child: Icon(
-                            Icons.mail_outline_rounded,
-                            color: Colors.white.withOpacity(0.9),
-                            size: 25,
-                          ),
-                        ),
-                        backgroundColor: Colors.transparent,
-                        radius: 20,
-                      ),
-                      secondChild: CircleAvatar(
-                        child: Center(
-                          child: Icon(
-                            Icons.mail_outline_rounded,
-                            color: Colors.white.withOpacity(0.9),
-                            size: 29,
-                          ),
-                        ),
-                        backgroundColor: Colors.transparent,
-                        radius: 20,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width / 16,
-//                child: Center(
-//                  child: Switch(
-//                    value: false,
-//                    onChanged: null,
-//                  ),
-//                ),
               ),
             ],
           ),

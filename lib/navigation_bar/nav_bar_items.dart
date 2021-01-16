@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
+import 'package:portfolio/theme/theme_switcher.dart';
 
 class NameTag extends StatelessWidget {
   @override
@@ -17,7 +18,9 @@ class NameTag extends StatelessWidget {
                   fontSize: 25,
                   fontFamily: 'RobotoMono',
                   fontWeight: FontWeight.w500,
-                  color: Colors.green,
+                  color: ThemeSwitcher.of(context).isDarkModeOn
+                      ? Colors.green
+                      : Colors.blue,
                 ),
               ),
               SizedBox(
@@ -59,7 +62,11 @@ class _NavBarButtonState extends State<NavBarButton> {
       ),
       secondChild: Text(
         '< ${widget._buttonName} >',
-        style: TextStyle(color: Colors.green, fontFamily: 'RobotoMono'),
+        style: TextStyle(
+            color: ThemeSwitcher.of(context).isDarkModeOn
+                ? Colors.green
+                : Colors.blue,
+            fontFamily: 'RobotoMono'),
       ),
     );
   }

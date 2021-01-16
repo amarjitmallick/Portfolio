@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
+import 'package:portfolio/theme/theme_switcher.dart';
 import 'package:portfolio/utilities/constants.dart';
 
 class IntroductionDesktop extends StatefulWidget {
@@ -13,7 +14,9 @@ class _IntroductionDesktopState extends State<IntroductionDesktop> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      color: Color(0xFF25262A),
+      color: ThemeSwitcher.of(context).isDarkModeOn
+          ? Color(0xFF25262A)
+          : Colors.grey[100],
       child: Row(
         children: [
           Container(
@@ -26,15 +29,23 @@ class _IntroductionDesktopState extends State<IntroductionDesktop> {
                   SizedBox(height: 50),
                   HoverAnimatedContainer(
                     decoration: BoxDecoration(
-                      color: kPrimaryColor,
+                      borderRadius: BorderRadius.circular(5),
+                      color: ThemeSwitcher.of(context).isDarkModeOn
+                          ? Color(0xFF2D2E32)
+                          : Colors.white,
                     ),
                     height: 200,
                     width: MediaQuery.of(context).size.width / 3,
                     hoverDecoration: BoxDecoration(
-                      color: kPrimaryColor,
+                      borderRadius: BorderRadius.circular(5),
+                      color: ThemeSwitcher.of(context).isDarkModeOn
+                          ? Color(0xFF2D2E32)
+                          : Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.35),
+                          color: ThemeSwitcher.of(context).isDarkModeOn
+                              ? Colors.black.withOpacity(0.35)
+                              : Colors.grey[300].withOpacity(0.8),
                           blurRadius: 5.0, // soften the shadow
                           spreadRadius: 3.0, //extend the shadow
                         ),
@@ -53,26 +64,37 @@ class _IntroductionDesktopState extends State<IntroductionDesktop> {
                               Text(
                                 'Design',
                                 style: TextStyle(
-                                    color: Colors.green,
+                                    color:
+                                        ThemeSwitcher.of(context).isDarkModeOn
+                                            ? Colors.green
+                                            : Colors.blue,
                                     fontFamily: 'RobotoMono',
                                     fontSize: 25),
                               ),
                               Icon(
                                 Icons.settings_ethernet,
-                                color: Colors.green,
+                                color: ThemeSwitcher.of(context).isDarkModeOn
+                                    ? Colors.green
+                                    : Colors.blue,
                               )
                             ],
                           ),
                           Text(
                             'data',
                             style: TextStyle(
-                                color: Colors.white.withOpacity(0.5),
+                                color: ThemeSwitcher.of(context).isDarkModeOn
+                                    ? Colors.white.withOpacity(0.5)
+                                    : Colors.black.withOpacity(0.5),
                                 fontFamily: 'RobotoMono',
                                 fontSize: 10),
                           ),
                           Text(
                             'data',
-                            style: TextStyle(color: Colors.white, fontSize: 11),
+                            style: TextStyle(
+                                color: ThemeSwitcher.of(context).isDarkModeOn
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontSize: 11),
                           ),
                         ],
                       ),
@@ -80,15 +102,23 @@ class _IntroductionDesktopState extends State<IntroductionDesktop> {
                   ),
                   HoverAnimatedContainer(
                     decoration: BoxDecoration(
-                      color: kPrimaryColor,
+                      borderRadius: BorderRadius.circular(5),
+                      color: ThemeSwitcher.of(context).isDarkModeOn
+                          ? Color(0xFF2D2E32)
+                          : Colors.white,
                     ),
                     height: 200,
                     width: MediaQuery.of(context).size.width / 3,
                     hoverDecoration: BoxDecoration(
-                      color: kPrimaryColor,
+                      borderRadius: BorderRadius.circular(5),
+                      color: ThemeSwitcher.of(context).isDarkModeOn
+                          ? Color(0xFF2D2E32)
+                          : Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.35),
+                          color: ThemeSwitcher.of(context).isDarkModeOn
+                              ? Colors.black.withOpacity(0.35)
+                              : Colors.grey[300].withOpacity(0.8),
                           blurRadius: 5.0, // soften the shadow
                           spreadRadius: 3.0, //extend the shadow
                         ),
@@ -107,26 +137,37 @@ class _IntroductionDesktopState extends State<IntroductionDesktop> {
                               Text(
                                 'Design',
                                 style: TextStyle(
-                                    color: Colors.green,
+                                    color:
+                                        ThemeSwitcher.of(context).isDarkModeOn
+                                            ? Colors.green
+                                            : Colors.blue,
                                     fontFamily: 'RobotoMono',
                                     fontSize: 25),
                               ),
                               Icon(
                                 Icons.settings_ethernet,
-                                color: Colors.green,
+                                color: ThemeSwitcher.of(context).isDarkModeOn
+                                    ? Colors.green
+                                    : Colors.blue,
                               )
                             ],
                           ),
                           Text(
                             'data',
                             style: TextStyle(
-                                color: Colors.white.withOpacity(0.5),
+                                color: ThemeSwitcher.of(context).isDarkModeOn
+                                    ? Colors.white.withOpacity(0.5)
+                                    : Colors.black.withOpacity(0.5),
                                 fontFamily: 'RobotoMono',
                                 fontSize: 10),
                           ),
                           Text(
                             'data',
-                            style: TextStyle(color: Colors.white, fontSize: 11),
+                            style: TextStyle(
+                                color: ThemeSwitcher.of(context).isDarkModeOn
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontSize: 11),
                           ),
                         ],
                       ),
@@ -134,15 +175,23 @@ class _IntroductionDesktopState extends State<IntroductionDesktop> {
                   ),
                   HoverAnimatedContainer(
                     decoration: BoxDecoration(
-                      color: kPrimaryColor,
+                      borderRadius: BorderRadius.circular(5),
+                      color: ThemeSwitcher.of(context).isDarkModeOn
+                          ? Color(0xFF2D2E32)
+                          : Colors.white,
                     ),
                     height: 200,
                     width: MediaQuery.of(context).size.width / 3,
                     hoverDecoration: BoxDecoration(
-                      color: kPrimaryColor,
+                      borderRadius: BorderRadius.circular(5),
+                      color: ThemeSwitcher.of(context).isDarkModeOn
+                          ? Color(0xFF2D2E32)
+                          : Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.35),
+                          color: ThemeSwitcher.of(context).isDarkModeOn
+                              ? Colors.black.withOpacity(0.35)
+                              : Colors.grey[300].withOpacity(0.8),
                           blurRadius: 5.0, // soften the shadow
                           spreadRadius: 3.0, //extend the shadow
                         ),
@@ -161,26 +210,37 @@ class _IntroductionDesktopState extends State<IntroductionDesktop> {
                               Text(
                                 'Design',
                                 style: TextStyle(
-                                    color: Colors.green,
+                                    color:
+                                        ThemeSwitcher.of(context).isDarkModeOn
+                                            ? Colors.green
+                                            : Colors.blue,
                                     fontFamily: 'RobotoMono',
                                     fontSize: 25),
                               ),
                               Icon(
                                 Icons.settings_ethernet,
-                                color: Colors.green,
+                                color: ThemeSwitcher.of(context).isDarkModeOn
+                                    ? Colors.green
+                                    : Colors.blue,
                               )
                             ],
                           ),
                           Text(
                             'data',
                             style: TextStyle(
-                                color: Colors.white.withOpacity(0.5),
+                                color: ThemeSwitcher.of(context).isDarkModeOn
+                                    ? Colors.white.withOpacity(0.5)
+                                    : Colors.black.withOpacity(0.5),
                                 fontFamily: 'RobotoMono',
                                 fontSize: 10),
                           ),
                           Text(
                             'data',
-                            style: TextStyle(color: Colors.white, fontSize: 11),
+                            style: TextStyle(
+                                color: ThemeSwitcher.of(context).isDarkModeOn
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontSize: 11),
                           ),
                         ],
                       ),
@@ -203,21 +263,27 @@ class _IntroductionDesktopState extends State<IntroductionDesktop> {
                   Text(
                     'Introduce',
                     style: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
+                        color: ThemeSwitcher.of(context).isDarkModeOn
+                            ? Colors.white.withOpacity(0.5)
+                            : Colors.black.withOpacity(0.5),
                         fontFamily: 'RobotoMono',
                         fontSize: 10),
                   ),
                   Text(
                     "Hello! I'm Amarjit\nMallick",
                     style: TextStyle(
-                        color: Colors.white,
+                        color: ThemeSwitcher.of(context).isDarkModeOn
+                            ? Colors.green
+                            : Colors.blue,
                         fontFamily: 'RobotoMono',
                         fontSize: 40),
                   ),
                   Text(
                     'Every great design begin with an\neven better story',
                     style: TextStyle(
-                        color: Colors.white,
+                        color: ThemeSwitcher.of(context).isDarkModeOn
+                            ? Colors.white
+                            : Colors.black,
                         fontFamily: 'RobotoMono',
                         fontSize: 25,
                         fontStyle: FontStyle.italic),
@@ -225,7 +291,9 @@ class _IntroductionDesktopState extends State<IntroductionDesktop> {
                   Text(
                     'I design and code beautifully simple things\nand I love what I do.',
                     style: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
+                        color: ThemeSwitcher.of(context).isDarkModeOn
+                            ? Colors.white.withOpacity(0.5)
+                            : Colors.black.withOpacity(0.5),
                         fontFamily: 'RobotoMono',
                         fontSize: 10),
                   ),

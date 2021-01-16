@@ -15,7 +15,6 @@ class _DesktopViewState extends State<DesktopView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kPrimaryColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
