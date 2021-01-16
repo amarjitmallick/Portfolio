@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/theme/theme_switcher.dart';
 import 'package:portfolio/utilities/constants.dart';
 
 class LatestWorksDesktop extends StatefulWidget {
@@ -12,7 +13,9 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 2,
-      color: Color(0xFF25262A),
+      color: ThemeSwitcher.of(context).isDarkModeOn
+          ? Color(0xFF25262A)
+          : Colors.grey[100],
       child: Row(
         children: [
           Container(
@@ -32,15 +35,15 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                           Text(
                             'Latest Works',
                             style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'RobotoMono',
-                                fontSize: 40),
+                                fontFamily: 'RobotoMono', fontSize: 40),
                           ),
                           SizedBox(height: 20),
                           Text(
                             'Perfect solutions for digital experience',
                             style: TextStyle(
-                                color: Colors.white.withOpacity(0.5),
+                                color: ThemeSwitcher.of(context).isDarkModeOn
+                                    ? Colors.white.withOpacity(0.5)
+                                    : Colors.black.withOpacity(0.5),
                                 fontFamily: 'RobotoMono',
                                 fontSize: 10),
                           ),
@@ -55,8 +58,12 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                       borderRadius: BorderRadius.circular(8),
                       gradient: LinearGradient(
                         colors: [
-                          Color(0xFF16191E),
-                          Color(0xFF272729),
+                          ThemeSwitcher.of(context).isDarkModeOn
+                              ? Color(0xFF16191E)
+                              : Color(0xFFf5f4f4),
+                          ThemeSwitcher.of(context).isDarkModeOn
+                              ? Color(0xFF272729)
+                              : Colors.grey[200],
                         ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
@@ -75,7 +82,13 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                                 child: Center(
                                   child: Text(
                                     'Portfolio',
-                                    style: TextStyle(fontSize: 25),
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      color:
+                                          ThemeSwitcher.of(context).isDarkModeOn
+                                              ? Colors.white
+                                              : Colors.blue,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -86,7 +99,10 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Container(
-                                        color: kPrimaryColor,
+                                        color: ThemeSwitcher.of(context)
+                                                .isDarkModeOn
+                                            ? Color(0xFF272729)
+                                            : Colors.grey[200],
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 5, horizontal: 8),
@@ -97,7 +113,10 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                                       ),
                                       SizedBox(width: 10),
                                       Container(
-                                        color: kPrimaryColor,
+                                        color: ThemeSwitcher.of(context)
+                                                .isDarkModeOn
+                                            ? Color(0xFF272729)
+                                            : Colors.grey[200],
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 5, horizontal: 8),
@@ -132,7 +151,9 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                           Text(
                             'ALL PROJECTS',
                             style: TextStyle(
-                                color: Colors.green,
+                                color: ThemeSwitcher.of(context).isDarkModeOn
+                                    ? Colors.green
+                                    : Colors.blue,
                                 fontFamily: 'RobotoMono',
                                 fontSize: 25,
                                 decoration: TextDecoration.underline),
@@ -141,7 +162,9 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                           Text(
                             '*Some projects are not allowed to publish.\nIf you want to see more, contact ',
                             style: TextStyle(
-                                color: Colors.white.withOpacity(0.5),
+                                color: ThemeSwitcher.of(context).isDarkModeOn
+                                    ? Colors.white.withOpacity(0.5)
+                                    : Colors.black.withOpacity(0.5),
                                 fontFamily: 'RobotoMono',
                                 fontSize: 10),
                           ),
@@ -165,7 +188,14 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                     width: MediaQuery.of(context).size.height / 1.5,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: Color(0xFF2D3037),
+                      gradient: LinearGradient(colors: [
+                        ThemeSwitcher.of(context).isDarkModeOn
+                            ? Color(0xFF2D3037)
+                            : Color(0xFFf5f4f4),
+                        ThemeSwitcher.of(context).isDarkModeOn
+                            ? Color(0xFF25262A)
+                            : Colors.grey[200],
+                      ], begin: Alignment.topRight, end: Alignment.bottomLeft),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -181,7 +211,12 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                                   child: Text(
                                     'Cardify',
                                     style: TextStyle(
-                                        fontSize: 25, color: Colors.green),
+                                      fontSize: 25,
+                                      color:
+                                          ThemeSwitcher.of(context).isDarkModeOn
+                                              ? Colors.green
+                                              : Colors.blue,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -192,7 +227,10 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Container(
-                                        color: kPrimaryColor,
+                                        color: ThemeSwitcher.of(context)
+                                                .isDarkModeOn
+                                            ? Colors.transparent
+                                            : Colors.grey[200],
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 5, horizontal: 8),
@@ -203,7 +241,10 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                                       ),
                                       SizedBox(width: 10),
                                       Container(
-                                        color: kPrimaryColor,
+                                        color: ThemeSwitcher.of(context)
+                                                .isDarkModeOn
+                                            ? Colors.transparent
+                                            : Colors.grey[200],
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 5, horizontal: 8),
@@ -227,7 +268,14 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                     width: MediaQuery.of(context).size.height / 1.5,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: Color(0xFF181B2C),
+                      gradient: LinearGradient(colors: [
+                        ThemeSwitcher.of(context).isDarkModeOn
+                            ? Color(0xFF2D3037)
+                            : Color(0xFFf5f4f4),
+                        ThemeSwitcher.of(context).isDarkModeOn
+                            ? Color(0xFF25262A)
+                            : Colors.grey[200],
+                      ], begin: Alignment.bottomLeft, end: Alignment.topRight),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -244,6 +292,10 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                                     'Formatics',
                                     style: TextStyle(
                                       fontSize: 25,
+                                      color:
+                                          ThemeSwitcher.of(context).isDarkModeOn
+                                              ? Colors.green
+                                              : Colors.blue,
                                     ),
                                   ),
                                 ),
@@ -255,7 +307,10 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Container(
-                                        color: kPrimaryColor,
+                                        color: ThemeSwitcher.of(context)
+                                                .isDarkModeOn
+                                            ? Colors.transparent
+                                            : Colors.grey[200],
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 5, horizontal: 8),
@@ -266,7 +321,10 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                                       ),
                                       SizedBox(width: 10),
                                       Container(
-                                        color: kPrimaryColor,
+                                        color: ThemeSwitcher.of(context)
+                                                .isDarkModeOn
+                                            ? Colors.transparent
+                                            : Colors.grey[200],
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 5, horizontal: 8),

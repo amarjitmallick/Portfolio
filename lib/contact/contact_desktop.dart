@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/navigation_bar/nav_bar_items.dart';
+import 'package:portfolio/theme/theme_switcher.dart';
 
 class ContactDesktop extends StatefulWidget {
   @override
@@ -12,7 +13,6 @@ class _ContactDesktopState extends State<ContactDesktop> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height / 1.5,
-      color: Color(0xFF2D2E32),
       child: Row(
         children: [
           Container(
@@ -25,25 +25,21 @@ class _ContactDesktopState extends State<ContactDesktop> {
                 children: [
                   Text(
                     "Let's make something amazing\ntogether.",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'RobotoMono',
-                        fontSize: 40),
+                    style: TextStyle(fontFamily: 'RobotoMono', fontSize: 40),
                   ),
                   Text(
                     "Start by saying hi",
                     style: TextStyle(
-                        color: Colors.white,
+                        color: ThemeSwitcher.of(context).isDarkModeOn
+                            ? Colors.green
+                            : Colors.blue,
                         fontFamily: 'RobotoMono',
                         fontSize: 40),
                   ),
                   SizedBox(height: 20),
                   Text(
                     "Amarjit Mallick",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'RobotoMono',
-                        fontSize: 25),
+                    style: TextStyle(fontFamily: 'RobotoMono', fontSize: 25),
                   ),
                 ],
               ),
@@ -63,21 +59,27 @@ class _ContactDesktopState extends State<ContactDesktop> {
                     Text(
                       'Information',
                       style: TextStyle(
-                          color: Colors.white.withOpacity(0.5),
+                          color: ThemeSwitcher.of(context).isDarkModeOn
+                              ? Colors.white.withOpacity(0.5)
+                              : Colors.black.withOpacity(0.5),
                           fontFamily: 'RobotoMono',
                           fontSize: 10),
                     ),
                     Text(
                       'Email me:',
                       style: TextStyle(
-                          color: Colors.white.withOpacity(0.5),
+                          color: ThemeSwitcher.of(context).isDarkModeOn
+                              ? Colors.white.withOpacity(0.5)
+                              : Colors.black.withOpacity(0.5),
                           fontFamily: 'RobotoMono',
                           fontSize: 20),
                     ),
                     Text(
                       "mallickamarjit@gmail.com",
                       style: TextStyle(
-                          color: Colors.white,
+                          color: ThemeSwitcher.of(context).isDarkModeOn
+                              ? Colors.green
+                              : Colors.blue,
                           fontFamily: 'RobotoMono',
                           fontSize: 30),
                     ),
