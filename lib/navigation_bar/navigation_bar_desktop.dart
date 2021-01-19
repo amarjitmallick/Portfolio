@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hovering/hovering.dart';
+
 import 'package:portfolio/navigation_bar/nav_bar_items.dart';
 import 'package:portfolio/theme/theme_switcher.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
 class NavigationBarDesktop extends StatefulWidget {
+  final AutoScrollController controller;
+  NavigationBarDesktop(this.controller);
   @override
   _NavigationBarDesktopState createState() => _NavigationBarDesktopState();
 }
@@ -17,6 +20,7 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
       height: 80,
       width: MediaQuery.of(context).size.width,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           NameTag(),
           Container(
@@ -25,10 +29,34 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  NavBarButton('Services'),
-                  NavBarButton('Works'),
-                  NavBarButton('Notes'),
-                  NavBarButton('Contacts'),
+                  GestureDetector(
+                    child: NavBarButton('Introduction'),
+                    onTap: () async {
+                      await widget.controller.scrollToIndex(0,
+                          preferPosition: AutoScrollPosition.begin);
+                    },
+                  ),
+                  GestureDetector(
+                    child: NavBarButton('About'),
+                    onTap: () async {
+                      await widget.controller.scrollToIndex(1,
+                          preferPosition: AutoScrollPosition.begin);
+                    },
+                  ),
+                  GestureDetector(
+                    child: NavBarButton('Works'),
+                    onTap: () async {
+                      await widget.controller.scrollToIndex(2,
+                          preferPosition: AutoScrollPosition.begin);
+                    },
+                  ),
+                  GestureDetector(
+                    child: NavBarButton('Contact'),
+                    onTap: () async {
+                      await widget.controller.scrollToIndex(3,
+                          preferPosition: AutoScrollPosition.begin);
+                    },
+                  ),
                 ],
               ),
             ),
@@ -80,8 +108,8 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
                 ),
               ),
               GestureDetector(
-                onTap: () => launch(
-                    "https://www.linkedin.com/in/amarjit-mallick-53a89a187/"),
+                onTap: () =>
+                    launch("https://www.linkedin.com/in/amarjit-mallick/"),
                 child: Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,

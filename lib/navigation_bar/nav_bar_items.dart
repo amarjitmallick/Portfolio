@@ -6,7 +6,7 @@ class NameTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width / 4,
+      width: MediaQuery.of(context).size.width / 4 - 50,
       child: Container(
         child: Center(
           child: Row(
@@ -59,6 +59,7 @@ class _NavBarButtonState extends State<NavBarButton> {
       duration: Duration(milliseconds: 100),
       firstChild: Text(
         widget._buttonName,
+        style: TextStyle(fontSize: 15),
       ),
       secondChild: Text(
         '< ${widget._buttonName} >',
@@ -66,7 +67,8 @@ class _NavBarButtonState extends State<NavBarButton> {
             color: ThemeSwitcher.of(context).isDarkModeOn
                 ? Colors.green
                 : Colors.blue,
-            fontFamily: 'RobotoMono'),
+            fontFamily: 'RobotoMono',
+            fontSize: 15),
       ),
     );
   }

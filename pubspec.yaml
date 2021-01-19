@@ -31,6 +31,7 @@ dependencies:
   hovering: ^1.0.2
   responsive_builder: ^0.1.2
   url_launcher: ^5.4.10
+  scroll_to_index: any
 
 dev_dependencies:
   flutter_test:
