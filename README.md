@@ -4,7 +4,7 @@ This is my Portfolio Website
 I have added light & dark mode functoinality
 
 # Motivation 
-I have seen many portfolio websites. So I decided to make this portfolio website
+I have seen many portfolio websites. So I decided to make this portfolio website to showcase my skills
 
 # Screenshots
 <p align="center">
