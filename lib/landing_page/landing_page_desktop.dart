@@ -33,18 +33,14 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
                     SizedBox(height: 50),
                     Container(
                       decoration: BoxDecoration(
-                          color: ThemeSwitcher.of(context).isDarkModeOn
-                              ? Colors.green
-                              : Colors.blue,
+                          color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.green : Colors.blue,
                           borderRadius: BorderRadius.circular(5)),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          ' Front-End App Developer ',
+                          ' Mobile Application Developer ',
                           style: TextStyle(
-                              color: ThemeSwitcher.of(context).isDarkModeOn
-                                  ? Colors.black
-                                  : Colors.white,
+                              color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.black : Colors.white,
                               fontFamily: 'RobotoMono',
                               fontSize: 20),
                         ),
@@ -53,9 +49,7 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
                     Text(
                       'Talk is cheap.\nShow me the code',
                       style: TextStyle(
-                          color: ThemeSwitcher.of(context).isDarkModeOn
-                              ? Colors.white
-                              : Colors.black,
+                          color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.white : Colors.black,
                           fontFamily: 'RobotoMono',
                           fontSize: 40),
                     ),
@@ -72,9 +66,7 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
                     Text(
                       "LET'S CHAT!",
                       style: TextStyle(
-                          color: ThemeSwitcher.of(context).isDarkModeOn
-                              ? Colors.green
-                              : Colors.blue,
+                          color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.green : Colors.blue,
                           fontFamily: 'RobotoMono',
                           fontSize: 25),
                     ),
@@ -89,21 +81,14 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
               child: Stack(
                 children: [
                   Center(
-                    child: CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      backgroundImage:
-                          AssetImage('assets/images/profile picture.jpg'),
-                      radius: MediaQuery.of(context).size.height / 2.7,
-                    ),
+                    child: Image.asset('assets/images/profile.png'),
                   ),
                   Positioned(
                     right: 180,
                     top: 60,
                     child: CircleAvatar(
                       radius: 12,
-                      backgroundColor: ThemeSwitcher.of(context).isDarkModeOn
-                          ? Colors.green
-                          : Colors.blue,
+                      backgroundColor: ThemeSwitcher.of(context).isDarkModeOn ? Colors.green : Colors.blue,
                     ),
                   ),
                   Positioned(
@@ -111,9 +96,7 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
                     bottom: 350,
                     child: CircleAvatar(
                       radius: 20,
-                      backgroundColor: ThemeSwitcher.of(context).isDarkModeOn
-                          ? Color(0xFF25262A)
-                          : Colors.grey[200],
+                      backgroundColor: ThemeSwitcher.of(context).isDarkModeOn ? Color(0xFF25262A) : Colors.grey[200],
                     ),
                   ),
                   Positioned(
@@ -122,22 +105,16 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
                     child: HoverAnimatedContainer(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: ThemeSwitcher.of(context).isDarkModeOn
-                            ? Color(0xFF25262A)
-                            : Colors.grey[100],
+                        color: ThemeSwitcher.of(context).isDarkModeOn ? Color(0xFF25262A) : Colors.grey[100],
                       ),
                       height: MediaQuery.of(context).size.height / 4,
                       width: MediaQuery.of(context).size.height / 4,
                       hoverDecoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: ThemeSwitcher.of(context).isDarkModeOn
-                            ? Color(0xFF25262A)
-                            : Colors.grey[100],
+                        color: ThemeSwitcher.of(context).isDarkModeOn ? Color(0xFF25262A) : Colors.grey[100],
                         boxShadow: [
                           BoxShadow(
-                            color: ThemeSwitcher.of(context).isDarkModeOn
-                                ? Color(0xFF25262A)
-                                : Colors.grey[100],
+                            color: ThemeSwitcher.of(context).isDarkModeOn ? Color(0xFF25262A) : Colors.grey[100],
                             blurRadius: 5.0, // soften the shadow
                             spreadRadius: 5.0, //extend the shadow
                           ),
@@ -157,17 +134,13 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
                     child: HoverAnimatedContainer(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: ThemeSwitcher.of(context).isDarkModeOn
-                            ? Color(0xFF25262A)
-                            : Colors.grey[100],
+                        color: ThemeSwitcher.of(context).isDarkModeOn ? Color(0xFF25262A) : Colors.grey[100],
                       ),
                       height: MediaQuery.of(context).size.height / 5,
                       width: MediaQuery.of(context).size.height / 5,
                       hoverDecoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: ThemeSwitcher.of(context).isDarkModeOn
-                            ? Color(0xFF25262A)
-                            : Colors.grey[100],
+                        color: ThemeSwitcher.of(context).isDarkModeOn ? Color(0xFF25262A) : Colors.grey[100],
                         boxShadow: [
                           BoxShadow(
                             color: ThemeSwitcher.of(context).isDarkModeOn
