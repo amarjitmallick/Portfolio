@@ -19,9 +19,9 @@ class _DesktopViewState extends State<DesktopView> {
   void initState() {
     super.initState();
     controller = AutoScrollController(
-        viewportBoundaryGetter: () =>
-            Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
-        axis: scrollDirection);
+      viewportBoundaryGetter: () => Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
+      axis: scrollDirection,
+    );
   }
 
   @override
