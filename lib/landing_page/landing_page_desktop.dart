@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
 import 'package:portfolio/theme/theme_switcher.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LandingPageDesktop extends StatefulWidget {
   final AutoScrollController controller;
@@ -23,7 +24,66 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
         child: Row(
           children: [
             Container(
-              width: MediaQuery.of(context).size.width / 2,
+              width: 200,
+              height: MediaQuery.of(context).size.height / 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        launch('https://github.com/AmarjitM13');
+                      },
+                      child: Image.asset(
+                        'assets/icons/github.png',
+                        scale: 2,
+                        color: ThemeSwitcher.of(context).isDarkModeOn
+                            ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+                            : Color(0xFF646AFF),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        launch('https://www.linkedin.com/in/amarjit-mallick/');
+                      },
+                      child: Image.asset(
+                        'assets/icons/linkedin.png',
+                        scale: 2,
+                        color: ThemeSwitcher.of(context).isDarkModeOn
+                            ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+                            : Color(0xFF646AFF),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        launch('https://twitter.com/AmarjitM13');
+                      },
+                      child: Image.asset(
+                        'assets/icons/twitter.png',
+                        scale: 2,
+                        color: ThemeSwitcher.of(context).isDarkModeOn
+                            ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+                            : Color(0xFF646AFF),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      width: 2,
+                      color: ThemeSwitcher.of(context).isDarkModeOn
+                          ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+                          : Color(0xFF646AFF),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width / 2 - 100,
               height: MediaQuery.of(context).size.height - 80,
               child: Center(
                 child: Column(
@@ -76,7 +136,7 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
               ),
             ),
             Container(
-              width: MediaQuery.of(context).size.width / 2,
+              width: MediaQuery.of(context).size.width / 2 - 100,
               height: MediaQuery.of(context).size.height - 80,
               child: Stack(
                 children: [

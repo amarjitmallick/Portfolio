@@ -10,7 +10,7 @@ darkTheme(context) {
     brightness: Brightness.dark,
     buttonTheme: Theme.of(context).buttonTheme.copyWith(
           colorScheme: ColorScheme.dark(),
-          buttonColor: Colors.blue,
+          buttonColor: Color(0xFF00D1C7),
           splashColor: Colors.black,
         ),
     appBarTheme: AppBarTheme(
@@ -35,17 +35,18 @@ lightTheme(context) {
     brightness: Brightness.light,
     buttonTheme: Theme.of(context).buttonTheme.copyWith(
           colorScheme: ColorScheme.light(),
-          buttonColor: Colors.blue,
+          buttonColor: Color(0xFF646AFF),
           splashColor: Colors.white,
         ),
     appBarTheme: AppBarTheme(
+      backgroundColor: Colors.white,
       elevation: 0.0,
     ),
     colorScheme: ColorScheme.fromSwatch(
       primarySwatch: Colors.blue,
       brightness: Brightness.light,
     ).copyWith(
-      secondary: Colors.blue,
+      secondary: Color(0xFF646AFF),
     ),
   );
 }
