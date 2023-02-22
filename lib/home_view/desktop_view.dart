@@ -4,6 +4,7 @@ import 'package:portfolio/introduction/introduction_desktop.dart';
 import 'package:portfolio/landing_page/landing_page_desktop.dart';
 import 'package:portfolio/latest_works/latest_works_desktop.dart';
 import 'package:portfolio/navigation_bar/navigation_bar_desktop.dart';
+import 'package:portfolio/skills/skills_desktop.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 class DesktopView extends StatefulWidget {
@@ -37,6 +38,7 @@ class _DesktopViewState extends State<DesktopView> {
         children: [
           LandingPageDesktop(controller),
           IntroductionDesktop(controller),
+          SkillsDesktop(controller),
           LatestWorksDesktop(controller),
           ContactDesktop(controller),
         ],

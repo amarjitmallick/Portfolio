@@ -31,33 +31,39 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     GestureDetector(
-                      child: NavBarButton('About'),
+                      child: NavBarButton('Home'),
                       onTap: () async {
                         await widget.controller.scrollToIndex(0, preferPosition: AutoScrollPosition.begin);
                       },
                     ),
                     GestureDetector(
-                      child: NavBarButton('Skills'),
+                      child: NavBarButton('About'),
                       onTap: () async {
                         await widget.controller.scrollToIndex(1, preferPosition: AutoScrollPosition.begin);
                       },
                     ),
                     GestureDetector(
-                      child: NavBarButton('Portfolio'),
+                      child: NavBarButton('Skills'),
                       onTap: () async {
                         await widget.controller.scrollToIndex(2, preferPosition: AutoScrollPosition.begin);
                       },
                     ),
                     GestureDetector(
-                      child: NavBarButton('Career'),
+                      child: NavBarButton('Portfolio'),
                       onTap: () async {
                         await widget.controller.scrollToIndex(3, preferPosition: AutoScrollPosition.begin);
                       },
                     ),
                     GestureDetector(
+                      child: NavBarButton('Career'),
+                      onTap: () async {
+                        await widget.controller.scrollToIndex(4, preferPosition: AutoScrollPosition.begin);
+                      },
+                    ),
+                    GestureDetector(
                       child: NavBarButton('Contact'),
                       onTap: () async {
-                        await widget.controller.scrollToIndex(3, preferPosition: AutoScrollPosition.begin);
+                        await widget.controller.scrollToIndex(4, preferPosition: AutoScrollPosition.begin);
                       },
                     ),
                     Container(

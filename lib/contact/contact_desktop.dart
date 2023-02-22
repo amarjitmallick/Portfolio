@@ -15,9 +15,9 @@ class _ContactDesktopState extends State<ContactDesktop> {
   @override
   Widget build(BuildContext context) {
     return AutoScrollTag(
-      key: ValueKey(3),
+      key: ValueKey(4),
       controller: widget.controller,
-      index: 3,
+      index: 4,
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height / 1.5,
@@ -38,9 +38,7 @@ class _ContactDesktopState extends State<ContactDesktop> {
                     Text(
                       "Start by saying hi",
                       style: TextStyle(
-                          color: ThemeSwitcher.of(context).isDarkModeOn
-                              ? Colors.green
-                              : Colors.blue,
+                          color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.green : Colors.blue,
                           fontFamily: 'RobotoMono',
                           fontSize: 40),
                     ),
@@ -58,8 +56,7 @@ class _ContactDesktopState extends State<ContactDesktop> {
               width: MediaQuery.of(context).size.width / 2 - 100,
               child: Center(
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,9 +82,7 @@ class _ContactDesktopState extends State<ContactDesktop> {
                       Text(
                         "mallickamarjit@gmail.com",
                         style: TextStyle(
-                            color: ThemeSwitcher.of(context).isDarkModeOn
-                                ? Colors.green
-                                : Colors.blue,
+                            color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.green : Colors.blue,
                             fontFamily: 'RobotoMono',
                             fontSize: 30),
                       ),
@@ -95,37 +90,32 @@ class _ContactDesktopState extends State<ContactDesktop> {
                       GestureDetector(
                         child: NavBarButton('Introduction'),
                         onTap: () async {
-                          await widget.controller.scrollToIndex(0,
-                              preferPosition: AutoScrollPosition.begin);
+                          await widget.controller.scrollToIndex(0, preferPosition: AutoScrollPosition.begin);
                         },
                       ),
                       GestureDetector(
                         child: NavBarButton('About'),
                         onTap: () async {
-                          await widget.controller.scrollToIndex(1,
-                              preferPosition: AutoScrollPosition.begin);
+                          await widget.controller.scrollToIndex(1, preferPosition: AutoScrollPosition.begin);
                         },
                       ),
                       GestureDetector(
                         child: NavBarButton('Works'),
                         onTap: () async {
-                          await widget.controller.scrollToIndex(2,
-                              preferPosition: AutoScrollPosition.begin);
+                          await widget.controller.scrollToIndex(2, preferPosition: AutoScrollPosition.begin);
                         },
                       ),
                       GestureDetector(
                         child: NavBarButton('Contact'),
                         onTap: () async {
-                          await widget.controller.scrollToIndex(3,
-                              preferPosition: AutoScrollPosition.begin);
+                          await widget.controller.scrollToIndex(3, preferPosition: AutoScrollPosition.begin);
                         },
                       ),
                       SizedBox(height: 30),
                       Row(
                         children: [
                           GestureDetector(
-                            onTap: () =>
-                                launch("https://twitter.com/AmarjitM13"),
+                            onTap: () => launch("https://twitter.com/AmarjitM13"),
                             child: Container(
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
@@ -134,14 +124,12 @@ class _ContactDesktopState extends State<ContactDesktop> {
                               child: Center(
                                 child: ThemeSwitcher.of(context).isDarkModeOn
                                     ? Image(
-                                        image: AssetImage(
-                                            'assets/icons/twitter_white.png'),
+                                        image: AssetImage('assets/icons/twitter_white.png'),
                                         height: 20,
                                         width: 20,
                                       )
                                     : Image(
-                                        image: AssetImage(
-                                            'assets/icons/twitter_black.png'),
+                                        image: AssetImage('assets/icons/twitter_black.png'),
                                         height: 20,
                                         width: 20,
                                       ),
@@ -150,8 +138,7 @@ class _ContactDesktopState extends State<ContactDesktop> {
                           ),
                           SizedBox(width: 10),
                           GestureDetector(
-                            onTap: () =>
-                                launch("https://github.com/AmarjitM13"),
+                            onTap: () => launch("https://github.com/AmarjitM13"),
                             child: Container(
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
@@ -160,14 +147,12 @@ class _ContactDesktopState extends State<ContactDesktop> {
                               child: Center(
                                 child: ThemeSwitcher.of(context).isDarkModeOn
                                     ? Image(
-                                        image: AssetImage(
-                                            'assets/icons/github_white.png'),
+                                        image: AssetImage('assets/icons/github_white.png'),
                                         height: 22,
                                         width: 22,
                                       )
                                     : Image(
-                                        image: AssetImage(
-                                            'assets/icons/github_black.png'),
+                                        image: AssetImage('assets/icons/github_black.png'),
                                         height: 22,
                                         width: 22,
                                       ),
@@ -176,8 +161,7 @@ class _ContactDesktopState extends State<ContactDesktop> {
                           ),
                           SizedBox(width: 10),
                           GestureDetector(
-                            onTap: () => launch(
-                                "https://www.linkedin.com/in/amarjit-mallick/"),
+                            onTap: () => launch("https://www.linkedin.com/in/amarjit-mallick/"),
                             child: Container(
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
@@ -186,14 +170,12 @@ class _ContactDesktopState extends State<ContactDesktop> {
                               child: Center(
                                 child: ThemeSwitcher.of(context).isDarkModeOn
                                     ? Image(
-                                        image: AssetImage(
-                                            'assets/icons/linkedin_white.png'),
+                                        image: AssetImage('assets/icons/linkedin_white.png'),
                                         height: 20,
                                         width: 20,
                                       )
                                     : Image(
-                                        image: AssetImage(
-                                            'assets/icons/linkedin_black.png'),
+                                        image: AssetImage('assets/icons/linkedin_black.png'),
                                         height: 20,
                                         width: 20,
                                       ),
@@ -202,8 +184,7 @@ class _ContactDesktopState extends State<ContactDesktop> {
                           ),
                           SizedBox(width: 10),
                           GestureDetector(
-                            onTap: () => launch(
-                                "https://www.instagram.com/amarjitmallick"),
+                            onTap: () => launch("https://www.instagram.com/amarjitmallick"),
                             child: Container(
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
@@ -212,14 +193,12 @@ class _ContactDesktopState extends State<ContactDesktop> {
                               child: Center(
                                 child: ThemeSwitcher.of(context).isDarkModeOn
                                     ? Image(
-                                        image: AssetImage(
-                                            'assets/icons/instagram_white.png'),
+                                        image: AssetImage('assets/icons/instagram_white.png'),
                                         height: 20,
                                         width: 20,
                                       )
                                     : Image(
-                                        image: AssetImage(
-                                            'assets/icons/instagram_black.png'),
+                                        image: AssetImage('assets/icons/instagram_black.png'),
                                         height: 20,
                                         width: 20,
                                       ),
