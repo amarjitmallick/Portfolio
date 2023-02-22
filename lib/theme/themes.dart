@@ -5,13 +5,13 @@ darkTheme(context) {
     fontFamily: 'RobotoMono',
     primaryColor: Color(0xFF1D2C33),
     disabledColor: Colors.grey,
-    cardColor: Color(0xff1f2124),
+    cardColor: Color(0xFF1D2C33),
     canvasColor: Color(0xFF1D2C33),
     brightness: Brightness.dark,
     buttonTheme: Theme.of(context).buttonTheme.copyWith(
           colorScheme: ColorScheme.dark(),
           buttonColor: Color(0xFF00D1C7),
-          splashColor: Colors.black,
+          splashColor: Color(0xFF1D2C33),
         ),
     appBarTheme: AppBarTheme(
       backgroundColor: Color(0xFF1D2C33),

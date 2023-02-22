@@ -22,77 +22,209 @@ class _IntroductionDesktopState extends State<IntroductionDesktop> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         color: ThemeSwitcher.of(context).isDarkModeOn
-            ? Color(0xFF25262A)
+            ? Color(0xFF1D2C33) //Color(0xFF1D2C33)Colors.white
             : Colors.grey[100],
         child: Row(
           children: [
-            Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width / 2,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(height: 50),
-                    CardView(),
-                    CardView(),
-                    CardView(),
-                    SizedBox(height: 50),
-                  ],
+            Expanded(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width / 2,
+                padding: EdgeInsets.all(100),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'a little about me ',
+                        style: TextStyle(
+                          color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.white : Colors.black,
+                          fontSize: 60,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'RobotoMono',
+                        ),
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: RichText(
+                            text: TextSpan(
+                              text: "I've been sailing the app development seas more than 2 years. "
+                                  "I've been creating everything from regular apps and dashboards,"
+                                  " all the way to complex mobile applications."
+                                  "\n\nThe main characteristic of my work one could give for all these years has been simple:\n\n",
+                              style: TextStyle(
+                                color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.white : Colors.black,
+                                fontFamily: 'RobotoMono',
+                                fontSize: 40,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: "Get things done. Fast!!!!!",
+                                  style: TextStyle(
+                                      color: ThemeSwitcher.of(context).isDarkModeOn
+                                          ? Color(0xFF00D1C7)
+                                          : Color(0xFF646AFF),
+                                      fontFamily: 'RobotoMono',
+                                      fontSize: 50,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                TextSpan(
+                                    text:
+                                        "\n\nI write clean and modern Dart code with a rigid code-style, and I do it really fast. "),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-            Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width / 2,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 50),
-                    Text(
-                      'About',
-                      style: TextStyle(
-                          color: ThemeSwitcher.of(context).isDarkModeOn
-                              ? Colors.white.withOpacity(0.5)
-                              : Colors.black.withOpacity(0.5),
-                          fontFamily: 'RobotoMono',
-                          fontSize: 10),
-                    ),
-                    Text(
-                      "Hello! I'm\nAmarjit Mallick",
-                      style: TextStyle(
-                          color: ThemeSwitcher.of(context).isDarkModeOn
-                              ? Colors.green
-                              : Colors.blue,
-                          fontFamily: 'RobotoMono',
-                          fontSize: 40),
-                    ),
-                    Text(
-                      'Every great design begin with an\neven better story',
-                      style: TextStyle(
-                          color: ThemeSwitcher.of(context).isDarkModeOn
-                              ? Colors.white
-                              : Colors.black,
-                          fontFamily: 'RobotoMono',
-                          fontSize: 25,
-                          fontStyle: FontStyle.italic),
-                    ),
-                    Text(
-                      'I design and code beautifully simple things\nand I love what I do.',
-                      style: TextStyle(
-                          color: ThemeSwitcher.of(context).isDarkModeOn
-                              ? Colors.white.withOpacity(0.5)
-                              : Colors.black.withOpacity(0.5),
-                          fontFamily: 'RobotoMono',
-                          fontSize: 10),
-                    ),
-                    SizedBox(height: 100),
-                  ],
-                ),
-              ),
-            ),
+            // Expanded(
+            //   child: Center(
+            //     child: Column(
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: [
+            //         Padding(
+            //           padding: const EdgeInsets.symmetric(horizontal: 50),
+            //           child: Text(
+            //             'My Skills',
+            //             style: TextStyle(
+            //               color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.white : Colors.black,
+            //               fontSize: 40,
+            //               fontWeight: FontWeight.bold,
+            //               fontFamily: 'RobotoMono',
+            //             ),
+            //           ),
+            //         ),
+            //         Expanded(
+            //           child: GridView.count(
+            //             shrinkWrap: true,
+            //             crossAxisCount: 3,
+            //             crossAxisSpacing: 15.0,
+            //             mainAxisSpacing: 15.0,
+            //             primary: false,
+            //             padding: EdgeInsets.all(50),
+            //             children: [
+            //               ElevatedButton(
+            //                 onPressed: () {},
+            //                 style: ElevatedButton.styleFrom(
+            //                   backgroundColor: Color(0xFF1D2C33).withOpacity(0.5),
+            //                 ),
+            //                 child: Column(
+            //                   mainAxisAlignment: MainAxisAlignment.center,
+            //                   children: [
+            //                     Image.asset('assets/icons/flutter.png'),
+            //                     Text(
+            //                       'Flutter',
+            //                       style: TextStyle(
+            //                         color: ThemeSwitcher.of(context).isDarkModeOn
+            //                             ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+            //                             : Color(0xFF646AFF),
+            //                         fontFamily: 'RobotoMono',
+            //                         fontSize: 10,
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //               ElevatedButton(
+            //                 onPressed: () {},
+            //                 style: ElevatedButton.styleFrom(
+            //                   backgroundColor: Color(0xFF1D2C33).withOpacity(0.5),
+            //                 ),
+            //                 child: Column(
+            //                   mainAxisAlignment: MainAxisAlignment.center,
+            //                   children: [
+            //                     Image.asset('assets/icons/flutter.png'),
+            //                     Text(
+            //                       'Flutter',
+            //                       style: TextStyle(
+            //                         color: ThemeSwitcher.of(context).isDarkModeOn
+            //                             ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+            //                             : Color(0xFF646AFF),
+            //                         fontFamily: 'RobotoMono',
+            //                         fontSize: 10,
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //               ElevatedButton(
+            //                 onPressed: () {},
+            //                 style: ElevatedButton.styleFrom(
+            //                   backgroundColor: Color(0xFF1D2C33).withOpacity(0.5),
+            //                 ),
+            //                 child: Column(
+            //                   mainAxisAlignment: MainAxisAlignment.center,
+            //                   children: [
+            //                     Image.asset('assets/icons/flutter.png'),
+            //                     Text(
+            //                       'Flutter',
+            //                       style: TextStyle(
+            //                         color: ThemeSwitcher.of(context).isDarkModeOn
+            //                             ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+            //                             : Color(0xFF646AFF),
+            //                         fontFamily: 'RobotoMono',
+            //                         fontSize: 10,
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //               ElevatedButton(
+            //                 onPressed: () {},
+            //                 style: ElevatedButton.styleFrom(
+            //                   backgroundColor: Color(0xFF1D2C33).withOpacity(0.5),
+            //                 ),
+            //                 child: Column(
+            //                   mainAxisAlignment: MainAxisAlignment.center,
+            //                   children: [
+            //                     Image.asset('assets/icons/flutter.png'),
+            //                     Text(
+            //                       'Flutter',
+            //                       style: TextStyle(
+            //                         color: ThemeSwitcher.of(context).isDarkModeOn
+            //                             ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+            //                             : Color(0xFF646AFF),
+            //                         fontFamily: 'RobotoMono',
+            //                         fontSize: 10,
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //               ElevatedButton(
+            //                 onPressed: () {},
+            //                 style: ElevatedButton.styleFrom(
+            //                   backgroundColor: Color(0xFF1D2C33).withOpacity(0.5),
+            //                 ),
+            //                 child: Column(
+            //                   mainAxisAlignment: MainAxisAlignment.center,
+            //                   children: [
+            //                     Image.asset('assets/icons/flutter.png'),
+            //                     Text(
+            //                       'Flutter',
+            //                       style: TextStyle(
+            //                         color: ThemeSwitcher.of(context).isDarkModeOn
+            //                             ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+            //                             : Color(0xFF646AFF),
+            //                         fontFamily: 'RobotoMono',
+            //                         fontSize: 10,
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -115,17 +247,11 @@ class _CardViewState extends State<CardView> {
     return HoverAnimatedContainer(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        color: ThemeSwitcher.of(context).isDarkModeOn
-            ? Color(0xFF2D2E32)
-            : Colors.white,
+        color: ThemeSwitcher.of(context).isDarkModeOn ? Color(0xFF2D2E32) : Colors.white,
       ),
-      height: 200,
-      width: MediaQuery.of(context).size.width / 3,
       hoverDecoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        color: ThemeSwitcher.of(context).isDarkModeOn
-            ? Color(0xFF2D2E32)
-            : Colors.white,
+        color: ThemeSwitcher.of(context).isDarkModeOn ? Color(0xFF2D2E32) : Colors.white,
         boxShadow: [
           BoxShadow(
             color: ThemeSwitcher.of(context).isDarkModeOn
@@ -141,44 +267,17 @@ class _CardViewState extends State<CardView> {
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Design',
-                  style: TextStyle(
-                      color: ThemeSwitcher.of(context).isDarkModeOn
-                          ? Colors.green
-                          : Colors.blue,
-                      fontFamily: 'RobotoMono',
-                      fontSize: 25),
-                ),
-                Icon(
-                  Icons.settings_ethernet,
-                  color: ThemeSwitcher.of(context).isDarkModeOn
-                      ? Colors.green
-                      : Colors.blue,
-                )
-              ],
-            ),
+            Image.asset('assets/icons/flutter.png'),
             Text(
-              'data',
+              'Flutter',
               style: TextStyle(
-                  color: ThemeSwitcher.of(context).isDarkModeOn
-                      ? Colors.white.withOpacity(0.5)
-                      : Colors.black.withOpacity(0.5),
-                  fontFamily: 'RobotoMono',
-                  fontSize: 10),
-            ),
-            Text(
-              'data',
-              style: TextStyle(
-                  color: ThemeSwitcher.of(context).isDarkModeOn
-                      ? Colors.white
-                      : Colors.black,
-                  fontSize: 11),
+                color: ThemeSwitcher.of(context).isDarkModeOn
+                    ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+                    : Color(0xFF646AFF),
+                fontFamily: 'RobotoMono',
+                fontSize: 10,
+              ),
             ),
           ],
         ),
