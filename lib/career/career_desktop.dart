@@ -21,7 +21,7 @@ class _CareerDesktopState extends State<CareerDesktop> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 50),
-        color: ThemeSwitcher.of(context).isDarkModeOn ? Color(0xFF1D2C33) : Colors.grey[100],
+        color: ThemeSwitcher.of(context).isDarkModeOn ? Color(0xFF1D2C33) : Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,

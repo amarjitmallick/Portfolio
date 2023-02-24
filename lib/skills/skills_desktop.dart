@@ -21,7 +21,7 @@ class _SkillsDesktopState extends State<SkillsDesktop> {
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        color: ThemeSwitcher.of(context).isDarkModeOn ? Color(0xFF1D2C33) : Colors.grey[100],
+        color: ThemeSwitcher.of(context).isDarkModeOn ? Color(0xFF1D2C33) : Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

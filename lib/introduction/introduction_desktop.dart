@@ -23,7 +23,7 @@ class _IntroductionDesktopState extends State<IntroductionDesktop> {
         height: MediaQuery.of(context).size.height,
         color: ThemeSwitcher.of(context).isDarkModeOn
             ? Color(0xFF1D2C33) //Color(0xFF1D2C33)Colors.white
-            : Colors.grey[100],
+            : Colors.white,
         child: Row(
           children: [
             Expanded(
