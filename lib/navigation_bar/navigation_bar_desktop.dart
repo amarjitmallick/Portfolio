@@ -63,7 +63,7 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
                     GestureDetector(
                       child: NavBarButton('Contact'),
                       onTap: () async {
-                        await widget.controller.scrollToIndex(4, preferPosition: AutoScrollPosition.begin);
+                        await widget.controller.scrollToIndex(5, preferPosition: AutoScrollPosition.begin);
                       },
                     ),
                     Container(

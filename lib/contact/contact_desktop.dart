@@ -15,9 +15,9 @@ class _ContactDesktopState extends State<ContactDesktop> {
   @override
   Widget build(BuildContext context) {
     return AutoScrollTag(
-      key: ValueKey(4),
+      key: ValueKey(5),
       controller: widget.controller,
-      index: 4,
+      index: 5,
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height / 1.5,
