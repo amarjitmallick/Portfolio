@@ -21,9 +21,13 @@ class _IntroductionDesktopState extends State<IntroductionDesktop> {
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        color: ThemeSwitcher.of(context).isDarkModeOn
-            ? Color(0xFF1D2C33) //Color(0xFF1D2C33)Colors.white
-            : Colors.white,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            opacity: 0.3,
+            fit: BoxFit.fill,
+            image: AssetImage('assets/images/bg_rev.png'),
+          ),
+        ),
         child: Row(
           children: [
             Expanded(

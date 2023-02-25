@@ -18,7 +18,7 @@ class _MobileViewState extends State<MobileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kPrimaryColor,
+      backgroundColor: Theme.of(context).primaryColor,
       endDrawer: CustomDrawer(),
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -98,8 +98,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                   child: Image(
                                     height: 48,
                                     width: 48,
-                                    image:
-                                        AssetImage('assets/icons/twitter.png'),
+                                    image: AssetImage('assets/icons/twitter.png'),
                                   ),
                                 ),
                               ),
@@ -113,8 +112,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                   child: Image(
                                     height: 48,
                                     width: 48,
-                                    image:
-                                        AssetImage('assets/icons/twitter.png'),
+                                    image: AssetImage('assets/icons/twitter.png'),
                                   ),
                                 ),
                               ),
@@ -143,8 +141,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                   child: Image(
                                     height: 48,
                                     width: 48,
-                                    image:
-                                        AssetImage('assets/icons/github.png'),
+                                    image: AssetImage('assets/icons/github.png'),
                                   ),
                                 ),
                               ),
@@ -158,8 +155,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                   child: Image(
                                     height: 48,
                                     width: 48,
-                                    image:
-                                        AssetImage('assets/icons/github.png'),
+                                    image: AssetImage('assets/icons/github.png'),
                                   ),
                                 ),
                               ),
@@ -173,8 +169,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     Container(
                       child: Center(
                         child: GestureDetector(
-                          onTap: () => launch(
-                              "https://www.google.com/intl/en-GB/gmail/about/#"),
+                          onTap: () => launch("https://www.google.com/intl/en-GB/gmail/about/#"),
                           child: HoverCrossFadeWidget(
                             firstCurve: Curves.linear,
                             secondCurve: Curves.linearToEaseOut,

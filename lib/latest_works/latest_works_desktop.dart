@@ -21,6 +21,13 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            opacity: 0.3,
+            fit: BoxFit.fill,
+            image: AssetImage('assets/images/bg_rev.png'),
+          ),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
