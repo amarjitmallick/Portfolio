@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/utilities/constants.dart';
+import 'package:portfolio/theme/theme_switcher.dart';
 
 class NavigationBarMobile extends StatefulWidget {
   @override
@@ -23,7 +23,9 @@ class _NavigationBarMobileState extends State<NavigationBarMobile> {
           child: IconButton(
             icon: Icon(
               Icons.menu_rounded,
-              color: Colors.green,
+              color: ThemeSwitcher.of(context).isDarkModeOn
+                  ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+                  : Color(0xFF646AFF),
             ),
             onPressed: () => Scaffold.of(context).openEndDrawer(),
           ),

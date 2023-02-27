@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hovering/hovering.dart';
 import 'package:portfolio/theme/theme_switcher.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 

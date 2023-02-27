@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/navigation_bar/nav_bar_items.dart';
 import 'package:portfolio/theme/theme_switcher.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:url_launcher/url_launcher.dart';
