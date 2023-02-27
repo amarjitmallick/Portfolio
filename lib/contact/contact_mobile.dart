@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/theme/theme_switcher.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactMobile extends StatefulWidget {
   @override
@@ -8,101 +10,78 @@ class ContactMobile extends StatefulWidget {
 class _ContactMobileState extends State<ContactMobile> {
   @override
   Widget build(BuildContext context) {
+    final Uri params = Uri(
+      scheme: 'mailto',
+      path: 'mallickamarjit@gmail.com',
+      query: 'subject= &body= Hi, Amarjit', //add subject and body here
+    );
+
+    var url = params.toString();
+
     return Container(
-      width: MediaQuery.of(context).size.width - 40,
-      height: MediaQuery.of(context).size.height / 1.2,
-      color: Color(0xFF2D2E32),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Text(
-                'Information',
-                style: TextStyle(
-                    color: Colors.white.withOpacity(0.5),
-                    fontFamily: 'RobotoMono',
-                    fontSize: 10),
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Text(
+              'get in touch',
+              style: TextStyle(
+                color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.white : Colors.black,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'RobotoMono',
               ),
+              textAlign: TextAlign.center,
             ),
-            Center(
-              child: Text(
-                "Let's make something\namazing together.",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'RobotoMono',
-                    fontSize: 15),
+          ),
+          Expanded(
+            child: Text(
+              "My inbox is always open. Whether you have a question or project or just want to say hi, I'll try my best to get back to you!",
+              style: TextStyle(
+                color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.white : Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'RobotoMono',
               ),
+              maxLines: 5,
+              textAlign: TextAlign.center,
             ),
-            Center(
-              child: Text(
-                "Start by saying hi",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'RobotoMono',
-                    fontSize: 15),
-              ),
-            ),
-            Center(
-              child: Text(
-                'Email me:',
-                style: TextStyle(
-                    color: Colors.white.withOpacity(0.5),
-                    fontFamily: 'RobotoMono',
-                    fontSize: 20),
-              ),
-            ),
-            Center(
-              child: Text(
-                "mallickamarjit@gmail.com",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'RobotoMono',
-                    fontSize: 20),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  backgroundImage: AssetImage('assets/icons/twitter.png'),
-                  backgroundColor: Colors.transparent,
-                  radius: 15,
+          ),
+          Spacer(),
+          Expanded(
+            child: TextButton(
+              onPressed: () async {
+                if (await canLaunch(url)) {
+                  await launch(url);
+                } else {
+                  throw 'Could not launch $url';
+                }
+              },
+              style: TextButton.styleFrom(
+                backgroundColor: ThemeSwitcher.of(context).isDarkModeOn
+                    ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+                    : Color(0xFF646AFF),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                SizedBox(width: 20),
-                CircleAvatar(
-                  backgroundImage: AssetImage('assets/icons/github.png'),
-                  backgroundColor: Colors.transparent,
-                  radius: 15,
-                ),
-                SizedBox(width: 20),
-                CircleAvatar(
-                  backgroundImage: AssetImage('assets/icons/linkedin.png'),
-                  backgroundColor: Colors.transparent,
-                  radius: 15,
-                ),
-                SizedBox(width: 20),
-                CircleAvatar(
-                  backgroundImage: AssetImage('assets/icons/instagram.png'),
-                  backgroundColor: Colors.transparent,
-                  radius: 15,
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Center(
+                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 50),
+              ),
               child: Text(
-                "Amarjit Mallick",
+                "Say Hello!",
                 style: TextStyle(
-                    color: Colors.white.withOpacity(0.5),
-                    fontFamily: 'RobotoMono',
-                    fontSize: 20),
+                  color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.black : Colors.white,
+                  fontFamily: 'RobotoMono',
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
-            SizedBox(height: 10),
-          ],
-        ),
+          ),
+          Spacer(),
+        ],
       ),
     );
   }
