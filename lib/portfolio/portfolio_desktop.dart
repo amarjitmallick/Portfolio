@@ -3,15 +3,15 @@ import 'package:portfolio/theme/theme_switcher.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class LatestWorksDesktop extends StatefulWidget {
+class PortfolioDesktop extends StatefulWidget {
   final AutoScrollController controller;
-  LatestWorksDesktop(this.controller);
+  PortfolioDesktop(this.controller);
 
   @override
-  _LatestWorksDesktopState createState() => _LatestWorksDesktopState();
+  _PortfolioDesktopState createState() => _PortfolioDesktopState();
 }
 
-class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
+class _PortfolioDesktopState extends State<PortfolioDesktop> {
   @override
   Widget build(BuildContext context) {
     return AutoScrollTag(
@@ -264,101 +264,6 @@ class _LatestWorksDesktopState extends State<LatestWorksDesktop> {
                         ),
                       ),
                     ),
-                    // Expanded(
-                    //   child: Container(
-                    //     width: MediaQuery.of(context).size.width / 3,
-                    //     height: MediaQuery.of(context).size.height / 2.5,
-                    //     decoration: BoxDecoration(
-                    //       color: Colors.transparent.withOpacity(0.2),
-                    //       borderRadius: BorderRadius.circular(10),
-                    //     ),
-                    //     child: Padding(
-                    //       padding: const EdgeInsets.all(30.0),
-                    //       child: Column(
-                    //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //         crossAxisAlignment: CrossAxisAlignment.start,
-                    //         children: [
-                    //           Expanded(
-                    //             child: Row(
-                    //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //               children: [
-                    //                 Icon(
-                    //                   Icons.folder_open_rounded,
-                    //                   color: ThemeSwitcher.of(context).isDarkModeOn
-                    //                       ? Color(0xFF00D1C7)
-                    //                       : Color(0xFF646AFF),
-                    //                 ),
-                    //                 Icon(
-                    //                   Icons.link_rounded,
-                    //                   color: ThemeSwitcher.of(context).isDarkModeOn
-                    //                       ? Color(0xFF00D1C7)
-                    //                       : Color(0xFF646AFF),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //           Expanded(
-                    //             child: Padding(
-                    //               padding: const EdgeInsets.symmetric(vertical: 10),
-                    //               child: FittedBox(
-                    //                 fit: BoxFit.scaleDown,
-                    //                 child: Text(
-                    //                   'Portfolio',
-                    //                   style: TextStyle(
-                    //                     color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.white : Colors.black,
-                    //                     fontFamily: 'RobotoMono',
-                    //                     fontSize: 30,
-                    //                   ),
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //           ),
-                    //           Expanded(
-                    //             child: FittedBox(
-                    //               fit: BoxFit.scaleDown,
-                    //               child: Text(
-                    //                 'A responsive portfolio website',
-                    //                 style: TextStyle(
-                    //                   color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.white : Colors.black,
-                    //                   fontFamily: 'RobotoMono',
-                    //                   fontSize: 20,
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //           ),
-                    //           Expanded(
-                    //             child: Row(
-                    //               children: [
-                    //                 Container(
-                    //                   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                    //                   margin: EdgeInsets.only(right: 15),
-                    //                   decoration: BoxDecoration(
-                    //                     borderRadius: BorderRadius.circular(15),
-                    //                     color: ThemeSwitcher.of(context).isDarkModeOn
-                    //                         ? Color(0xFF00D1C7).withOpacity(0.2)
-                    //                         : Color(0xFF646AFF).withOpacity(0.2),
-                    //                   ),
-                    //                   child: Text('Flutter'),
-                    //                 ),
-                    //                 Container(
-                    //                   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                    //                   margin: EdgeInsets.only(right: 15),
-                    //                   decoration: BoxDecoration(
-                    //                     borderRadius: BorderRadius.circular(15),
-                    //                     color: ThemeSwitcher.of(context).isDarkModeOn
-                    //                         ? Color(0xFF00D1C7).withOpacity(0.2)
-                    //                         : Color(0xFF646AFF).withOpacity(0.2),
-                    //                   ),
-                    //                   child: Text('Dart'),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),

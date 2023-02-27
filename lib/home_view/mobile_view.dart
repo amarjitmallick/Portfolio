@@ -3,9 +3,9 @@ import 'package:hovering/hovering.dart';
 import 'package:portfolio/contact/contact_mobile.dart';
 import 'package:portfolio/introduction/about_mobile.dart';
 import 'package:portfolio/landing_page/landing_page_mobile.dart';
-import 'package:portfolio/latest_works/latest_works_mobile.dart';
 import 'package:portfolio/navigation_bar/nav_bar_items.dart';
 import 'package:portfolio/navigation_bar/navigation_bar_mobile.dart';
+import 'package:portfolio/portfolio/portfolio_mobile.dart';
 import 'package:portfolio/skills/skills_mobile.dart';
 import 'package:portfolio/utilities/constants.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -46,7 +46,7 @@ class _MobileViewState extends State<MobileView> {
               LandingPageMobile(),
               AboutMobile(),
               SkillsMobile(controller),
-              LatestWorksMobile(),
+              PortfolioMobile(),
               ContactMobile(),
             ],
           ),
