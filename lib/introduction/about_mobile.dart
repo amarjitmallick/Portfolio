@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/theme/theme_switcher.dart';
 import 'package:portfolio/utilities/constants.dart';
 
-class IntroductionMobile extends StatefulWidget {
+class AboutMobile extends StatefulWidget {
   @override
-  _IntroductionMobileState createState() => _IntroductionMobileState();
+  _AboutMobileState createState() => _AboutMobileState();
 }
 
-class _IntroductionMobileState extends State<IntroductionMobile> {
+class _AboutMobileState extends State<AboutMobile> {
   @override
   Widget build(BuildContext context) {
     return Container(

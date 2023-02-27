@@ -3,15 +3,15 @@ import 'package:hovering/hovering.dart';
 import 'package:portfolio/theme/theme_switcher.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-class IntroductionDesktop extends StatefulWidget {
+class AboutDesktop extends StatefulWidget {
   final AutoScrollController controller;
-  IntroductionDesktop(this.controller);
+  AboutDesktop(this.controller);
 
   @override
-  _IntroductionDesktopState createState() => _IntroductionDesktopState();
+  _AboutDesktopState createState() => _AboutDesktopState();
 }
 
-class _IntroductionDesktopState extends State<IntroductionDesktop> {
+class _AboutDesktopState extends State<AboutDesktop> {
   @override
   Widget build(BuildContext context) {
     return AutoScrollTag(

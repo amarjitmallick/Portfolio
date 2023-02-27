@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
 import 'package:portfolio/contact/contact_mobile.dart';
-import 'package:portfolio/introduction/introduction_mobile.dart';
+import 'package:portfolio/introduction/about_mobile.dart';
 import 'package:portfolio/landing_page/landing_page_mobile.dart';
 import 'package:portfolio/latest_works/latest_works_mobile.dart';
 import 'package:portfolio/navigation_bar/nav_bar_items.dart';
 import 'package:portfolio/navigation_bar/navigation_bar_mobile.dart';
+import 'package:portfolio/skills/skills_mobile.dart';
 import 'package:portfolio/utilities/constants.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MobileView extends StatefulWidget {
@@ -15,6 +17,18 @@ class MobileView extends StatefulWidget {
 }
 
 class _MobileViewState extends State<MobileView> {
+  final scrollDirection = Axis.vertical;
+  AutoScrollController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AutoScrollController(
+      viewportBoundaryGetter: () => Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
+      axis: scrollDirection,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +44,8 @@ class _MobileViewState extends State<MobileView> {
           child: Column(
             children: [
               LandingPageMobile(),
-              IntroductionMobile(),
+              AboutMobile(),
+              SkillsMobile(controller),
               LatestWorksMobile(),
               ContactMobile(),
             ],

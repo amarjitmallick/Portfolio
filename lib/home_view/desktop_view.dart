@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/career/career_desktop.dart';
 import 'package:portfolio/contact/contact_desktop.dart';
-import 'package:portfolio/introduction/introduction_desktop.dart';
+import 'package:portfolio/introduction/about_desktop.dart';
 import 'package:portfolio/landing_page/landing_page_desktop.dart';
 import 'package:portfolio/latest_works/latest_works_desktop.dart';
 import 'package:portfolio/navigation_bar/navigation_bar_desktop.dart';
@@ -38,7 +38,7 @@ class _DesktopViewState extends State<DesktopView> {
         controller: controller,
         children: [
           LandingPageDesktop(controller),
-          IntroductionDesktop(controller),
+          AboutDesktop(controller),
           SkillsDesktop(controller),
           LatestWorksDesktop(controller),
           CareerDesktop(controller),
