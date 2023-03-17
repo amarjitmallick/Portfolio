@@ -20,13 +20,6 @@ class _AboutDesktopState extends State<AboutDesktop> {
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            opacity: 0.3,
-            fit: BoxFit.fill,
-            image: AssetImage('assets/images/bg_rev.png'),
-          ),
-        ),
         child: Row(
           children: [
             Expanded(

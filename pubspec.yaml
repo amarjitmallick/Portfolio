@@ -32,6 +32,7 @@ dependencies:
   responsive_builder: ^0.1.2
   url_launcher: ^5.4.10
   scroll_to_index: any
+  animated_text_kit: ^4.2.2
 
 dev_dependencies:
   flutter_test:

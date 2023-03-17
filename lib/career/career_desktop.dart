@@ -21,13 +21,6 @@ class _CareerDesktopState extends State<CareerDesktop> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 50),
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            opacity: 0.3,
-            fit: BoxFit.fill,
-            image: AssetImage('assets/images/bg_rev.png'),
-          ),
-        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,

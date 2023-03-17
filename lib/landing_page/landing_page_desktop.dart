@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/theme/theme_switcher.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -20,13 +21,6 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            opacity: 0.3,
-            fit: BoxFit.fill,
-            image: AssetImage('assets/images/bg.png'),
-          ),
-        ),
         child: Row(
           children: [
             Container(
@@ -98,27 +92,38 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: RichText(
-                        text: TextSpan(
-                          text: "Hi, I'm  ",
-                          style: TextStyle(
-                            color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.white : Colors.black,
-                            fontSize: 60,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'RobotoMono',
-                          ),
-                          children: [
-                            TextSpan(
-                              text: 'Amarjit',
-                              style: TextStyle(
-                                color: ThemeSwitcher.of(context).isDarkModeOn
-                                    ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
-                                    : Color(0xFF646AFF),
-                              ),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Hi, I'm  ",
+                            style: TextStyle(
+                              color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.white : Colors.black,
+                              fontSize: 60,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'RobotoMono',
                             ),
-                          ],
-                        ),
-                        overflow: TextOverflow.ellipsis,
+                          ),
+                          Expanded(
+                            child: AnimatedTextKit(
+                              animatedTexts: [
+                                TypewriterAnimatedText(
+                                  'Amarjit',
+                                  textStyle: TextStyle(
+                                    color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.white : Colors.black,
+                                    fontSize: 60,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'RobotoMono',
+                                  ),
+                                  speed: const Duration(milliseconds: 500),
+                                ),
+                              ],
+                              totalRepeatCount: 40,
+                              pause: const Duration(milliseconds: 500),
+                              displayFullTextOnTap: true,
+                              stopPauseOnTap: true,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Expanded(

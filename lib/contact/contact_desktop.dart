@@ -29,13 +29,6 @@ class _ContactDesktopState extends State<ContactDesktop> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.symmetric(horizontal: 100, vertical: 100),
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            opacity: 0.3,
-            fit: BoxFit.fill,
-            image: AssetImage('assets/images/bg.png'),
-          ),
-        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
