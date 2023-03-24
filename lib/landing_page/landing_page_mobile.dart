@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:portfolio/theme/theme_switcher.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -12,6 +14,12 @@ class LandingPageMobile extends StatefulWidget {
 }
 
 class _LandingPageMobileState extends State<LandingPageMobile> {
+  downloadFile(url) {
+    AnchorElement anchorElement = new AnchorElement(href: url);
+    anchorElement.download = "Amarjit_Mallick_Resume";
+    anchorElement.click();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AutoScrollTag(
@@ -141,7 +149,9 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
             ),
             Expanded(
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  downloadFile('/assets/images/Amarjit_Mallick_Resume.pdf');
+                },
                 style: TextButton.styleFrom(
                   backgroundColor: ThemeSwitcher.of(context).isDarkModeOn
                       ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
