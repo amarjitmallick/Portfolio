@@ -3,7 +3,7 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "assets/AssetManifest.json": "74665d3d3a032e94688bf9383ae84b69",
+  "assets/AssetManifest.json": "67ac4cccbde4954b7481775bac0cb8aa",
 "assets/assets/fonts/RobotoMono-Regular.ttf": "e5ca8c0ac474df46fe45840707a0c483",
 "assets/assets/icons/dark.png": "45443840041ea3ca99cec3e9963ff668",
 "assets/assets/icons/dart.png": "2e0719b33b5cdd1ece46611b4d3d4a81",
@@ -23,6 +23,7 @@ const RESOURCES = {
 "assets/assets/icons/twitter_black.png": "0ec939dbbfcf65bd510f877c92fd4780",
 "assets/assets/icons/twitter_white.png": "1913c5e57aafc3af5d7b48f1b6201845",
 "assets/assets/icons/ui-ux.png": "b501162ba2f6a65b1e95edd618332aca",
+"assets/assets/images/Amarjit_Mallick_Resume.pdf": "315f2fb5d3d3467a6cf0ede9ab059339",
 "assets/assets/images/bg.jpg": "56076d9727100984547b0fbc7b88122a",
 "assets/assets/images/bg.png": "0e21ea9b75e0c9af77471580527612c9",
 "assets/assets/images/bg_rev.png": "dcffd475f1b133d7561409145f474ad0",
@@ -45,10 +46,10 @@ const RESOURCES = {
 "icons/android-chrome-192x192.png": "37ac33f424aad680ce99c1885359dfc9",
 "icons/android-chrome-512x512.png": "0da3c5fd33e33341a339acad268f0ead",
 "icons/apple-touch-icon.png": "95d6457c5260ac2c4937106e706f1675",
-"index.html": "e361efa2337d7ebde581911828af9836",
-"/": "e361efa2337d7ebde581911828af9836",
+"index.html": "4cbb794ce0c4959922085790abb379e8",
+"/": "4cbb794ce0c4959922085790abb379e8",
 "logo.png": "0da3c5fd33e33341a339acad268f0ead",
-"main.dart.js": "d178c0937dc4c913ef5a8f7ae6142853",
+"main.dart.js": "d70d268db135cdf2b78e3e1567ca2dd0",
 "manifest.json": "89eb8fdeecca4524c584943c019e6280",
 "version.json": "009c9e65172e010890f7f65fde438006"
 };
