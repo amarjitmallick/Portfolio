@@ -18,9 +18,7 @@ class NameTag extends StatelessWidget {
                   fontSize: 25,
                   fontFamily: 'RobotoMono',
                   fontWeight: FontWeight.w500,
-                  color: ThemeSwitcher.of(context).isDarkModeOn
-                      ? Colors.green
-                      : Colors.blue,
+                  color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.green : Colors.blue,
                 ),
               ),
               SizedBox(
@@ -59,16 +57,21 @@ class _NavBarButtonState extends State<NavBarButton> {
       duration: Duration(milliseconds: 100),
       firstChild: Text(
         widget._buttonName,
-        style: TextStyle(fontSize: 15),
+        style: TextStyle(
+          color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.white : Colors.black,
+          fontFamily: 'RobotoMono',
+          fontSize: 15,
+        ),
       ),
       secondChild: Text(
         '< ${widget._buttonName} >',
         style: TextStyle(
-            color: ThemeSwitcher.of(context).isDarkModeOn
-                ? Colors.green
-                : Colors.blue,
-            fontFamily: 'RobotoMono',
-            fontSize: 15),
+          color: ThemeSwitcher.of(context).isDarkModeOn
+              ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+              : Color(0xFF646AFF),
+          fontFamily: 'RobotoMono',
+          fontSize: 15,
+        ),
       ),
     );
   }
