@@ -1,7 +1,10 @@
+import 'dart:html';
+
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:hovering/hovering.dart';
 import 'package:portfolio/theme/theme_switcher.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LandingPageDesktop extends StatefulWidget {
   final AutoScrollController controller;
@@ -11,6 +14,12 @@ class LandingPageDesktop extends StatefulWidget {
 }
 
 class _LandingPageDesktopState extends State<LandingPageDesktop> {
+  downloadFile(url) {
+    AnchorElement anchorElement = new AnchorElement(href: url);
+    anchorElement.download = "Amarjit_Mallick_Resume";
+    anchorElement.click();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AutoScrollTag(
@@ -19,174 +28,178 @@ class _LandingPageDesktopState extends State<LandingPageDesktop> {
       index: 0,
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height - 80,
+        height: MediaQuery.of(context).size.height,
         child: Row(
           children: [
             Container(
-              width: MediaQuery.of(context).size.width / 2,
-              height: MediaQuery.of(context).size.height - 80,
+              width: 200,
+              height: MediaQuery.of(context).size.height / 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        launch('https://github.com/AmarjitM13');
+                      },
+                      child: Image.asset(
+                        'assets/icons/github.png',
+                        scale: 2,
+                        color: ThemeSwitcher.of(context).isDarkModeOn
+                            ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+                            : Color(0xFF646AFF),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        launch('https://www.linkedin.com/in/amarjit-mallick/');
+                      },
+                      child: Image.asset(
+                        'assets/icons/linkedin.png',
+                        scale: 2,
+                        color: ThemeSwitcher.of(context).isDarkModeOn
+                            ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+                            : Color(0xFF646AFF),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        launch('https://twitter.com/AmarjitM13');
+                      },
+                      child: Image.asset(
+                        'assets/icons/twitter.png',
+                        scale: 2,
+                        color: ThemeSwitcher.of(context).isDarkModeOn
+                            ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+                            : Color(0xFF646AFF),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      width: 2,
+                      color: ThemeSwitcher.of(context).isDarkModeOn
+                          ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+                          : Color(0xFF646AFF),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width / 2 - 100,
+              height: MediaQuery.of(context).size.height / 2,
+              padding: EdgeInsets.only(top: 50, bottom: 30),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 50),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: ThemeSwitcher.of(context).isDarkModeOn
-                              ? Colors.green
-                              : Colors.blue,
-                          borderRadius: BorderRadius.circular(5)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          ' Front-End App Developer ',
-                          style: TextStyle(
-                              color: ThemeSwitcher.of(context).isDarkModeOn
-                                  ? Colors.black
-                                  : Colors.white,
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Text(
+                            "Hi, I'm  ",
+                            style: TextStyle(
+                              color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.white : Colors.black,
+                              fontSize: 60,
+                              fontWeight: FontWeight.bold,
                               fontFamily: 'RobotoMono',
-                              fontSize: 20),
+                            ),
+                          ),
+                          Expanded(
+                            child: AnimatedTextKit(
+                              animatedTexts: [
+                                TypewriterAnimatedText(
+                                  'Amarjit',
+                                  textStyle: TextStyle(
+                                    color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.white : Colors.black,
+                                    fontSize: 60,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'RobotoMono',
+                                  ),
+                                  speed: const Duration(milliseconds: 500),
+                                ),
+                              ],
+                              totalRepeatCount: 40,
+                              pause: const Duration(milliseconds: 500),
+                              displayFullTextOnTap: true,
+                              stopPauseOnTap: true,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Mobile Application Developer',
+                        style: TextStyle(
+                          color: ThemeSwitcher.of(context).isDarkModeOn
+                              ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+                              : Color(0xFF646AFF),
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'RobotoMono',
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'I design and code beautifully simple things using Flutter',
+                        style: TextStyle(
+                          color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.white : Colors.black,
+                          fontFamily: 'RobotoMono',
+                          fontSize: 25,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Spacer(),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () {
+                          downloadFile('/assets/images/Amarjit_Mallick_Resume.pdf');
+                        },
+                        style: TextButton.styleFrom(
+                          backgroundColor: ThemeSwitcher.of(context).isDarkModeOn
+                              ? ThemeData.dark(useMaterial3: true).colorScheme.secondary
+                              : Color(0xFF646AFF),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          padding: EdgeInsets.symmetric(horizontal: 25),
+                        ),
+                        child: Text(
+                          "Download Resume",
+                          style: TextStyle(
+                            color: ThemeSwitcher.of(context).isDarkModeOn ? Colors.black : Colors.white,
+                            fontFamily: 'RobotoMono',
+                            fontSize: 25,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ),
-                    Text(
-                      'Talk is cheap.\nShow me the code',
-                      style: TextStyle(
-                          color: ThemeSwitcher.of(context).isDarkModeOn
-                              ? Colors.white
-                              : Colors.black,
-                          fontFamily: 'RobotoMono',
-                          fontSize: 40),
-                    ),
-                    Text(
-                      'I design and code beautifully simple things\nand I love what I do.',
-                      style: TextStyle(
-                          color: ThemeSwitcher.of(context).isDarkModeOn
-                              ? Colors.white.withOpacity(0.5)
-                              : Colors.black.withOpacity(0.5),
-                          fontFamily: 'RobotoMono',
-                          fontSize: 10),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      "LET'S CHAT!",
-                      style: TextStyle(
-                          color: ThemeSwitcher.of(context).isDarkModeOn
-                              ? Colors.green
-                              : Colors.blue,
-                          fontFamily: 'RobotoMono',
-                          fontSize: 25),
-                    ),
-                    SizedBox(height: 100),
                   ],
                 ),
               ),
             ),
             Container(
-              width: MediaQuery.of(context).size.width / 2,
+              width: MediaQuery.of(context).size.width / 2 - 100,
               height: MediaQuery.of(context).size.height - 80,
-              child: Stack(
-                children: [
-                  Center(
-                    child: CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      backgroundImage:
-                          AssetImage('assets/images/profile picture.jpg'),
-                      radius: MediaQuery.of(context).size.height / 2.7,
-                    ),
-                  ),
-                  Positioned(
-                    right: 180,
-                    top: 60,
-                    child: CircleAvatar(
-                      radius: 12,
-                      backgroundColor: ThemeSwitcher.of(context).isDarkModeOn
-                          ? Colors.green
-                          : Colors.blue,
-                    ),
-                  ),
-                  Positioned(
-                    right: 30,
-                    bottom: 350,
-                    child: CircleAvatar(
-                      radius: 20,
-                      backgroundColor: ThemeSwitcher.of(context).isDarkModeOn
-                          ? Color(0xFF25262A)
-                          : Colors.grey[200],
-                    ),
-                  ),
-                  Positioned(
-                    right: 65,
-                    bottom: 35,
-                    child: HoverAnimatedContainer(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ThemeSwitcher.of(context).isDarkModeOn
-                            ? Color(0xFF25262A)
-                            : Colors.grey[100],
-                      ),
-                      height: MediaQuery.of(context).size.height / 4,
-                      width: MediaQuery.of(context).size.height / 4,
-                      hoverDecoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ThemeSwitcher.of(context).isDarkModeOn
-                            ? Color(0xFF25262A)
-                            : Colors.grey[100],
-                        boxShadow: [
-                          BoxShadow(
-                            color: ThemeSwitcher.of(context).isDarkModeOn
-                                ? Color(0xFF25262A)
-                                : Colors.grey[100],
-                            blurRadius: 5.0, // soften the shadow
-                            spreadRadius: 5.0, //extend the shadow
-                          ),
-                        ],
-                      ),
-                      duration: Duration(milliseconds: 120),
-                      child: Center(
-                        child: Image(
-                          image: AssetImage('assets/icons/dart.png'),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 0,
-                    bottom: 220,
-                    child: HoverAnimatedContainer(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ThemeSwitcher.of(context).isDarkModeOn
-                            ? Color(0xFF25262A)
-                            : Colors.grey[100],
-                      ),
-                      height: MediaQuery.of(context).size.height / 5,
-                      width: MediaQuery.of(context).size.height / 5,
-                      hoverDecoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ThemeSwitcher.of(context).isDarkModeOn
-                            ? Color(0xFF25262A)
-                            : Colors.grey[100],
-                        boxShadow: [
-                          BoxShadow(
-                            color: ThemeSwitcher.of(context).isDarkModeOn
-                                ? Color(0xFF25262A).withOpacity(0.8)
-                                : Colors.grey[100].withOpacity(0.8),
-                            blurRadius: 5.0, // soften the shadow
-                            spreadRadius: 5.0, //extend the shadow
-                          ),
-                        ],
-                      ),
-                      duration: Duration(milliseconds: 100),
-                      child: Center(
-                        child: Image(
-                          image: AssetImage('assets/icons/flutter.png'),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              child: Center(
+                child: CircleAvatar(
+                  minRadius: 10,
+                  maxRadius: MediaQuery.of(context).size.height / 3,
+                  backgroundImage: ThemeSwitcher.of(context).isDarkModeOn
+                      ? AssetImage('assets/images/profile_dark.png')
+                      : AssetImage('assets/images/profile_light.png'),
+                ),
               ),
             ),
           ],
