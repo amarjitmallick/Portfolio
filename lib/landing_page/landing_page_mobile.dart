@@ -1,6 +1,6 @@
-import 'dart:html';
-
+import 'package:file_saver/file_saver.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:portfolio/theme/theme_switcher.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,12 +14,6 @@ class LandingPageMobile extends StatefulWidget {
 }
 
 class _LandingPageMobileState extends State<LandingPageMobile> {
-  downloadFile(url) {
-    AnchorElement anchorElement = new AnchorElement(href: url);
-    anchorElement.download = "Amarjit_Mallick_Resume";
-    anchorElement.click();
-  }
-
   @override
   Widget build(BuildContext context) {
     return AutoScrollTag(
@@ -149,8 +143,11 @@ class _LandingPageMobileState extends State<LandingPageMobile> {
             ),
             Expanded(
               child: TextButton(
-                onPressed: () {
-                  downloadFile('/assets/images/Amarjit_Mallick_Resume.pdf');
+                onPressed: () async {
+                  ByteData file = await rootBundle.load('/images/Amarjit_Mallick_Resume.pdf');
+                  Uint8List pdf = file.buffer.asUint8List();
+                  await FileSaver.instance
+                      .saveFile(name: 'Resume.pdf', bytes: pdf, mimeType: MimeType.pdf, filePath: 'downloads');
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: ThemeSwitcher.of(context).isDarkModeOn

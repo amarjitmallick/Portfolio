@@ -33,6 +33,7 @@ dependencies:
   url_launcher: ^5.4.10
   scroll_to_index: any
   animated_text_kit: ^4.2.2
+  file_saver: ^0.2.1
 
 dev_dependencies:
   flutter_test:
