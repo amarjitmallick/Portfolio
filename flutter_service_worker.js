@@ -2,65 +2,70 @@
 const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
-const RESOURCES = {
-  "assets/AssetManifest.json": "67ac4cccbde4954b7481775bac0cb8aa",
-"assets/assets/fonts/RobotoMono-Regular.ttf": "e5ca8c0ac474df46fe45840707a0c483",
-"assets/assets/icons/dark.png": "45443840041ea3ca99cec3e9963ff668",
-"assets/assets/icons/dart.png": "2e0719b33b5cdd1ece46611b4d3d4a81",
-"assets/assets/icons/firebase.png": "cf0918b3d77d6e4505a65f103e5f3382",
-"assets/assets/icons/flutter.png": "23ded1e93189e77c12bda66ca4274d08",
+
+const RESOURCES = {"flutter_bootstrap.js": "e6eac92176cee4eec3aa68382a494ab8",
+"version.json": "009c9e65172e010890f7f65fde438006",
+"index.html": "fe65196cdb045642a6cdeb436cd6ef59",
+"/": "fe65196cdb045642a6cdeb436cd6ef59",
+"main.dart.js": "5775dc849dadfedaacefc48c7037748e",
+"flutter.js": "83d881c1dbb6d6bcd6b42e274605b69c",
+"favicon.png": "5dcef449791fa27946b3d35ad8803796",
+"logo.png": "0da3c5fd33e33341a339acad268f0ead",
+"icons/android-chrome-192x192.png": "37ac33f424aad680ce99c1885359dfc9",
+"icons/apple-touch-icon.png": "95d6457c5260ac2c4937106e706f1675",
+"icons/android-chrome-512x512.png": "0da3c5fd33e33341a339acad268f0ead",
+"manifest.json": "1357d45f4147cf126da5e529ce974108",
+"assets/AssetManifest.json": "99dd5a96b382fd4d5d4361595201123f",
+"assets/NOTICES": "7b4c1c3a8c7e3505f6ed7c871c13c3d7",
+"assets/FontManifest.json": "5113da4751e4e2f4bf56b5daf9f903c6",
+"assets/AssetManifest.bin.json": "32323ae2bc5ec92c1ceed6d9c3071725",
+"assets/shaders/ink_sparkle.frag": "ecc85a2e95f5e9f53123dcaf8cb9b6ce",
+"assets/AssetManifest.bin": "9ed2d0e326da283503e31230be87c3d7",
+"assets/fonts/MaterialIcons-Regular.otf": "729c49544d88a35e661dff152e6910b6",
+"assets/assets/images/farmops.webp": "85d03f9c043157e6013ef85fa05718f5",
+"assets/assets/images/gdg_siliguri.webp": "330dd93b4d90a6016be9563db922baa7",
+"assets/assets/images/profile.jpeg": "2e51e5858ac043ca90b7146ec583de77",
+"assets/assets/images/xpense.webp": "02ce1f46318d2a19ff3f22992062c983",
 "assets/assets/icons/git.png": "5f551c335eb3dc4b81ae34cf93b9a7f1",
+"assets/assets/icons/instagram_white.png": "28c24c383926f74b4b8f52445b8f8500",
+"assets/assets/icons/dark.png": "45443840041ea3ca99cec3e9963ff668",
+"assets/assets/icons/linkedin_white.png": "aaa2ad6032dea586ed8f4586d8a31ddb",
+"assets/assets/icons/twitter_black.png": "0ec939dbbfcf65bd510f877c92fd4780",
+"assets/assets/icons/flutter.png": "23ded1e93189e77c12bda66ca4274d08",
 "assets/assets/icons/github.png": "33cd9e042cd4dea449593a75bc0749d7",
+"assets/assets/icons/firebase.png": "cf0918b3d77d6e4505a65f103e5f3382",
 "assets/assets/icons/github_2.png": "d601556f552f0366969c8f21495e9e78",
-"assets/assets/icons/github_black.png": "9c24687a6322470c692b9ea4b7f34f6d",
 "assets/assets/icons/github_white.png": "dc53ac25eba1f479e1dba894d298be06",
 "assets/assets/icons/instagram_black.png": "f2f4e6538f8ab25e004fa752aa3366f8",
-"assets/assets/icons/instagram_white.png": "28c24c383926f74b4b8f52445b8f8500",
-"assets/assets/icons/linkedin.png": "69e40c129dc5d9f27e4ccd9f263affd4",
-"assets/assets/icons/linkedin_black.png": "3fb9953ab705fd4b9cbf8d1fe8486c55",
-"assets/assets/icons/linkedin_white.png": "aaa2ad6032dea586ed8f4586d8a31ddb",
 "assets/assets/icons/twitter.png": "2ffa00ef31b5a897e7bb34f1282594c6",
-"assets/assets/icons/twitter_black.png": "0ec939dbbfcf65bd510f877c92fd4780",
+"assets/assets/icons/linkedin.png": "69e40c129dc5d9f27e4ccd9f263affd4",
 "assets/assets/icons/twitter_white.png": "1913c5e57aafc3af5d7b48f1b6201845",
+"assets/assets/icons/linkedin_black.png": "3fb9953ab705fd4b9cbf8d1fe8486c55",
+"assets/assets/icons/github_black.png": "9c24687a6322470c692b9ea4b7f34f6d",
+"assets/assets/icons/dart.png": "2e0719b33b5cdd1ece46611b4d3d4a81",
 "assets/assets/icons/ui-ux.png": "b501162ba2f6a65b1e95edd618332aca",
-"assets/assets/images/Amarjit_Mallick_Resume.pdf": "315f2fb5d3d3467a6cf0ede9ab059339",
-"assets/assets/images/bg.jpg": "56076d9727100984547b0fbc7b88122a",
-"assets/assets/images/bg.png": "0e21ea9b75e0c9af77471580527612c9",
-"assets/assets/images/bg_rev.png": "dcffd475f1b133d7561409145f474ad0",
-"assets/assets/images/portfolio.png": "da7df5423244b1ba0ea02d822d3795c1",
-"assets/assets/images/portfolio_light.png": "37eac72c47853d2c8f12ea3d0556ff3a",
-"assets/assets/images/profile%2520picture.jpg": "017056ee7a5cee5110a1cd5345e728ca",
-"assets/assets/images/profile.png": "d94f47bee1a608bdda1c847c49b33261",
-"assets/assets/images/profile_dark.png": "19666004f725b9f024ac46acdf823c64",
-"assets/assets/images/profile_light.png": "0d60db0bc1a1095ae3ac425f57bcbb5b",
-"assets/FontManifest.json": "25a6999077830f949d3a2e504f5a64a9",
-"assets/fonts/MaterialIcons-Regular.otf": "e7069dfd19b331be16bed984668fe080",
-"assets/NOTICES": "a795f5bfd141c8cf7d76689d2a31fc01",
-"assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
-"canvaskit/canvaskit.js": "97937cb4c2c2073c968525a3e08c86a3",
-"canvaskit/canvaskit.wasm": "3de12d898ec208a5f31362cc00f09b9e",
-"canvaskit/profiling/canvaskit.js": "c21852696bc1cc82e8894d851c01921a",
-"canvaskit/profiling/canvaskit.wasm": "371bc4e204443b0d5e774d64a046eb99",
-"favicon.png": "5dcef449791fa27946b3d35ad8803796",
-"flutter.js": "a85fcf6324d3c4d3ae3be1ae4931e9c5",
-"icons/android-chrome-192x192.png": "37ac33f424aad680ce99c1885359dfc9",
-"icons/android-chrome-512x512.png": "0da3c5fd33e33341a339acad268f0ead",
-"icons/apple-touch-icon.png": "95d6457c5260ac2c4937106e706f1675",
-"index.html": "eab1fdabeecd5ca91acfbb18ccb49cd9",
-"/": "eab1fdabeecd5ca91acfbb18ccb49cd9",
-"logo.png": "0da3c5fd33e33341a339acad268f0ead",
-"main.dart.js": "6844cd4ab6a4eb685bca26bd21d19e01",
-"manifest.json": "89eb8fdeecca4524c584943c019e6280",
-"version.json": "009c9e65172e010890f7f65fde438006"
-};
-
+"assets/assets/fonts/Manrope-Medium.ttf": "de7b3026c153d63d5732582887fecbf4",
+"assets/assets/fonts/Manrope-SemiBold.ttf": "80cb1b1a8ba262608706cb7f2b017835",
+"assets/assets/fonts/Manrope-Regular.ttf": "8ca1a84037fdb644723129315c390ad9",
+"assets/assets/fonts/Manrope-Light.ttf": "7c8bdfd65f2d0d081069e438f953359f",
+"assets/assets/animations/developer.json": "b6a331a54f98cd1745bd6a91a2541a48",
+"canvaskit/skwasm.js": "ea559890a088fe28b4ddf70e17e60052",
+"canvaskit/skwasm.js.symbols": "e72c79950c8a8483d826a7f0560573a1",
+"canvaskit/canvaskit.js.symbols": "bdcd3835edf8586b6d6edfce8749fb77",
+"canvaskit/skwasm.wasm": "39dd80367a4e71582d234948adc521c0",
+"canvaskit/chromium/canvaskit.js.symbols": "b61b5f4673c9698029fa0a746a9ad581",
+"canvaskit/chromium/canvaskit.js": "8191e843020c832c9cf8852a4b909d4c",
+"canvaskit/chromium/canvaskit.wasm": "f504de372e31c8031018a9ec0a9ef5f0",
+"canvaskit/canvaskit.js": "728b2d477d9b8c14593d4f9b82b484f3",
+"canvaskit/canvaskit.wasm": "7a3f4ae7d65fc1de6a6e7ddd3224bc93"};
 // The application shell files that are downloaded before a service worker can
 // start.
-const CORE = [
-  "main.dart.js",
+const CORE = ["main.dart.js",
 "index.html",
-"assets/AssetManifest.json",
+"flutter_bootstrap.js",
+"assets/AssetManifest.bin.json",
 "assets/FontManifest.json"];
+
 // During install, the TEMP cache is populated with the application shell files.
 self.addEventListener("install", (event) => {
   self.skipWaiting();
@@ -71,7 +76,6 @@ self.addEventListener("install", (event) => {
     })
   );
 });
-
 // During activate, the cache is populated with the temp files downloaded in
 // install. If this service worker is upgrading from one with a saved
 // MANIFEST, then use this to retain unchanged resource files.
@@ -93,6 +97,8 @@ self.addEventListener("activate", function(event) {
         await caches.delete(TEMP);
         // Save the manifest to make future upgrades efficient.
         await manifestCache.put('manifest', new Response(JSON.stringify(RESOURCES)));
+        // Claim client to enable caching on first launch
+        self.clients.claim();
         return;
       }
       var oldManifest = await manifest.json();
@@ -118,6 +124,8 @@ self.addEventListener("activate", function(event) {
       await caches.delete(TEMP);
       // Save the manifest to make future upgrades efficient.
       await manifestCache.put('manifest', new Response(JSON.stringify(RESOURCES)));
+      // Claim client to enable caching on first launch
+      self.clients.claim();
       return;
     } catch (err) {
       // On an unhandled exception the state of the cache cannot be guaranteed.
@@ -128,7 +136,6 @@ self.addEventListener("activate", function(event) {
     }
   }());
 });
-
 // The fetch handler redirects requests for RESOURCE files to the service
 // worker cache.
 self.addEventListener("fetch", (event) => {
@@ -168,7 +175,6 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
-
 self.addEventListener('message', (event) => {
   // SkipWaiting can be used to immediately activate a waiting service worker.
   // This will also require a page refresh triggered by the main worker.
@@ -181,7 +187,6 @@ self.addEventListener('message', (event) => {
     return;
   }
 });
-
 // Download offline will check the RESOURCES for all files not in the cache
 // and populate them.
 async function downloadOffline() {
@@ -202,7 +207,6 @@ async function downloadOffline() {
   }
   return contentCache.addAll(resources);
 }
-
 // Attempt to download the resource online before falling back to
 // the offline cache.
 function onlineFirst(event) {
