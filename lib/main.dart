@@ -1,41 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/home_view/home_page.dart';
-import 'package:portfolio/theme/theme_switcher.dart';
-import 'package:portfolio/theme/themes.dart';
+import 'package:provider/provider.dart';
+
+import 'screens/home/home_screen.dart';
+import 'themes/theme_provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) {
-    return ThemeSwitcherWidget(
-      initialDarkModeOn: true,
-      child: AmarjitMallick(),
-    );
-  }
-}
-
-class AmarjitMallick extends StatelessWidget {
-  const AmarjitMallick({
-    Key key,
-  }) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
-      title: 'Amarjit Mallick',
-      home: HomePage(),
-      theme: ThemeSwitcher.of(context).isDarkModeOn
-          ? darkTheme(context)
-          : lightTheme(context),
       debugShowCheckedModeBanner: false,
+      title: 'Amarjit Mallick | Portfolio',
+      theme: themeProvider.lightTheme,
+      home: const HomeScreen(),
     );
   }
 }
