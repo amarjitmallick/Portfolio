@@ -13,14 +13,14 @@ class ThemeProvider extends ChangeNotifier {
   ThemeData get lightTheme => ThemeData(
     fontFamily: "Manrope",
     brightness: Brightness.light,
-    primarySwatch: Colors.blue,
-    scaffoldBackgroundColor: Colors.white,
-    appBarTheme: const AppBarTheme(
-      color: Colors.transparent,
-      elevation: 0,
-      iconTheme: IconThemeData(color: Colors.black),
-    ),
-    textTheme: const TextTheme(bodyLarge: TextStyle(color: Colors.black87)),
+    // primarySwatch: Colors.blue,
+    // scaffoldBackgroundColor: Colors.white,
+    // appBarTheme: const AppBarTheme(
+    //   color: Colors.transparent,
+    //   elevation: 0,
+    //   iconTheme: IconThemeData(color: Colors.black),
+    // ),
+    // textTheme: const TextTheme(bodyLarge: TextStyle(color: Colors.black87)),
   );
 
   ThemeData get darkTheme => ThemeData(

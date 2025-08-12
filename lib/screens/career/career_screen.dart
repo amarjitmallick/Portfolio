@@ -82,7 +82,7 @@ class CareerScreen extends StatelessWidget {
                             career["description"]!,
                             style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w500),
                             overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
+                            maxLines: 10,
                           ),
                         ],
                       ),

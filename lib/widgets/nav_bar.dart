@@ -1,7 +1,6 @@
+// widgets/nav_bar.dart
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../themes/theme_provider.dart';
+import 'package:portfolio/responsive/responsive.dart';
 
 class NavBar extends StatelessWidget implements PreferredSizeWidget {
   final Function(String section)? onItemSelected;
@@ -10,44 +9,41 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    final isDarkMode = themeProvider.themeMode == ThemeMode.dark;
+    final isCompact = context.isTablet; // tablet = compact, desktop = full
 
     return AppBar(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor.withValues(alpha: 0.95),
       elevation: 1,
       toolbarHeight: 70,
       titleSpacing: 20,
+      leading: isCompact
+          ? IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () => Scaffold.of(context).openEndDrawer(),
+              tooltip: 'Menu',
+            )
+          : null,
       title: Text(
         'Portfolio',
         style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.bodyLarge?.color),
       ),
-      actions: [
-        ...[
-          'About',
-          'Projects',
-          'Publications',
-          'Career',
-          'Contact',
-        ].map((section) => _navItem(section, context)),
-        const SizedBox(width: 180),
-        // Light/Dark toggle
-        // Switch(
-        //   value: isDarkMode,
-        //   onChanged: (value) {
-        //     themeProvider.toggleTheme(value);
-        //   },
-        // ),
-        // const SizedBox(width: 8),
-        // Profile Avatar
-        const CircleAvatar(
-          radius: 18,
-          backgroundImage: AssetImage(
-            'assets/images/profile.jpeg', // Placeholder profile image
-          ),
-        ),
-        const SizedBox(width: 16),
-      ],
+      actions: isCompact
+          ? const [
+              CircleAvatar(radius: 18, backgroundImage: AssetImage('assets/images/profile.jpeg')),
+              SizedBox(width: 16),
+            ]
+          : [
+              ...[
+                'About',
+                'Projects',
+                'Publications',
+                'Career',
+                'Contact',
+              ].map((section) => _navItem(section, context)),
+              const SizedBox(width: 180),
+              const CircleAvatar(radius: 18, backgroundImage: AssetImage('assets/images/profile.jpeg')),
+              const SizedBox(width: 16),
+            ],
     );
   }
 
@@ -55,9 +51,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: TextButton(
-        onPressed: () {
-          if (onItemSelected != null) onItemSelected!(title);
-        },
+        onPressed: () => onItemSelected?.call(title),
         child: Text(title, style: Theme.of(context).textTheme.titleMedium),
       ),
     );

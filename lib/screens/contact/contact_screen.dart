@@ -13,7 +13,6 @@ class _ContactScreenState extends State<ContactScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _messageController = TextEditingController();
 
-  // Dispose of the controllers when the widget is removed from the widget tree.
   @override
   void dispose() {
     _nameController.dispose();
@@ -23,43 +22,34 @@ class _ContactScreenState extends State<ContactScreen> {
   }
 
   Future<void> _launchEmail() async {
-    // Get values from the text controllers.
     final String name = _nameController.text;
     final String userEmail = _emailController.text;
     final String message = _messageController.text;
 
-    // Define the recipient email address.
     const String recipientEmail = 'mallickamarjit@gmail.com';
     const String subject = 'Inquiry from Portfolio Website';
 
-    // Construct the email body.
     final String body =
         'Name: $name\n'
         'Email: $userEmail\n\n'
         'Message:\n$message';
 
-    // Encode the subject and body to be URL-safe.
     final String encodedSubject = Uri.encodeComponent(subject);
     final String encodedBody = Uri.encodeComponent(body);
 
-    // Create the mailto URI.
     final Uri emailLaunchUri = Uri.parse('mailto:$recipientEmail?subject=$encodedSubject&body=$encodedBody');
 
-    // Attempt to launch the email URI.
     try {
       if (await canLaunchUrl(emailLaunchUri)) {
         await launchUrl(emailLaunchUri);
       } else {
-        // Show an error message if the email client cannot be launched.
         _showSnackBar('Could not launch email client. Please ensure you have an email app configured.');
       }
     } catch (e) {
-      // Catch any exceptions during the launch process.
       _showSnackBar('An error occurred: $e');
     }
   }
 
-  // Helper function to show a SnackBar message.
   void _showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -132,7 +122,7 @@ class _ContactScreenState extends State<ContactScreen> {
       maxLines: maxLines,
       decoration: InputDecoration(
         labelText: label,
-        fillColor: Colors.grey[100],
+        fillColor: Colors.white,
         filled: true,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
       ),

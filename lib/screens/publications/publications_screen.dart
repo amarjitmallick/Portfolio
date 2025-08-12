@@ -67,6 +67,7 @@ class PublicationsScreen extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(24),
         decoration: BoxDecoration(
+          color: Colors.white,
           border: Border.all(),
           borderRadius: BorderRadius.circular(24),
         ),

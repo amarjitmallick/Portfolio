@@ -53,66 +53,122 @@ class ProjectsScreen extends StatelessWidget {
               return Container(
                 padding: EdgeInsets.all(24),
                 decoration: BoxDecoration(
+                  color: Colors.white,
                   border: Border.all(),
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: Flex(
+                  mainAxisSize: MainAxisSize.min,
                   direction: isMobile ? Axis.vertical : Axis.horizontal,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Text content
-                    Expanded(
-                      child: Column(
-                        spacing: 16,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            project["title"]!,
-                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
-                          ),
-
-                          Text(
-                            project["description"]!,
-                            style: Theme.of(context).textTheme.headlineSmall,
-                          ),
-
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              backgroundColor: Color(0xFFDBE8F2),
-                            ),
-                            onPressed: () {
-                              launchUrl(Uri.parse(project["link"]!));
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                              child: const Text(
-                                "View Project",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 18,
+                  children: isMobile
+                      ? [
+                          Flexible(
+                            child: Column(
+                              spacing: 16,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  project["title"]!,
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
                                 ),
-                              ),
+
+                                Text(
+                                  project["description"]!,
+                                  style: Theme.of(context).textTheme.headlineSmall,
+                                ),
+
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: Color(0xFFDBE8F2),
+                                  ),
+                                  onPressed: () {
+                                    launchUrl(Uri.parse(project["link"]!));
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                                    child: const Text(
+                                      "View Project",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 200, height: 20),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.asset(
+                              project["image"]!,
+                              width: isMobile ? double.infinity : 200,
+                              height: isMobile ? 200 : 200,
+                              fit: isMobile ? BoxFit.fitHeight : BoxFit.cover,
+                              errorBuilder: (_, obj, stc) {
+                                return Placeholder();
+                              },
+                            ),
+                          ),
+                        ].reversed.toList()
+                      : [
+                          Flexible(
+                            child: Column(
+                              spacing: 16,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  project["title"]!,
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+                                ),
+
+                                Text(
+                                  project["description"]!,
+                                  style: Theme.of(context).textTheme.headlineSmall,
+                                ),
+
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: Color(0xFFDBE8F2),
+                                  ),
+                                  onPressed: () {
+                                    launchUrl(Uri.parse(project["link"]!));
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                                    child: const Text(
+                                      "View Project",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 200, height: 20),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.asset(
+                              project["image"]!,
+                              width: isMobile ? double.infinity : 200,
+                              height: isMobile ? 200 : 200,
+                              fit: isMobile ? BoxFit.fitHeight : BoxFit.cover,
+                              errorBuilder: (_, obj, stc) {
+                                return Placeholder();
+                              },
                             ),
                           ),
                         ],
-                      ),
-                    ),
-                    const SizedBox(width: 200, height: 20),
-                    // Project image
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: Image.asset(
-                        project["image"]!,
-                        width: isMobile ? double.infinity : 200,
-                        height: isMobile ? 200 : 200,
-                        fit: BoxFit.cover,
-                        errorBuilder: (_, obj, stc) {
-                          return Placeholder();
-                        },
-                      ),
-                    ),
-                  ],
                 ),
               );
             }).toList(),
