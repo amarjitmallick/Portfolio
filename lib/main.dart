@@ -1,41 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/home_view/home_page.dart';
-import 'package:portfolio/theme/theme_switcher.dart';
-import 'package:portfolio/theme/themes.dart';
+import 'package:portfolio/responsive/typography.dart';
+import 'package:provider/provider.dart';
+
+import 'responsive/responsive.dart';
+import 'screens/home/desktop_and_tab_home.dart';
+import 'screens/home/mobile_home.dart';
+import 'themes/theme_provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return ThemeSwitcherWidget(
-      initialDarkModeOn: true,
-      child: AmarjitMallick(),
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Amarjit Mallick | Portfolio',
+      theme: themeProvider.lightTheme,
+      builder: (context, child) => BreakpointTypography(child: child ?? const SizedBox()),
+      home: const ResponsiveHomeSwitcher(),
     );
   }
 }
 
-class AmarjitMallick extends StatelessWidget {
-  const AmarjitMallick({
-    Key key,
-  }) : super(key: key);
+class ResponsiveHomeSwitcher extends StatelessWidget {
+  const ResponsiveHomeSwitcher({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Amarjit Mallick',
-      home: HomePage(),
-      theme: ThemeSwitcher.of(context).isDarkModeOn
-          ? darkTheme(context)
-          : lightTheme(context),
-      debugShowCheckedModeBanner: false,
+    return LayoutBuilder(
+      builder: (_, constraints) {
+        final w = constraints.maxWidth;
+        if (w < Breakpoints.mobile) {
+          return const MobileHome();
+        }
+        return const DesktopAndTabHome();
+      },
     );
   }
 }
