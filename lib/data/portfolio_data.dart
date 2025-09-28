@@ -8,7 +8,7 @@ class PortfolioData {
         'Passionate developer with 3+ years of experience creating innovative cross platform mobile and web applications. I love turning complex problems into simple, beautiful designs.',
     email: 'mallickamarjit@gmail.com',
     location: 'India',
-    profileImage: 'assets/images/profile.jpeg',
+    profileImage: 'assets/images/profile.jpg',
   );
 
   static const skills = [

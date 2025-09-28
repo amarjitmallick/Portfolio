@@ -3,6 +3,8 @@ import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/widgets/animated_section.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../models/portfolio_models.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -58,7 +60,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeroSection(BuildContext context, personalInfo, bool isDesktop, bool isTablet) {
+  Widget _buildHeroSection(BuildContext context, PersonalInfo personalInfo, bool isDesktop, bool isTablet) {
     return Container(
       constraints: BoxConstraints(maxWidth: isDesktop ? 1400 : 900),
       child: isDesktop
@@ -163,7 +165,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeroImage(BuildContext context, personalInfo) {
+  Widget _buildHeroImage(BuildContext context, PersonalInfo personalInfo) {
     return Container(
       constraints: const BoxConstraints(maxWidth: 400),
       child: AspectRatio(
