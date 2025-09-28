@@ -129,40 +129,42 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     final screenSize = MediaQuery.of(context).size;
     final isDesktop = screenSize.width >= 1024;
 
-    return Scaffold(
-      appBar: !isDesktop
-          ? AppBar(
-              title: Text(
-                'Portfolio',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
+    return SelectionArea(
+      child: Scaffold(
+        appBar: !isDesktop
+            ? AppBar(
+                title: Text(
+                  'Portfolio',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
-              ),
-              centerTitle: true,
-              backgroundColor: Theme.of(context).colorScheme.surface,
-              elevation: 0,
-            )
-          : null,
-      body: Column(
-        children: [
-          if (isDesktop) _buildDesktopNavigation(),
-          Expanded(
-            child: Center(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: isDesktop ? 1400 : double.infinity,
-                ),
-                child: FadeTransition(
-                  opacity: _fadeAnimation,
-                  child: _screens[_currentIndex],
+                centerTitle: true,
+                backgroundColor: Theme.of(context).colorScheme.surface,
+                elevation: 0,
+              )
+            : null,
+        body: Column(
+          children: [
+            if (isDesktop) _buildDesktopNavigation(),
+            Expanded(
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: isDesktop ? 1400 : double.infinity,
+                  ),
+                  child: FadeTransition(
+                    opacity: _fadeAnimation,
+                    child: _screens[_currentIndex],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
+        bottomNavigationBar: isDesktop ? null : _buildBottomNavigation(),
       ),
-      bottomNavigationBar: isDesktop ? null : _buildBottomNavigation(),
     );
   }
 
