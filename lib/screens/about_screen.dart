@@ -335,7 +335,7 @@ class AboutScreen extends StatelessWidget {
             },
             separatorBuilder: (BuildContext context, int index) {
               return SizedBox(
-                width: 8,
+                width: 10,
               );
             },
           ),
@@ -345,13 +345,8 @@ class AboutScreen extends StatelessWidget {
   }
 
   Widget _buildSkillItem(BuildContext context, skill) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Text(
+    return Chip(
+      label: Text(
         skill.name,
         style: Theme.of(context).textTheme.titleMedium?.copyWith(
           fontWeight: FontWeight.w600,
