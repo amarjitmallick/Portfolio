@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/widgets/animated_section.dart';
 
+import '../models/portfolio_models.dart';
+
 class CareerScreen extends StatelessWidget {
   const CareerScreen({super.key});
 
@@ -69,7 +71,7 @@ class CareerScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTimeline(BuildContext context, List careerItems, bool isDesktop, bool isTablet) {
+  Widget _buildTimeline(BuildContext context, List<CareerItem> careerItems, bool isDesktop, bool isTablet) {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -86,7 +88,7 @@ class CareerScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTimelineItem(BuildContext context, careerItem, bool isLast) {
+  Widget _buildTimelineItem(BuildContext context, CareerItem careerItem, bool isLast) {
     return IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -186,67 +188,72 @@ class CareerScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
-                  Text(
-                    careerItem.description,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      height: 1.6,
-                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.star,
-                            size: 16,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            'Key Achievements',
-                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: Theme.of(context).colorScheme.onSurface,
-                            ),
-                          ),
-                        ],
+                  if (careerItem.description.isNotEmpty) ...[
+                    const SizedBox(height: 16),
+                    Text(
+                      careerItem.description,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        height: 1.6,
+                        color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
                       ),
-                      const SizedBox(height: 12),
-                      ...careerItem.achievements.map<Widget>((achievement) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.only(top: 6),
-                                width: 4,
-                                height: 4,
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  shape: BoxShape.circle,
-                                ),
+                    ),
+                  ],
+
+                  if (careerItem.achievements.isNotEmpty) ...[
+                    const SizedBox(height: 20),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.star,
+                              size: 16,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              'Key Achievements',
+                              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context).colorScheme.onSurface,
                               ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Text(
-                                  achievement,
-                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    height: 1.5,
-                                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        ...careerItem.achievements.map<Widget>((achievement) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 8),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.only(top: 6),
+                                  width: 4,
+                                  height: 4,
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).colorScheme.primary,
+                                    shape: BoxShape.circle,
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
-                      }),
-                    ],
-                  ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Text(
+                                    achievement,
+                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                      height: 1.5,
+                                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
+                      ],
+                    ),
+                  ],
                 ],
               ),
             ),

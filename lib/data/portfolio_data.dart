@@ -54,6 +54,13 @@ class PortfolioData {
 
   static const careerItems = [
     CareerItem(
+      company: 'Sundew',
+      position: 'Associate Flutter Developer (A2)',
+      duration: 'Sept 2025 – Present',
+      description: '',
+      achievements: [],
+    ),
+    CareerItem(
       company: 'Cloudcraftz Solutions',
       position: 'Associate Software Developer',
       duration: 'Apr 2024 – Mar 2025',
