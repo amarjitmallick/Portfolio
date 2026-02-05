@@ -26,7 +26,9 @@ class AboutScreen extends StatelessWidget {
         ),
         child: Center(
           child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: isDesktop ? 1400 : 900),
+            constraints: BoxConstraints(
+              maxWidth: isDesktop ? double.infinity : 900,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -43,7 +45,12 @@ class AboutScreen extends StatelessWidget {
                 ),
                 AnimatedSection(
                   delay: const Duration(milliseconds: 400),
-                  child: _buildAboutContent(context, personalInfo, isDesktop, isTablet),
+                  child: _buildAboutContent(
+                    context,
+                    personalInfo,
+                    isDesktop,
+                    isTablet,
+                  ),
                 ),
                 SizedBox(
                   height: isDesktop
@@ -54,7 +61,12 @@ class AboutScreen extends StatelessWidget {
                 ),
                 AnimatedSection(
                   delay: const Duration(milliseconds: 600),
-                  child: _buildSkillsSection(context, skills, isDesktop, isTablet),
+                  child: _buildSkillsSection(
+                    context,
+                    skills,
+                    isDesktop,
+                    isTablet,
+                  ),
                 ),
                 if (isMobile) ...[
                   SizedBox(
@@ -66,7 +78,12 @@ class AboutScreen extends StatelessWidget {
                   ),
                   AnimatedSection(
                     delay: const Duration(milliseconds: 800),
-                    child: _buildCareerSection(context, careerItems, isDesktop, isTablet),
+                    child: _buildCareerSection(
+                      context,
+                      careerItems,
+                      isDesktop,
+                      isTablet,
+                    ),
                   ),
                 ],
               ],
@@ -97,14 +114,21 @@ class AboutScreen extends StatelessWidget {
               ? 'Get to know me, my skills, and professional journey'
               : 'Get to know me better and explore my technical expertise',
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurface.withValues(alpha: 0.7),
           ),
         ),
       ],
     );
   }
 
-  Widget _buildAboutContent(BuildContext context, personalInfo, bool isDesktop, bool isTablet) {
+  Widget _buildAboutContent(
+    BuildContext context,
+    personalInfo,
+    bool isDesktop,
+    bool isTablet,
+  ) {
     return Container(
       child: isDesktop
           ? Row(
@@ -132,7 +156,6 @@ class AboutScreen extends StatelessWidget {
 
   Widget _buildAboutText(BuildContext context, personalInfo) {
     return Container(
-      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(16),
@@ -210,16 +233,41 @@ class AboutScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 20),
-          _buildInfoItem(context, Icons.person_rounded, 'Name', personalInfo.name),
-          _buildInfoItem(context, Icons.work_rounded, 'Title', personalInfo.title),
-          _buildInfoItem(context, Icons.email_rounded, 'Email', personalInfo.email),
-          _buildInfoItem(context, Icons.location_on_rounded, 'Location', personalInfo.location),
+          _buildInfoItem(
+            context,
+            Icons.person_rounded,
+            'Name',
+            personalInfo.name,
+          ),
+          _buildInfoItem(
+            context,
+            Icons.work_rounded,
+            'Title',
+            personalInfo.title,
+          ),
+          _buildInfoItem(
+            context,
+            Icons.email_rounded,
+            'Email',
+            personalInfo.email,
+          ),
+          _buildInfoItem(
+            context,
+            Icons.location_on_rounded,
+            'Location',
+            personalInfo.location,
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildInfoItem(BuildContext context, IconData icon, String label, String value) {
+  Widget _buildInfoItem(
+    BuildContext context,
+    IconData icon,
+    String label,
+    String value,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Row(
@@ -237,7 +285,9 @@ class AboutScreen extends StatelessWidget {
                 Text(
                   label,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.6),
                   ),
                 ),
                 Text(
@@ -254,14 +304,18 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSkillsSection(BuildContext context, List skills, bool isDesktop, bool isTablet) {
+  Widget _buildSkillsSection(
+    BuildContext context,
+    List skills,
+    bool isDesktop,
+    bool isTablet,
+  ) {
     final groupedSkills = <String, List>{};
     for (final skill in skills) {
       groupedSkills.putIfAbsent(skill.category, () => []).add(skill);
     }
 
     return Container(
-      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(16),
@@ -287,7 +341,10 @@ class AboutScreen extends StatelessWidget {
           const SizedBox(height: 24),
           ...groupedSkills.entries.map((entry) {
             return AnimatedSection(
-              delay: Duration(milliseconds: 200 * groupedSkills.keys.toList().indexOf(entry.key)),
+              delay: Duration(
+                milliseconds:
+                    200 * groupedSkills.keys.toList().indexOf(entry.key),
+              ),
               child: Padding(
                 padding: EdgeInsets.only(
                   bottom: isDesktop
@@ -296,7 +353,13 @@ class AboutScreen extends StatelessWidget {
                       ? 32
                       : 24,
                 ),
-                child: _buildSkillCategory(context, entry.key, entry.value, isDesktop, isTablet),
+                child: _buildSkillCategory(
+                  context,
+                  entry.key,
+                  entry.value,
+                  isDesktop,
+                  isTablet,
+                ),
               ),
             );
           }),
@@ -355,7 +418,12 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCareerSection(BuildContext context, List careerItems, bool isDesktop, bool isTablet) {
+  Widget _buildCareerSection(
+    BuildContext context,
+    List careerItems,
+    bool isDesktop,
+    bool isTablet,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -441,7 +509,9 @@ class AboutScreen extends StatelessWidget {
                 Text(
                   item.duration,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.7),
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -465,10 +535,11 @@ class AboutScreen extends StatelessWidget {
                         const SizedBox(width: 8),
                         Text(
                           'Key Achievements',
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
+                          style: Theme.of(context).textTheme.titleSmall
+                              ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
                         ),
                       ],
                     ),
@@ -492,10 +563,14 @@ class AboutScreen extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 achievement,
-                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  height: 1.5,
-                                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
-                                ),
+                                style: Theme.of(context).textTheme.bodyMedium
+                                    ?.copyWith(
+                                      height: 1.5,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface
+                                          .withValues(alpha: 0.8),
+                                    ),
                               ),
                             ),
                           ],
