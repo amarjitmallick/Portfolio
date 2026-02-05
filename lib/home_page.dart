@@ -224,7 +224,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           color: isSelected
                               ? Theme.of(context).colorScheme.primary
                               : Theme.of(context).colorScheme.onSurface,
-                          fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                          fontWeight: isSelected
+                              ? FontWeight.w600
+                              : FontWeight.normal,
                         ),
                       ),
                     ),
@@ -252,7 +254,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               icon: Icon(
                 item.icon,
                 size: 24,
-                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+                color: Theme.of(
+                  context,
+                ).colorScheme.onSurface.withValues(alpha: 0.6),
               ),
               selectedIcon: Icon(
                 item.icon,

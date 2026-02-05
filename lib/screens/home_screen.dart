@@ -29,7 +29,12 @@ class HomeScreen extends StatelessWidget {
             children: [
               AnimatedSection(
                 delay: const Duration(milliseconds: 200),
-                child: _buildHeroSection(context, personalInfo, isDesktop, isTablet),
+                child: _buildHeroSection(
+                  context,
+                  personalInfo,
+                  isDesktop,
+                  isTablet,
+                ),
               ),
               SizedBox(
                 height: isDesktop
@@ -60,7 +65,12 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeroSection(BuildContext context, PersonalInfo personalInfo, bool isDesktop, bool isTablet) {
+  Widget _buildHeroSection(
+    BuildContext context,
+    PersonalInfo personalInfo,
+    bool isDesktop,
+    bool isTablet,
+  ) {
     return Container(
       constraints: BoxConstraints(maxWidth: isDesktop ? 1400 : 900),
       child: isDesktop
@@ -68,7 +78,12 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 2,
-                  child: _buildHeroContent(context, personalInfo, isDesktop, isTablet),
+                  child: _buildHeroContent(
+                    context,
+                    personalInfo,
+                    isDesktop,
+                    isTablet,
+                  ),
                 ),
                 const SizedBox(width: 60),
                 Expanded(
@@ -86,12 +101,19 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeroContent(BuildContext context, personalInfo, bool isDesktop, bool isTablet) {
+  Widget _buildHeroContent(
+    BuildContext context,
+    personalInfo,
+    bool isDesktop,
+    bool isTablet,
+  ) {
     return Column(
-      crossAxisAlignment: isDesktop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+      crossAxisAlignment: isDesktop
+          ? CrossAxisAlignment.start
+          : CrossAxisAlignment.center,
       children: [
         Text(
-          'Hi, I\'m ${personalInfo.name} 👋',
+          'Hi, I\'m ${personalInfo.name} !!!',
           style:
               (isDesktop
                       ? Theme.of(context).textTheme.displaySmall
@@ -124,7 +146,9 @@ class HomeScreen extends StatelessWidget {
           personalInfo.bio,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
             height: 1.6,
-            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurface.withValues(alpha: 0.8),
           ),
           textAlign: isDesktop ? TextAlign.start : TextAlign.center,
           maxLines: isTablet ? 4 : null,
@@ -139,14 +163,19 @@ class HomeScreen extends StatelessWidget {
             TextButton(
               onPressed: () {
                 launchUrl(
-                  Uri.parse("https://drive.google.com/file/d/161FOXZArLz2TfrqD2zBIA2mMRTCsgwlq/view"),
+                  Uri.parse(
+                    "https://drive.google.com/file/d/161FOXZArLz2TfrqD2zBIA2mMRTCsgwlq/view",
+                  ),
                   mode: LaunchMode.externalApplication,
                 );
               },
               style: TextButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 32,
+                ),
               ),
               child: const Text('Download Resume'),
             ),
@@ -155,7 +184,10 @@ class HomeScreen extends StatelessWidget {
               style: OutlinedButton.styleFrom(
                 foregroundColor: Theme.of(context).colorScheme.primary,
                 side: BorderSide(color: Theme.of(context).colorScheme.primary),
-                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 32,
+                ),
               ),
               child: const Text('Contact Me'),
             ),
@@ -175,7 +207,9 @@ class HomeScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.1),
+                color: Theme.of(
+                  context,
+                ).colorScheme.shadow.withValues(alpha: 0.1),
                 blurRadius: 20,
                 offset: const Offset(0, 10),
               ),
@@ -208,9 +242,21 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildQuickStats(BuildContext context, bool isDesktop, bool isTablet) {
     final stats = [
-      {'number': '20+', 'label': 'Projects Completed', 'icon': Icons.work_rounded},
-      {'number': '3+', 'label': 'Years Experience', 'icon': Icons.timeline_rounded},
-      {'number': '100+', 'label': 'App Downloads', 'icon': Icons.download_rounded},
+      {
+        'number': '20+',
+        'label': 'Projects Completed',
+        'icon': Icons.work_rounded,
+      },
+      {
+        'number': '3+',
+        'label': 'Years Experience',
+        'icon': Icons.timeline_rounded,
+      },
+      {
+        'number': '100+',
+        'label': 'App Downloads',
+        'icon': Icons.download_rounded,
+      },
     ];
 
     return Container(
@@ -238,7 +284,9 @@ class HomeScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
-              mainAxisAlignment: isDesktop ? MainAxisAlignment.center : MainAxisAlignment.start,
+              mainAxisAlignment: isDesktop
+                  ? MainAxisAlignment.center
+                  : MainAxisAlignment.start,
               children: [
                 Icon(
                   stat['icon'] as IconData,
@@ -257,7 +305,9 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   stat['label'] as String,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.7),
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -298,7 +348,7 @@ class HomeScreen extends StatelessWidget {
     ];
 
     return Container(
-      constraints: BoxConstraints(maxWidth: isDesktop ? 1200 : 900),
+      constraints: BoxConstraints(maxWidth: isDesktop ? double.infinity : 900),
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
@@ -324,7 +374,9 @@ class HomeScreen extends StatelessWidget {
                 color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                  color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.outline.withValues(alpha: 0.2),
                 ),
               ),
               child: Row(
@@ -349,16 +401,20 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Text(
                           link['title'] as String,
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           link['subtitle'] as String,
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
-                          ),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurface.withValues(alpha: 0.6),
+                              ),
                         ),
                       ],
                     ),
@@ -366,7 +422,9 @@ class HomeScreen extends StatelessWidget {
                   Icon(
                     Icons.arrow_forward_ios,
                     size: 16,
-                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.4),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.4),
                   ),
                 ],
               ),

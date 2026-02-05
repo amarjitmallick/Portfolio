@@ -27,55 +27,67 @@ class ProjectsScreen extends StatelessWidget {
               ? 24
               : 16,
         ),
-        child: Center(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: isDesktop ? 1400 : 900),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AnimatedSection(
-                  delay: const Duration(milliseconds: 200),
-                  child: _buildHeader(context),
-                ),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: isDesktop ? double.infinity : 900,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AnimatedSection(
+                delay: const Duration(milliseconds: 200),
+                child: _buildHeader(context),
+              ),
+              SizedBox(
+                height: isDesktop
+                    ? 50
+                    : isTablet
+                    ? 32
+                    : 24,
+              ),
+              ...projects.asMap().entries.map((entry) {
+                final index = entry.key;
+                final project = entry.value;
+                return AnimatedSection(
+                  delay: Duration(milliseconds: 400 + (index * 200)),
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      bottom: isDesktop
+                          ? 40
+                          : isTablet
+                          ? 32
+                          : 24,
+                    ),
+                    child: _buildProjectCard(
+                      context,
+                      project,
+                      isDesktop,
+                      isTablet,
+                      index.isEven,
+                    ),
+                  ),
+                );
+              }),
+              if (isMobile) ...[
                 SizedBox(
                   height: isDesktop
-                      ? 50
+                      ? 80
                       : isTablet
-                      ? 32
-                      : 24,
+                      ? 60
+                      : 40,
                 ),
-                ...projects.asMap().entries.map((entry) {
-                  final index = entry.key;
-                  final project = entry.value;
-                  return AnimatedSection(
-                    delay: Duration(milliseconds: 400 + (index * 200)),
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        bottom: isDesktop
-                            ? 40
-                            : isTablet
-                            ? 32
-                            : 24,
-                      ),
-                      child: _buildProjectCard(context, project, isDesktop, isTablet, index.isEven),
-                    ),
-                  );
-                }),
-                if (isMobile) ...[
-                  SizedBox(
-                    height: isDesktop
-                        ? 80
-                        : isTablet
-                        ? 60
-                        : 40,
+                AnimatedSection(
+                  delay: Duration(
+                    milliseconds: 600 + (projects.length * 200),
                   ),
-                  AnimatedSection(
-                    delay: Duration(milliseconds: 600 + (projects.length * 200)),
-                    child: _buildPublicationsSection(context, isDesktop, isTablet),
+                  child: _buildPublicationsSection(
+                    context,
+                    isDesktop,
+                    isTablet,
                   ),
-                ],
+                ),
               ],
-            ),
+            ],
           ),
         ),
       ),
@@ -102,26 +114,41 @@ class ProjectsScreen extends StatelessWidget {
               ? 'A showcase of my work and research contributions'
               : 'A showcase of my latest work and personal projects',
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurface.withValues(alpha: 0.7),
           ),
         ),
       ],
     );
   }
 
-  Widget _buildProjectCard(BuildContext context, project, bool isDesktop, bool isTablet, bool isEven) {
+  Widget _buildProjectCard(
+    BuildContext context,
+    project,
+    bool isDesktop,
+    bool isTablet,
+    bool isEven,
+  ) {
     final imageWidget = _buildProjectImage(context, project);
-    final contentWidget = _buildProjectContent(context, project, isDesktop, isTablet);
+    final contentWidget = _buildProjectContent(
+      context,
+      project,
+      isDesktop,
+      isTablet,
+    );
 
     return Container(
-      constraints: const BoxConstraints(maxWidth: 1200),
+      constraints: const BoxConstraints(maxWidth: double.infinity),
       child: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.1),
+              color: Theme.of(
+                context,
+              ).colorScheme.shadow.withValues(alpha: 0.1),
               blurRadius: 20,
               offset: const Offset(0, 10),
             ),
@@ -134,17 +161,17 @@ class ProjectsScreen extends StatelessWidget {
                   child: Row(
                     children: isEven
                         ? [
-                            Expanded(flex: 2, child: imageWidget),
-                            Expanded(flex: 3, child: contentWidget),
+                            imageWidget,
+                            Expanded(child: contentWidget),
                           ]
                         : [
-                            Expanded(flex: 3, child: contentWidget),
-                            Expanded(flex: 2, child: imageWidget),
+                            Expanded(child: contentWidget),
+                            imageWidget,
                           ],
                   ),
                 )
               : Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     imageWidget,
                     contentWidget,
@@ -158,6 +185,7 @@ class ProjectsScreen extends StatelessWidget {
   Widget _buildProjectImage(BuildContext context, project) {
     return Container(
       height: 250,
+      width: 250,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         image: DecorationImage(
@@ -188,7 +216,12 @@ class ProjectsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildProjectContent(BuildContext context, project, bool isDesktop, bool isTablet) {
+  Widget _buildProjectContent(
+    BuildContext context,
+    project,
+    bool isDesktop,
+    bool isTablet,
+  ) {
     return Container(
       padding: EdgeInsets.all(
         isDesktop
@@ -212,7 +245,9 @@ class ProjectsScreen extends StatelessWidget {
             project.description,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
               height: 1.6,
-              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
+              color: Theme.of(
+                context,
+              ).colorScheme.onSurface.withValues(alpha: 0.8),
             ),
           ),
           SizedBox(height: isDesktop ? 20 : 16),
@@ -254,7 +289,10 @@ class ProjectsScreen extends StatelessWidget {
                   style: TextButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 16,
+                      horizontal: 32,
+                    ),
                   ),
                 ),
               if (project.githubUrl != null)
@@ -264,7 +302,9 @@ class ProjectsScreen extends StatelessWidget {
                   label: const Text('Source Code'),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: Theme.of(context).colorScheme.primary,
-                    side: BorderSide(color: Theme.of(context).colorScheme.primary),
+                    side: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -277,7 +317,11 @@ class ProjectsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildPublicationsSection(BuildContext context, bool isDesktop, bool isTablet) {
+  Widget _buildPublicationsSection(
+    BuildContext context,
+    bool isDesktop,
+    bool isTablet,
+  ) {
     List<Publication> publications;
     return FutureBuilder<List<dynamic>>(
       future: BlogRepository().fetchBlogs(),
@@ -309,9 +353,10 @@ class ProjectsScreen extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       'Publications',
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                     ),
                   ],
                 ),
@@ -370,7 +415,9 @@ class ProjectsScreen extends StatelessWidget {
           Text(
             DateFormat("MMM dd, yyyy").format(DateTime.parse(publication.year)),
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+              color: Theme.of(
+                context,
+              ).colorScheme.onSurface.withValues(alpha: 0.6),
               fontStyle: FontStyle.italic,
             ),
           ),
@@ -378,7 +425,9 @@ class ProjectsScreen extends StatelessWidget {
             publication.description,
             maxLines: 3,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+              color: Theme.of(
+                context,
+              ).colorScheme.onSurface.withValues(alpha: 0.6),
               fontStyle: FontStyle.italic,
             ),
           ),
