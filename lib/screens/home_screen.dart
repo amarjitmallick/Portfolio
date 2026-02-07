@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/widgets/animated_section.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -11,56 +12,350 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final personalInfo = PortfolioData.personalInfo;
+    final projects = PortfolioData.projects;
     final screenSize = MediaQuery.of(context).size;
     final isDesktop = screenSize.width >= 1024;
     final isTablet = screenSize.width >= 768 && screenSize.width < 1024;
 
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(
-          isDesktop
-              ? 40
-              : isTablet
-              ? 24
-              : 16,
+      body: Center(
+        child: Column(
+          children: [
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: _buildHeroImage(context, personalInfo),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: SingleChildScrollView(
+                      primary: true,
+                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                              text: "SOFTWARE\n",
+                              style: GoogleFonts.urbanist().copyWith(
+                                fontSize: 120,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 2,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: "ENGINEER",
+                                  style: TextStyle(
+                                    fontSize: 120,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 2,
+                                    color:
+                                        Theme.of(
+                                          context,
+                                        ).colorScheme.onSurface.withValues(
+                                          alpha: 0.5,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          Text(
+                            "Passionate about creating intuitive and engaging user experiences. Specialize in transforming ideas into beautifully crafted products.",
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                          _buildQuickStats(context, isDesktop, isTablet),
+
+                          SizedBox(
+                            height: 250,
+                            child: Row(
+                              spacing: 32,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: Colors.yellow,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          SizedBox(height: 100),
+
+                          RichText(
+                            text: TextSpan(
+                              text: "RECENT\n",
+                              style: GoogleFonts.urbanist().copyWith(
+                                fontSize: 120,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 2,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: "PROJECTS",
+                                  style: TextStyle(
+                                    fontSize: 120,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 2,
+                                    color:
+                                        Theme.of(
+                                          context,
+                                        ).colorScheme.onSurface.withValues(
+                                          alpha: 0.5,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          ...projects.asMap().entries.map((entry) {
+                            final index = entry.key;
+                            final project = entry.value;
+                            return AnimatedSection(
+                              delay: Duration(
+                                milliseconds: 400 + (index * 200),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  bottom: isDesktop
+                                      ? 40
+                                      : isTablet
+                                      ? 32
+                                      : 24,
+                                ),
+                                child: _buildProjectCard(
+                                  context,
+                                  project,
+                                  isDesktop,
+                                  isTablet,
+                                  index.isEven,
+                                ),
+                              ),
+                            );
+                          }),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-        child: Center(
-          child: Column(
-            children: [
-              AnimatedSection(
-                delay: const Duration(milliseconds: 200),
-                child: _buildHeroSection(
-                  context,
-                  personalInfo,
-                  isDesktop,
-                  isTablet,
+      ),
+    );
+  }
+
+  Widget _buildProjectCard(
+    BuildContext context,
+    project,
+    bool isDesktop,
+    bool isTablet,
+    bool isEven,
+  ) {
+    final imageWidget = _buildProjectImage(context, project);
+    final contentWidget = _buildProjectContent(
+      context,
+      project,
+      isDesktop,
+      isTablet,
+    );
+
+    return Container(
+      constraints: const BoxConstraints(maxWidth: double.infinity),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surface,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(
+                context,
+              ).colorScheme.shadow.withValues(alpha: 0.1),
+              blurRadius: 20,
+              offset: const Offset(0, 10),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: isDesktop
+              ? IntrinsicHeight(
+                  child: Row(
+                    children: isEven
+                        ? [
+                            imageWidget,
+                            Expanded(child: contentWidget),
+                          ]
+                        : [
+                            Expanded(child: contentWidget),
+                            imageWidget,
+                          ],
+                  ),
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    imageWidget,
+                    contentWidget,
+                  ],
                 ),
-              ),
-              SizedBox(
-                height: isDesktop
-                    ? 80
-                    : isTablet
-                    ? 60
-                    : 40,
-              ),
-              AnimatedSection(
-                delay: const Duration(milliseconds: 400),
-                child: _buildQuickStats(context, isDesktop, isTablet),
-              ),
-              SizedBox(
-                height: isDesktop
-                    ? 80
-                    : isTablet
-                    ? 60
-                    : 40,
-              ),
-              AnimatedSection(
-                delay: const Duration(milliseconds: 600),
-                child: _buildQuickLinks(context, isDesktop, isTablet),
-              ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProjectImage(BuildContext context, project) {
+    return Container(
+      height: 250,
+      width: 250,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        image: DecorationImage(
+          image: AssetImage(project.imageUrl),
+          fit: BoxFit.fitHeight,
+        ),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Theme.of(context).colorScheme.primary.withValues(alpha: 0.8),
+            Theme.of(context).colorScheme.secondary.withValues(alpha: 0.6),
+          ],
+        ),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.black.withValues(alpha: 0.3),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildProjectContent(
+    BuildContext context,
+    project,
+    bool isDesktop,
+    bool isTablet,
+  ) {
+    return Container(
+      padding: EdgeInsets.all(
+        isDesktop
+            ? 40
+            : isTablet
+            ? 32
+            : 24,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            project.title,
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+          ),
+          SizedBox(height: isDesktop ? 16 : 12),
+          Text(
+            project.description,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              height: 1.6,
+              color: Theme.of(
+                context,
+              ).colorScheme.onSurface.withValues(alpha: 0.8),
+            ),
+          ),
+          SizedBox(height: isDesktop ? 20 : 16),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: project.technologies.map<Widget>((tech) {
+              return Chip(
+                label: Text(
+                  tech,
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+          SizedBox(height: isDesktop ? 24 : 20),
+          Wrap(
+            spacing: 12,
+            runSpacing: 12,
+            children: [
+              if (project.demoUrl != null)
+                TextButton.icon(
+                  onPressed: () {
+                    launchUrl(
+                      Uri.parse(project.demoUrl),
+                      mode: LaunchMode.externalApplication,
+                    );
+                  },
+                  icon: const Icon(Icons.android_rounded),
+                  label: const Text(
+                    'Check Application',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  style: TextButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 16,
+                      horizontal: 32,
+                    ),
+                  ),
+                ),
+              if (project.githubUrl != null)
+                OutlinedButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.code),
+                  label: const Text('Source Code'),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Theme.of(context).colorScheme.primary,
+                    side: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -243,18 +538,19 @@ class HomeScreen extends StatelessWidget {
   Widget _buildQuickStats(BuildContext context, bool isDesktop, bool isTablet) {
     final stats = [
       {
-        'number': '20+',
-        'label': 'Projects Completed',
-        'icon': Icons.work_rounded,
-      },
-      {
-        'number': '3+',
-        'label': 'Years Experience',
+        'number': '+3',
+        'label': 'YEARS OF EXPERIENCE',
         'icon': Icons.timeline_rounded,
       },
       {
-        'number': '100+',
-        'label': 'App Downloads',
+        'number': '+20',
+        'label': 'PROJECTS COMPLETED',
+        'icon': Icons.work_rounded,
+      },
+
+      {
+        'number': '+100',
+        'label': 'APP DOWNLOADS',
         'icon': Icons.download_rounded,
       },
     ];
@@ -267,7 +563,7 @@ class HomeScreen extends StatelessWidget {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           childAspectRatio: isDesktop
-              ? 2
+              ? 1.1
               : isTablet
               ? 1.2
               : 0.6,
@@ -278,7 +574,6 @@ class HomeScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           final stat = stats[index];
           return Container(
-            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(16),
@@ -287,23 +582,19 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: isDesktop
                   ? MainAxisAlignment.center
                   : MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(
-                  stat['icon'] as IconData,
-                  size: isDesktop ? 32 : 24,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                const SizedBox(height: 12),
                 Text(
                   stat['number'] as String,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontSize: 64,
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  stat['label'] as String,
+                  (stat['label'] as String),
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Theme.of(
                       context,

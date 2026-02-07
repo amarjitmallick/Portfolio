@@ -86,63 +86,63 @@ ThemeData get lightTheme => ThemeData(
     elevation: 0,
   ),
   textTheme: TextTheme(
-    displayLarge: GoogleFonts.manrope(
+    displayLarge: GoogleFonts.urbanist(
       fontSize: FontSizes.displayLarge,
       fontWeight: FontWeight.normal,
     ),
-    displayMedium: GoogleFonts.manrope(
+    displayMedium: GoogleFonts.urbanist(
       fontSize: FontSizes.displayMedium,
       fontWeight: FontWeight.normal,
     ),
-    displaySmall: GoogleFonts.manrope(
+    displaySmall: GoogleFonts.urbanist(
       fontSize: FontSizes.displaySmall,
       fontWeight: FontWeight.w600,
     ),
-    headlineLarge: GoogleFonts.manrope(
+    headlineLarge: GoogleFonts.urbanist(
       fontSize: FontSizes.headlineLarge,
       fontWeight: FontWeight.normal,
     ),
-    headlineMedium: GoogleFonts.manrope(
+    headlineMedium: GoogleFonts.urbanist(
       fontSize: FontSizes.headlineMedium,
       fontWeight: FontWeight.w500,
     ),
-    headlineSmall: GoogleFonts.manrope(
+    headlineSmall: GoogleFonts.urbanist(
       fontSize: FontSizes.headlineSmall,
       fontWeight: FontWeight.bold,
     ),
-    titleLarge: GoogleFonts.manrope(
+    titleLarge: GoogleFonts.urbanist(
       fontSize: FontSizes.titleLarge,
       fontWeight: FontWeight.w500,
     ),
-    titleMedium: GoogleFonts.manrope(
+    titleMedium: GoogleFonts.urbanist(
       fontSize: FontSizes.titleMedium,
       fontWeight: FontWeight.w500,
     ),
-    titleSmall: GoogleFonts.manrope(
+    titleSmall: GoogleFonts.urbanist(
       fontSize: FontSizes.titleSmall,
       fontWeight: FontWeight.w500,
     ),
-    labelLarge: GoogleFonts.manrope(
+    labelLarge: GoogleFonts.urbanist(
       fontSize: FontSizes.labelLarge,
       fontWeight: FontWeight.w500,
     ),
-    labelMedium: GoogleFonts.manrope(
+    labelMedium: GoogleFonts.urbanist(
       fontSize: FontSizes.labelMedium,
       fontWeight: FontWeight.w500,
     ),
-    labelSmall: GoogleFonts.manrope(
+    labelSmall: GoogleFonts.urbanist(
       fontSize: FontSizes.labelSmall,
       fontWeight: FontWeight.w500,
     ),
-    bodyLarge: GoogleFonts.manrope(
+    bodyLarge: GoogleFonts.urbanist(
       fontSize: FontSizes.bodyLarge,
       fontWeight: FontWeight.normal,
     ),
-    bodyMedium: GoogleFonts.manrope(
+    bodyMedium: GoogleFonts.urbanist(
       fontSize: FontSizes.bodyMedium,
       fontWeight: FontWeight.normal,
     ),
-    bodySmall: GoogleFonts.manrope(
+    bodySmall: GoogleFonts.urbanist(
       fontSize: FontSizes.bodySmall,
       fontWeight: FontWeight.normal,
     ),
@@ -176,63 +176,63 @@ ThemeData get darkTheme => ThemeData(
     elevation: 0,
   ),
   textTheme: TextTheme(
-    displayLarge: GoogleFonts.manrope(
+    displayLarge: GoogleFonts.urbanist(
       fontSize: FontSizes.displayLarge,
       fontWeight: FontWeight.normal,
     ),
-    displayMedium: GoogleFonts.manrope(
+    displayMedium: GoogleFonts.urbanist(
       fontSize: FontSizes.displayMedium,
       fontWeight: FontWeight.normal,
     ),
-    displaySmall: GoogleFonts.manrope(
+    displaySmall: GoogleFonts.urbanist(
       fontSize: FontSizes.displaySmall,
       fontWeight: FontWeight.w600,
     ),
-    headlineLarge: GoogleFonts.manrope(
+    headlineLarge: GoogleFonts.urbanist(
       fontSize: FontSizes.headlineLarge,
       fontWeight: FontWeight.normal,
     ),
-    headlineMedium: GoogleFonts.manrope(
+    headlineMedium: GoogleFonts.urbanist(
       fontSize: FontSizes.headlineMedium,
       fontWeight: FontWeight.w500,
     ),
-    headlineSmall: GoogleFonts.manrope(
+    headlineSmall: GoogleFonts.urbanist(
       fontSize: FontSizes.headlineSmall,
       fontWeight: FontWeight.bold,
     ),
-    titleLarge: GoogleFonts.manrope(
+    titleLarge: GoogleFonts.urbanist(
       fontSize: FontSizes.titleLarge,
       fontWeight: FontWeight.w500,
     ),
-    titleMedium: GoogleFonts.manrope(
+    titleMedium: GoogleFonts.urbanist(
       fontSize: FontSizes.titleMedium,
       fontWeight: FontWeight.w500,
     ),
-    titleSmall: GoogleFonts.manrope(
+    titleSmall: GoogleFonts.urbanist(
       fontSize: FontSizes.titleSmall,
       fontWeight: FontWeight.w500,
     ),
-    labelLarge: GoogleFonts.manrope(
+    labelLarge: GoogleFonts.urbanist(
       fontSize: FontSizes.labelLarge,
       fontWeight: FontWeight.w500,
     ),
-    labelMedium: GoogleFonts.manrope(
+    labelMedium: GoogleFonts.urbanist(
       fontSize: FontSizes.labelMedium,
       fontWeight: FontWeight.w500,
     ),
-    labelSmall: GoogleFonts.manrope(
+    labelSmall: GoogleFonts.urbanist(
       fontSize: FontSizes.labelSmall,
       fontWeight: FontWeight.w500,
     ),
-    bodyLarge: GoogleFonts.manrope(
+    bodyLarge: GoogleFonts.urbanist(
       fontSize: FontSizes.bodyLarge,
       fontWeight: FontWeight.normal,
     ),
-    bodyMedium: GoogleFonts.manrope(
+    bodyMedium: GoogleFonts.urbanist(
       fontSize: FontSizes.bodyMedium,
       fontWeight: FontWeight.normal,
     ),
-    bodySmall: GoogleFonts.manrope(
+    bodySmall: GoogleFonts.urbanist(
       fontSize: FontSizes.bodySmall,
       fontWeight: FontWeight.normal,
     ),
