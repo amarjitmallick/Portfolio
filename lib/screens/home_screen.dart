@@ -6,13 +6,32 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../models/portfolio_models.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _messageController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _messageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final personalInfo = PortfolioData.personalInfo;
     final projects = PortfolioData.projects;
+    final careerItems = PortfolioData.careerItems;
     final screenSize = MediaQuery.of(context).size;
     final isDesktop = screenSize.width >= 1024;
     final isTablet = screenSize.width >= 768 && screenSize.width < 1024;
@@ -153,6 +172,107 @@ class HomeScreen extends StatelessWidget {
                               ),
                             );
                           }),
+
+                          SizedBox(height: 100),
+
+                          RichText(
+                            text: TextSpan(
+                              text: "3+ YEARS OF\n",
+                              style: GoogleFonts.urbanist().copyWith(
+                                fontSize: 120,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 2,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: "EXPERIENCE",
+                                  style: TextStyle(
+                                    fontSize: 120,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 2,
+                                    color:
+                                        Theme.of(
+                                          context,
+                                        ).colorScheme.onSurface.withValues(
+                                          alpha: 0.5,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          SizedBox(
+                            height: 24,
+                          ),
+
+                          ...careerItems.asMap().entries.map((entry) {
+                            final index = entry.key;
+                            final project = entry.value;
+                            final isLast = index == careerItems.length - 1;
+                            return AnimatedSection(
+                              delay: Duration(
+                                milliseconds: 400 + (index * 200),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  bottom: isDesktop
+                                      ? 40
+                                      : isTablet
+                                      ? 32
+                                      : 24,
+                                ),
+                                child: _buildTimelineItem(
+                                  context,
+                                  project,
+                                  isLast,
+                                ),
+                              ),
+                            );
+                          }),
+
+                          SizedBox(height: 100),
+
+                          RichText(
+                            text: TextSpan(
+                              text: "LET'S WORK\n",
+                              style: GoogleFonts.urbanist().copyWith(
+                                fontSize: 120,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 2,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: "TOGETHER",
+                                  style: TextStyle(
+                                    fontSize: 120,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 2,
+                                    color:
+                                        Theme.of(
+                                          context,
+                                        ).colorScheme.onSurface.withValues(
+                                          alpha: 0.5,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          SizedBox(
+                            height: 24,
+                          ),
+                          _buildContactForm(
+                            context,
+                            isDesktop,
+                            isTablet,
+                          ),
+                          SizedBox(
+                            height: 240,
+                          ),
                         ],
                       ),
                     ),
@@ -162,6 +282,332 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildContactForm(
+    BuildContext context,
+    bool isDesktop,
+    bool isTablet,
+  ) {
+    return Container(
+      padding: EdgeInsets.all(
+        isDesktop
+            ? 0
+            : isTablet
+            ? 24
+            : 20,
+      ),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.1),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  Icons.send_rounded,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  'Send Message',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            TextFormField(
+              controller: _nameController,
+              decoration: InputDecoration(
+                labelText: 'Your Name',
+                prefixIcon: const Icon(Icons.person_rounded),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                filled: true,
+                fillColor: Theme.of(
+                  context,
+                ).colorScheme.surfaceContainerHighest,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your name';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 20),
+            TextFormField(
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                labelText: 'Email Address',
+                prefixIcon: const Icon(Icons.email_rounded),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                filled: true,
+                fillColor: Theme.of(
+                  context,
+                ).colorScheme.surfaceContainerHighest,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your email';
+                }
+                if (!RegExp(
+                  r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                ).hasMatch(value)) {
+                  return 'Please enter a valid email';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 20),
+            TextFormField(
+              controller: _messageController,
+              maxLines: 5,
+              decoration: InputDecoration(
+                labelText: 'Message',
+                prefixIcon: const Padding(
+                  padding: EdgeInsets.only(bottom: 80),
+                  child: Icon(Icons.message_rounded),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                filled: true,
+                fillColor: Theme.of(
+                  context,
+                ).colorScheme.surfaceContainerHighest,
+                alignLabelWithHint: true,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your message';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 32),
+            SizedBox(
+              width: double.infinity,
+              child: TextButton(
+                onPressed: _sendMessage,
+                style: TextButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                  padding: const EdgeInsets.symmetric(vertical: 24),
+                ),
+                child: Text(
+                  'Send Message',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _sendMessage() {
+    if (_formKey.currentState!.validate()) {
+      _launchEmail();
+
+      // Clear the form
+      _nameController.clear();
+      _emailController.clear();
+      _messageController.clear();
+    }
+  }
+
+  Future<void> _launchEmail() async {
+    final String name = _nameController.text;
+    final String message = _messageController.text;
+
+    const String recipientEmail = 'mallickamarjit@gmail.com';
+    const String subject = 'Inquiry from Portfolio Website';
+
+    final String body =
+        '$message\n\n'
+        'Regards,\n$name\n';
+
+    final String encodedSubject = Uri.encodeComponent(subject);
+    final String encodedBody = Uri.encodeComponent(body);
+
+    final Uri emailLaunchUri = Uri.parse(
+      'mailto:$recipientEmail?subject=$encodedSubject&body=$encodedBody',
+    );
+
+    try {
+      if (await canLaunchUrl(emailLaunchUri)) {
+        await launchUrl(emailLaunchUri);
+      } else {
+        _showSnackBar(
+          'Could not launch email client. Please ensure you have an email app configured.',
+        );
+      }
+    } catch (e) {
+      _showSnackBar('An error occurred: $e');
+    }
+  }
+
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: const Duration(seconds: 3),
+      ),
+    );
+  }
+
+  Widget _buildTimelineItem(BuildContext context, CareerItem careerItem, bool isLast) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      careerItem.position,
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      careerItem.company,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  careerItem.duration,
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          if (careerItem.description.isNotEmpty) ...[
+            const SizedBox(height: 16),
+            Text(
+              careerItem.description,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                height: 1.6,
+                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
+              ),
+            ),
+          ],
+
+          if (careerItem.achievements.isNotEmpty) ...[
+            const SizedBox(height: 20),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.star,
+                      size: 16,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Key Achievements',
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                ...careerItem.achievements.map<Widget>((achievement) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(top: 6),
+                          width: 4,
+                          height: 4,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primary,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            achievement,
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              height: 1.5,
+                              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+              ],
+            ),
+          ],
+        ],
       ),
     );
   }
@@ -202,15 +648,10 @@ class HomeScreen extends StatelessWidget {
           child: isDesktop
               ? IntrinsicHeight(
                   child: Row(
-                    children: isEven
-                        ? [
-                            imageWidget,
-                            Expanded(child: contentWidget),
-                          ]
-                        : [
-                            Expanded(child: contentWidget),
-                            imageWidget,
-                          ],
+                    children: [
+                      imageWidget,
+                      Expanded(child: contentWidget),
+                    ],
                   ),
                 )
               : Column(
@@ -227,33 +668,13 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildProjectImage(BuildContext context, project) {
     return Container(
-      height: 250,
-      width: 250,
+      height: 150,
+      width: 150,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         image: DecorationImage(
           image: AssetImage(project.imageUrl),
-          fit: BoxFit.fitHeight,
-        ),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Theme.of(context).colorScheme.primary.withValues(alpha: 0.8),
-            Theme.of(context).colorScheme.secondary.withValues(alpha: 0.6),
-          ],
-        ),
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.transparent,
-              Colors.black.withValues(alpha: 0.3),
-            ],
-          ),
+          fit: BoxFit.cover,
         ),
       ),
     );
@@ -403,9 +824,7 @@ class HomeScreen extends StatelessWidget {
     bool isTablet,
   ) {
     return Column(
-      crossAxisAlignment: isDesktop
-          ? CrossAxisAlignment.start
-          : CrossAxisAlignment.center,
+      crossAxisAlignment: isDesktop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
       children: [
         Text(
           'Hi, I\'m ${personalInfo.name} !!!',
@@ -579,9 +998,7 @@ class HomeScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
-              mainAxisAlignment: isDesktop
-                  ? MainAxisAlignment.center
-                  : MainAxisAlignment.start,
+              mainAxisAlignment: isDesktop ? MainAxisAlignment.center : MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -692,20 +1109,18 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Text(
                           link['title'] as String,
-                          style: Theme.of(context).textTheme.titleMedium
-                              ?.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           link['subtitle'] as String,
-                          style: Theme.of(context).textTheme.bodyMedium
-                              ?.copyWith(
-                                color: Theme.of(
-                                  context,
-                                ).colorScheme.onSurface.withValues(alpha: 0.6),
-                              ),
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurface.withValues(alpha: 0.6),
+                          ),
                         ),
                       ],
                     ),
