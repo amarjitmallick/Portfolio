@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     flex: 3,
                     child: SingleChildScrollView(
                       primary: true,
-                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontSize: 120,
                                 fontWeight: FontWeight.w600,
                                 letterSpacing: 2,
-                                color: Theme.of(context).colorScheme.onSurface,
+                                color: Colors.white,
                               ),
                               children: [
                                 TextSpan(
@@ -73,12 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 120,
                                     fontWeight: FontWeight.bold,
                                     letterSpacing: 2,
-                                    color:
-                                        Theme.of(
-                                          context,
-                                        ).colorScheme.onSurface.withValues(
-                                          alpha: 0.5,
-                                        ),
+                                    color: Colors.white.withValues(
+                                      alpha: 0.35,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -127,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontSize: 120,
                                 fontWeight: FontWeight.w600,
                                 letterSpacing: 2,
-                                color: Theme.of(context).colorScheme.onSurface,
+                                color: Colors.white,
                               ),
                               children: [
                                 TextSpan(
@@ -136,12 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 120,
                                     fontWeight: FontWeight.bold,
                                     letterSpacing: 2,
-                                    color:
-                                        Theme.of(
-                                          context,
-                                        ).colorScheme.onSurface.withValues(
-                                          alpha: 0.5,
-                                        ),
+                                    color: Colors.white.withValues(alpha: 0.35),
                                   ),
                                 ),
                               ],
@@ -182,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontSize: 120,
                                 fontWeight: FontWeight.w600,
                                 letterSpacing: 2,
-                                color: Theme.of(context).colorScheme.onSurface,
+                                color: Colors.white,
                               ),
                               children: [
                                 TextSpan(
@@ -191,12 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 120,
                                     fontWeight: FontWeight.bold,
                                     letterSpacing: 2,
-                                    color:
-                                        Theme.of(
-                                          context,
-                                        ).colorScheme.onSurface.withValues(
-                                          alpha: 0.5,
-                                        ),
+                                    color: Colors.white.withValues(alpha: 0.35),
                                   ),
                                 ),
                               ],
@@ -241,7 +228,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontSize: 120,
                                 fontWeight: FontWeight.w600,
                                 letterSpacing: 2,
-                                color: Theme.of(context).colorScheme.onSurface,
+                                color: Colors.white,
                               ),
                               children: [
                                 TextSpan(
@@ -250,12 +237,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 120,
                                     fontWeight: FontWeight.bold,
                                     letterSpacing: 2,
-                                    color:
-                                        Theme.of(
-                                          context,
-                                        ).colorScheme.onSurface.withValues(
-                                          alpha: 0.5,
-                                        ),
+                                    color: Colors.white.withValues(alpha: 0.35),
                                   ),
                                 ),
                               ],
@@ -511,7 +493,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       careerItem.position,
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onSurface,
+                        color: Colors.white,
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -547,7 +529,7 @@ class _HomeScreenState extends State<HomeScreen> {
               careerItem.description,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 height: 1.6,
-                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
+                color: Colors.white.withValues(alpha: 0.8),
               ),
             ),
           ],
@@ -569,7 +551,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       'Key Achievements',
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.w600,
-                        color: Theme.of(context).colorScheme.onSurface,
+                        color: Colors.white,
                       ),
                     ),
                   ],
@@ -596,7 +578,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             achievement,
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               height: 1.5,
-                              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
+                              color: Colors.white.withValues(alpha: 0.8),
                             ),
                           ),
                         ),
@@ -701,7 +683,7 @@ class _HomeScreenState extends State<HomeScreen> {
             project.title,
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
               fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.onSurface,
+              color: Colors.white,
             ),
           ),
           SizedBox(height: isDesktop ? 16 : 12),
@@ -781,175 +763,131 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildHeroSection(
-    BuildContext context,
-    PersonalInfo personalInfo,
-    bool isDesktop,
-    bool isTablet,
-  ) {
-    return Container(
-      constraints: BoxConstraints(maxWidth: isDesktop ? 1400 : 900),
-      child: isDesktop
-          ? Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: _buildHeroContent(
-                    context,
-                    personalInfo,
-                    isDesktop,
-                    isTablet,
-                  ),
-                ),
-                const SizedBox(width: 60),
-                Expanded(
-                  child: _buildHeroImage(context, personalInfo),
-                ),
-              ],
-            )
-          : Column(
-              children: [
-                _buildHeroImage(context, personalInfo),
-                SizedBox(height: isTablet ? 40 : 32),
-                _buildHeroContent(context, personalInfo, isDesktop, isTablet),
-              ],
-            ),
-    );
-  }
-
-  Widget _buildHeroContent(
-    BuildContext context,
-    personalInfo,
-    bool isDesktop,
-    bool isTablet,
-  ) {
-    return Column(
-      crossAxisAlignment: isDesktop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
-      children: [
-        Text(
-          'Hi, I\'m ${personalInfo.name} !!!',
-          style:
-              (isDesktop
-                      ? Theme.of(context).textTheme.displaySmall
-                      : isTablet
-                      ? Theme.of(context).textTheme.headlineLarge
-                      : Theme.of(context).textTheme.headlineMedium)
-                  ?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
-          textAlign: isDesktop ? TextAlign.start : TextAlign.center,
-        ),
-        const SizedBox(height: 16),
-        Text(
-          personalInfo.title,
-          style:
-              (isDesktop
-                      ? Theme.of(context).textTheme.headlineMedium
-                      : isTablet
-                      ? Theme.of(context).textTheme.headlineSmall
-                      : Theme.of(context).textTheme.titleLarge)
-                  ?.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.w600,
-                  ),
-          textAlign: isDesktop ? TextAlign.start : TextAlign.center,
-        ),
-        const SizedBox(height: 24),
-        Text(
-          personalInfo.bio,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            height: 1.6,
-            color: Theme.of(
-              context,
-            ).colorScheme.onSurface.withValues(alpha: 0.8),
-          ),
-          textAlign: isDesktop ? TextAlign.start : TextAlign.center,
-          maxLines: isTablet ? 4 : null,
-          overflow: isTablet ? TextOverflow.ellipsis : null,
-        ),
-        const SizedBox(height: 32),
-        Wrap(
-          spacing: 16,
-          runSpacing: 16,
-          alignment: isDesktop ? WrapAlignment.start : WrapAlignment.center,
-          children: [
-            TextButton(
-              onPressed: () {
-                launchUrl(
-                  Uri.parse(
-                    "https://drive.google.com/file/d/161FOXZArLz2TfrqD2zBIA2mMRTCsgwlq/view",
-                  ),
-                  mode: LaunchMode.externalApplication,
-                );
-              },
-              style: TextButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                padding: const EdgeInsets.symmetric(
-                  vertical: 16,
-                  horizontal: 32,
-                ),
-              ),
-              child: const Text('Download Resume'),
-            ),
-            OutlinedButton(
-              onPressed: () {},
-              style: OutlinedButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.primary,
-                side: BorderSide(color: Theme.of(context).colorScheme.primary),
-                padding: const EdgeInsets.symmetric(
-                  vertical: 16,
-                  horizontal: 32,
-                ),
-              ),
-              child: const Text('Contact Me'),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
   Widget _buildHeroImage(BuildContext context, PersonalInfo personalInfo) {
     return Container(
-      constraints: const BoxConstraints(maxWidth: 400),
-      child: AspectRatio(
-        aspectRatio: 1,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(
-                  context,
-                ).colorScheme.shadow.withValues(alpha: 0.1),
-                blurRadius: 20,
-                offset: const Offset(0, 10),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(32),
+      ),
+      margin: EdgeInsets.symmetric(vertical: 50, horizontal: 80),
+      padding: EdgeInsets.all(40),
+      constraints: const BoxConstraints(maxWidth: 300),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AspectRatio(
+            aspectRatio: 1,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.shadow.withValues(alpha: 0.1),
+                    blurRadius: 20,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
               ),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(24),
-            child: Image.asset(
-              personalInfo.profileImage,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primaryContainer,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Icon(
-                    Icons.person,
-                    size: 100,
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  ),
-                );
-              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(24),
+                child: Image.asset(
+                  personalInfo.profileImage,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Icon(
+                        Icons.person,
+                        size: 100,
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      ),
+                    );
+                  },
+                ),
+              ),
             ),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Text(
+              "Amarjit Mallick",
+              style: TextStyle(
+                fontSize: 42,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 2,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Text(
+              "A Software Engineer who has developed countless innovative solutions",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+              ),
+            ),
+          ),
+          _buildSocialLinks(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSocialLinks(
+    BuildContext context,
+  ) {
+    final socialLinks = [
+      {
+        'name': 'LinkedIn',
+        'icon': 'assets/icons/linkedin.png',
+        'url': 'https://www.linkedin.com/in/amarjit-mallick/',
+      },
+      {
+        'name': 'GitHub',
+        'icon': 'assets/icons/github.png',
+        'url': 'https://github.com/amarjitmallick',
+      },
+      {
+        'name': 'Twitter',
+        'icon': 'assets/icons/twitter.png',
+        'url': 'https://x.com/amarjitmallick_',
+      },
+    ];
+
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 600),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 16,
+            children: socialLinks.map((link) {
+              return IconButton(
+                onPressed: () {
+                  launchUrl(
+                    Uri.parse(link['url'] as String),
+                    mode: LaunchMode.externalApplication,
+                  );
+                },
+                icon: Image.asset(
+                  link['icon'] as String,
+                  width: 36,
+                  height: 36,
+                  fit: BoxFit.contain,
+                ),
+              );
+            }).toList(),
+          ),
+        ],
       ),
     );
   }
@@ -1006,7 +944,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontSize: 64,
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.onSurface,
+                    color: Colors.white,
                   ),
                 ),
                 const SizedBox(height: 8),

@@ -170,9 +170,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   Widget _buildDesktopNavigation() {
     return Container(
-      height: 80,
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+      margin: EdgeInsets.symmetric(vertical: 20),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+        //color: Colors.white.withValues(alpha: 0.05),
+        borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
             color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.1),
@@ -181,46 +183,34 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
         ],
       ),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1400),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ..._navigationItems.asMap().entries.map((entry) {
-                  final index = entry.key;
-                  final item = entry.value;
-                  final isSelected = index == _currentIndex;
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: IconButton(
-                      tooltip: item.label,
-                      onPressed: () => _onNavigationTap(index),
-                      style: TextButton.styleFrom(
-                        backgroundColor: isSelected
-                            ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.15)
-                            : null,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      icon: Icon(
-                        item.icon,
-                        color: isSelected
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(context).colorScheme.onSurface,
-                        size: 20,
-                      ),
-                    ),
-                  );
-                }),
-                const SizedBox(width: 16),
-              ],
-            ),
-          ),
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ..._navigationItems.asMap().entries.map((entry) {
+            final index = entry.key;
+            final item = entry.value;
+            final isSelected = index == _currentIndex;
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: IconButton(
+                tooltip: item.label,
+                onPressed: () => _onNavigationTap(index),
+                style: TextButton.styleFrom(
+                  backgroundColor: isSelected ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.15) : null,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                icon: Icon(
+                  item.icon,
+                  color: isSelected ? Colors.white : Theme.of(context).colorScheme.onSurface,
+                  size: 20,
+                ),
+              ),
+            );
+          }),
+        ],
       ),
     );
   }
