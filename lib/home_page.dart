@@ -187,29 +187,24 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'Portfolio',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-                const Spacer(),
                 ..._navigationItems.asMap().entries.map((entry) {
                   final index = entry.key;
                   final item = entry.value;
                   final isSelected = index == _currentIndex;
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: TextButton.icon(
+                    child: IconButton(
+                      tooltip: item.label,
                       onPressed: () => _onNavigationTap(index),
                       style: TextButton.styleFrom(
-                        side: isSelected
-                            ? BorderSide(
-                                color: Theme.of(context).colorScheme.primary,
-                              )
+                        backgroundColor: isSelected
+                            ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.15)
                             : null,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
                       icon: Icon(
                         item.icon,
@@ -217,17 +212,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             ? Theme.of(context).colorScheme.primary
                             : Theme.of(context).colorScheme.onSurface,
                         size: 20,
-                      ),
-                      label: Text(
-                        item.label,
-                        style: TextStyle(
-                          color: isSelected
-                              ? Theme.of(context).colorScheme.primary
-                              : Theme.of(context).colorScheme.onSurface,
-                          fontWeight: isSelected
-                              ? FontWeight.w600
-                              : FontWeight.normal,
-                        ),
                       ),
                     ),
                   );
