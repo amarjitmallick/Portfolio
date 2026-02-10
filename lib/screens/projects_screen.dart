@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/data/repository/blog_repository.dart';
@@ -12,6 +13,8 @@ class ProjectsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final personalInfo = PortfolioData.personalInfo;
+
     final projects = PortfolioData.projects;
     final screenSize = MediaQuery.of(context).size;
     final isDesktop = screenSize.width >= 1024;
@@ -19,77 +22,229 @@ class ProjectsScreen extends StatelessWidget {
     final isMobile = screenSize.width < 768;
 
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(
-          isDesktop
-              ? 40
-              : isTablet
-              ? 24
-              : 16,
-        ),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: isDesktop ? double.infinity : 900,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AnimatedSection(
-                delay: const Duration(milliseconds: 200),
-                child: _buildHeader(context),
-              ),
-              SizedBox(
-                height: isDesktop
-                    ? 50
-                    : isTablet
-                    ? 32
-                    : 24,
-              ),
-              ...projects.asMap().entries.map((entry) {
-                final index = entry.key;
-                final project = entry.value;
-                return AnimatedSection(
-                  delay: Duration(milliseconds: 400 + (index * 200)),
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      bottom: isDesktop
-                          ? 40
-                          : isTablet
-                          ? 32
-                          : 24,
+      body: Center(
+        child: Column(
+          children: [
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: AnimatedSection(
+                      delay: const Duration(milliseconds: 200),
+                      child: _buildHeroImage(context, personalInfo),
                     ),
-                    child: _buildProjectCard(
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: SingleChildScrollView(
+                      padding: EdgeInsets.all(
+                        isDesktop
+                            ? 40
+                            : isTablet
+                            ? 24
+                            : 16,
+                      ),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: isDesktop ? double.infinity : 900,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AnimatedSection(
+                              delay: const Duration(milliseconds: 200),
+                              child: _buildHeader(context),
+                            ),
+                            SizedBox(
+                              height: isDesktop
+                                  ? 50
+                                  : isTablet
+                                  ? 32
+                                  : 24,
+                            ),
+                            ...projects.asMap().entries.map((entry) {
+                              final index = entry.key;
+                              final project = entry.value;
+                              return AnimatedSection(
+                                delay: Duration(milliseconds: 400 + (index * 200)),
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    bottom: isDesktop
+                                        ? 40
+                                        : isTablet
+                                        ? 32
+                                        : 24,
+                                  ),
+                                  child: _buildProjectCard(
+                                    context,
+                                    project,
+                                    isDesktop,
+                                    isTablet,
+                                    index.isEven,
+                                  ),
+                                ),
+                              );
+                            }),
+                            if (isMobile) ...[
+                              SizedBox(
+                                height: isDesktop
+                                    ? 80
+                                    : isTablet
+                                    ? 60
+                                    : 40,
+                              ),
+                              AnimatedSection(
+                                delay: Duration(
+                                  milliseconds: 600 + (projects.length * 200),
+                                ),
+                                child: _buildPublicationsSection(
+                                  context,
+                                  isDesktop,
+                                  isTablet,
+                                ),
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeroImage(BuildContext context, PersonalInfo personalInfo) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(32),
+      ),
+      margin: EdgeInsets.symmetric(vertical: 50, horizontal: 80),
+      padding: EdgeInsets.all(40),
+      constraints: const BoxConstraints(maxWidth: 300),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AspectRatio(
+            aspectRatio: 1,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(
                       context,
-                      project,
-                      isDesktop,
-                      isTablet,
-                      index.isEven,
-                    ),
+                    ).colorScheme.shadow.withValues(alpha: 0.1),
+                    blurRadius: 20,
+                    offset: const Offset(0, 10),
                   ),
-                );
-              }),
-              if (isMobile) ...[
-                SizedBox(
-                  height: isDesktop
-                      ? 80
-                      : isTablet
-                      ? 60
-                      : 40,
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(24),
+                child: Image.asset(
+                  personalInfo.profileImage,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Icon(
+                        Icons.person,
+                        size: 100,
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      ),
+                    );
+                  },
                 ),
-                AnimatedSection(
-                  delay: Duration(
-                    milliseconds: 600 + (projects.length * 200),
-                  ),
-                  child: _buildPublicationsSection(
-                    context,
-                    isDesktop,
-                    isTablet,
-                  ),
-                ),
-              ],
-            ],
+              ),
+            ),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Text(
+              "Amarjit Mallick",
+              style: TextStyle(
+                fontSize: 42,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 2,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Text(
+              "A Software Engineer who has developed countless innovative solutions",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+              ),
+            ),
+          ),
+          _buildSocialLinks(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSocialLinks(
+    BuildContext context,
+  ) {
+    final socialLinks = [
+      {
+        'name': 'LinkedIn',
+        'icon': 'assets/icons/linkedin.png',
+        'url': 'https://www.linkedin.com/in/amarjit-mallick/',
+      },
+      {
+        'name': 'GitHub',
+        'icon': 'assets/icons/github.png',
+        'url': 'https://github.com/amarjitmallick',
+      },
+      {
+        'name': 'Twitter',
+        'icon': 'assets/icons/twitter.png',
+        'url': 'https://x.com/amarjitmallick_',
+      },
+    ];
+
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 600),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 16,
+            children: socialLinks.map((link) {
+              return IconButton(
+                onPressed: () {
+                  launchUrl(
+                    Uri.parse(link['url'] as String),
+                    mode: LaunchMode.externalApplication,
+                  );
+                },
+                icon: Image.asset(
+                  link['icon'] as String,
+                  width: 36,
+                  height: 36,
+                  fit: BoxFit.contain,
+                ),
+              );
+            }).toList(),
+          ),
+        ],
       ),
     );
   }
@@ -101,13 +256,29 @@ class ProjectsScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          isMobile ? 'Projects & Publications' : 'My Projects',
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.onSurface,
+        RichText(
+          text: TextSpan(
+            text: "RECENT\n",
+            style: GoogleFonts.urbanist().copyWith(
+              fontSize: 120,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 2,
+              color: Colors.white,
+            ),
+            children: [
+              TextSpan(
+                text: "PROJECTS",
+                style: TextStyle(
+                  fontSize: 120,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2,
+                  color: Colors.white.withValues(alpha: 0.35),
+                ),
+              ),
+            ],
           ),
         ),
+
         const SizedBox(height: 8),
         Text(
           isMobile
@@ -144,30 +315,16 @@ class ProjectsScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Theme.of(
-                context,
-              ).colorScheme.shadow.withValues(alpha: 0.1),
-              blurRadius: 20,
-              offset: const Offset(0, 10),
-            ),
-          ],
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: isDesktop
               ? IntrinsicHeight(
                   child: Row(
-                    children: isEven
-                        ? [
-                            imageWidget,
-                            Expanded(child: contentWidget),
-                          ]
-                        : [
-                            Expanded(child: contentWidget),
-                            imageWidget,
-                          ],
+                    children: [
+                      imageWidget,
+                      Expanded(child: contentWidget),
+                    ],
                   ),
                 )
               : Column(
@@ -255,13 +412,11 @@ class ProjectsScreen extends StatelessWidget {
             spacing: 8,
             runSpacing: 8,
             children: project.technologies.map<Widget>((tech) {
-              return Chip(
-                label: Text(
-                  tech,
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                    fontWeight: FontWeight.w500,
-                  ),
+              return Text(
+                tech,
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  fontWeight: FontWeight.w500,
                 ),
               );
             }).toList(),
@@ -287,7 +442,8 @@ class ProjectsScreen extends StatelessWidget {
                     ),
                   ),
                   style: TextButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    backgroundColor: Colors.white,
                     foregroundColor: Theme.of(context).colorScheme.onPrimary,
                     padding: const EdgeInsets.symmetric(
                       vertical: 16,
@@ -353,10 +509,9 @@ class ProjectsScreen extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       'Publications',
-                      style: Theme.of(context).textTheme.headlineMedium
-                          ?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
