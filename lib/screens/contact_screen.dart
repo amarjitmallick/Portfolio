@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/data/portfolio_data.dart';
+import 'package:portfolio/models/portfolio_models.dart';
 import 'package:portfolio/widgets/animated_section.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -32,87 +34,214 @@ class _ContactScreenState extends State<ContactScreen> {
     final isTablet = screenSize.width >= 768 && screenSize.width < 1024;
 
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(
-          isDesktop
-              ? 40
-              : isTablet
-              ? 24
-              : 16,
-        ),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: isDesktop ? double.infinity : 900,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AnimatedSection(
-                delay: const Duration(milliseconds: 200),
-                child: _buildHeader(context),
-              ),
-              SizedBox(
-                height: isDesktop
-                    ? 50
-                    : isTablet
-                    ? 32
-                    : 24,
-              ),
-              isDesktop
-                  ? Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: AnimatedSection(
-                            delay: const Duration(milliseconds: 400),
-                            child: _buildContactForm(
-                              context,
-                              isDesktop,
-                              isTablet,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 40),
-                        Expanded(
-                          child: AnimatedSection(
-                            delay: const Duration(milliseconds: 600),
-                            child: _buildContactInfo(context, personalInfo),
-                          ),
-                        ),
-                      ],
-                    )
-                  : Column(
-                      children: [
-                        AnimatedSection(
-                          delay: const Duration(milliseconds: 400),
-                          child: _buildContactInfo(context, personalInfo),
-                        ),
-                        SizedBox(height: isTablet ? 40 : 32),
-                        AnimatedSection(
-                          delay: const Duration(milliseconds: 600),
-                          child: _buildContactForm(
-                            context,
-                            isDesktop,
-                            isTablet,
-                          ),
-                        ),
-                      ],
+      body: Center(
+        child: Column(
+          children: [
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: AnimatedSection(
+                      delay: const Duration(milliseconds: 200),
+                      child: _buildHeroImage(context, personalInfo),
                     ),
-              SizedBox(
-                height: isDesktop
-                    ? 60
-                    : isTablet
-                    ? 48
-                    : 40,
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: SingleChildScrollView(
+                      padding: EdgeInsets.all(
+                        isDesktop
+                            ? 40
+                            : isTablet
+                            ? 24
+                            : 16,
+                      ),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: isDesktop ? double.infinity : 900,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AnimatedSection(
+                              delay: const Duration(milliseconds: 200),
+                              child: _buildHeader(context),
+                            ),
+                            SizedBox(
+                              height: isDesktop
+                                  ? 50
+                                  : isTablet
+                                  ? 32
+                                  : 24,
+                            ),
+                            isDesktop
+                                ? AnimatedSection(
+                                    delay: const Duration(milliseconds: 400),
+                                    child: _buildContactForm(
+                                      context,
+                                      isDesktop,
+                                      isTablet,
+                                    ),
+                                  )
+                                : Column(
+                                    children: [
+                                      AnimatedSection(
+                                        delay: const Duration(milliseconds: 400),
+                                        child: _buildContactInfo(context, personalInfo),
+                                      ),
+                                      SizedBox(height: isTablet ? 40 : 32),
+                                      AnimatedSection(
+                                        delay: const Duration(milliseconds: 600),
+                                        child: _buildContactForm(
+                                          context,
+                                          isDesktop,
+                                          isTablet,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              AnimatedSection(
-                delay: const Duration(milliseconds: 800),
-                child: _buildSocialLinks(context, isDesktop, isTablet),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildHeroImage(BuildContext context, PersonalInfo personalInfo) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(32),
+      ),
+      margin: EdgeInsets.symmetric(vertical: 50, horizontal: 80),
+      padding: EdgeInsets.all(40),
+      constraints: const BoxConstraints(maxWidth: 300),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AspectRatio(
+            aspectRatio: 1,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.shadow.withValues(alpha: 0.1),
+                    blurRadius: 20,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(24),
+                child: Image.asset(
+                  personalInfo.profileImage,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Icon(
+                        Icons.person,
+                        size: 100,
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Text(
+              "Amarjit Mallick",
+              style: TextStyle(
+                fontSize: 42,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 2,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Text(
+              "A Software Engineer who has developed countless innovative solutions",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+              ),
+            ),
+          ),
+          _buildSocialLinks(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSocialLinks(
+    BuildContext context,
+  ) {
+    final socialLinks = [
+      {
+        'name': 'LinkedIn',
+        'icon': 'assets/icons/linkedin.png',
+        'url': 'https://www.linkedin.com/in/amarjit-mallick/',
+      },
+      {
+        'name': 'GitHub',
+        'icon': 'assets/icons/github.png',
+        'url': 'https://github.com/amarjitmallick',
+      },
+      {
+        'name': 'Twitter',
+        'icon': 'assets/icons/twitter.png',
+        'url': 'https://x.com/amarjitmallick_',
+      },
+    ];
+
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 600),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 16,
+            children: socialLinks.map((link) {
+              return IconButton(
+                onPressed: () {
+                  launchUrl(
+                    Uri.parse(link['url'] as String),
+                    mode: LaunchMode.externalApplication,
+                  );
+                },
+                icon: Image.asset(
+                  link['icon'] as String,
+                  width: 36,
+                  height: 36,
+                  fit: BoxFit.contain,
+                ),
+              );
+            }).toList(),
+          ),
+        ],
       ),
     );
   }
@@ -121,20 +250,26 @@ class _ContactScreenState extends State<ContactScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Get in Touch',
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'Let\'s discuss opportunities and potential collaborations',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Theme.of(
-              context,
-            ).colorScheme.onSurface.withValues(alpha: 0.7),
+        RichText(
+          text: TextSpan(
+            text: "LET'S WORK\n",
+            style: GoogleFonts.urbanist().copyWith(
+              fontSize: 120,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 2,
+              color: Colors.white,
+            ),
+            children: [
+              TextSpan(
+                text: "TOGETHER",
+                style: TextStyle(
+                  fontSize: 120,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2,
+                  color: Colors.white.withValues(alpha: 0.35),
+                ),
+              ),
+            ],
           ),
         ),
       ],
@@ -170,94 +305,93 @@ class _ContactScreenState extends State<ContactScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            Column(
+              spacing: 12,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(
-                  Icons.send_rounded,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                const SizedBox(width: 12),
-                Text(
-                  'Send Message',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
+                Text("Name"),
+                TextFormField(
+                  controller: _nameController,
+                  decoration: InputDecoration(
+                    hintText: "Your Name",
+                    hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.4)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Colors.white.withValues(alpha: 0.1),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your name';
+                    }
+                    return null;
+                  },
                 ),
               ],
             ),
-            const SizedBox(height: 24),
-            TextFormField(
-              controller: _nameController,
-              decoration: InputDecoration(
-                labelText: 'Your Name',
-                prefixIcon: const Icon(Icons.person_rounded),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+            const SizedBox(height: 20),
+            Column(
+              spacing: 12,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Email"),
+                TextFormField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    hintText: "abc@email.com",
+                    hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.4)),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white.withValues(alpha: 0.1),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your email';
+                    }
+                    if (!RegExp(
+                      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                    ).hasMatch(value)) {
+                      return 'Please enter a valid email';
+                    }
+                    return null;
+                  },
                 ),
-                filled: true,
-                fillColor: Theme.of(
-                  context,
-                ).colorScheme.surfaceContainerHighest,
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your name';
-                }
-                return null;
-              },
+              ],
             ),
             const SizedBox(height: 20),
-            TextFormField(
-              controller: _emailController,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: 'Email Address',
-                prefixIcon: const Icon(Icons.email_rounded),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+            Column(
+              spacing: 12,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Message"),
+                TextFormField(
+                  controller: _messageController,
+                  maxLines: 5,
+                  decoration: InputDecoration(
+                    hintText: "Message",
+                    hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.4)),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white.withValues(alpha: 0.1),
+                    alignLabelWithHint: true,
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your message';
+                    }
+                    return null;
+                  },
                 ),
-                filled: true,
-                fillColor: Theme.of(
-                  context,
-                ).colorScheme.surfaceContainerHighest,
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your email';
-                }
-                if (!RegExp(
-                  r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-                ).hasMatch(value)) {
-                  return 'Please enter a valid email';
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: 20),
-            TextFormField(
-              controller: _messageController,
-              maxLines: 5,
-              decoration: InputDecoration(
-                labelText: 'Message',
-                prefixIcon: const Padding(
-                  padding: EdgeInsets.only(bottom: 80),
-                  child: Icon(Icons.message_rounded),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                filled: true,
-                fillColor: Theme.of(
-                  context,
-                ).colorScheme.surfaceContainerHighest,
-                alignLabelWithHint: true,
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your message';
-                }
-                return null;
-              },
+              ],
             ),
             const SizedBox(height: 32),
             SizedBox(
@@ -265,12 +399,13 @@ class _ContactScreenState extends State<ContactScreen> {
               child: TextButton(
                 onPressed: _sendMessage,
                 style: TextButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  backgroundColor: Colors.white,
                   foregroundColor: Theme.of(context).colorScheme.onPrimary,
                   padding: const EdgeInsets.symmetric(vertical: 24),
                 ),
                 child: Text(
-                  'Send Message',
+                  'Submit',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: Theme.of(context).colorScheme.onPrimary,
                     fontWeight: FontWeight.bold,
@@ -354,23 +489,18 @@ class _ContactScreenState extends State<ContactScreen> {
                           children: [
                             Text(
                               item['label'] as String,
-                              style: Theme.of(context).textTheme.bodySmall
-                                  ?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onPrimaryContainer
-                                        .withValues(alpha: 0.8),
-                                  ),
+                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: Theme.of(context).colorScheme.onPrimaryContainer.withValues(alpha: 0.8),
+                              ),
                             ),
                             Text(
                               item['value'] as String,
-                              style: Theme.of(context).textTheme.bodyMedium
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.onPrimaryContainer,
-                                  ),
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onPrimaryContainer,
+                              ),
                             ),
                           ],
                         ),
@@ -428,67 +558,6 @@ class _ContactScreenState extends State<ContactScreen> {
           ],
         ),
       ],
-    );
-  }
-
-  Widget _buildSocialLinks(
-    BuildContext context,
-    bool isDesktop,
-    bool isTablet,
-  ) {
-    final socialLinks = [
-      {
-        'name': 'LinkedIn',
-        'icon': 'assets/icons/linkedin.png',
-        'url': 'https://www.linkedin.com/in/amarjit-mallick/',
-      },
-      {
-        'name': 'GitHub',
-        'icon': 'assets/icons/github.png',
-        'url': 'https://github.com/amarjitmallick',
-      },
-      {
-        'name': 'Twitter',
-        'icon': 'assets/icons/twitter.png',
-        'url': 'https://x.com/amarjitmallick_',
-      },
-    ];
-
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 600),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Find me on',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 20),
-          Wrap(
-            spacing: 16,
-            runSpacing: 16,
-            children: socialLinks.map((link) {
-              return ActionChip(
-                onPressed: () {
-                  launchUrl(
-                    Uri.parse(link['url'] as String),
-                    mode: LaunchMode.externalApplication,
-                  );
-                },
-                avatar: Image.asset(
-                  link['icon'] as String,
-                  width: 18,
-                  height: 18,
-                  fit: BoxFit.contain,
-                ),
-                label: Text(link['name'] as String),
-              );
-            }).toList(),
-          ),
-        ],
-      ),
     );
   }
 
