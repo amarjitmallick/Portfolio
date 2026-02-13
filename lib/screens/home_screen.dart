@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/widgets/animated_section.dart';
@@ -46,7 +47,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Expanded(
                     flex: 2,
-                    child: _buildHeroImage(context, personalInfo),
+                    child: AnimatedSection(
+                      delay: const Duration(milliseconds: 200),
+                      child: _buildHeroImage(context, personalInfo),
+                    ),
                   ),
                   Expanded(
                     flex: 3,
@@ -57,86 +61,169 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          RichText(
-                            text: TextSpan(
-                              text: "SOFTWARE\n",
-                              style: GoogleFonts.urbanist().copyWith(
-                                fontSize: 120,
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 2,
-                                color: Colors.white,
+                          AnimatedSection(
+                            delay: const Duration(milliseconds: 300),
+                            child: RichText(
+                              text: TextSpan(
+                                text: "SOFTWARE\n",
+                                style: GoogleFonts.urbanist().copyWith(
+                                  fontSize: 120,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 2,
+                                  color: Colors.white,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: "ENGINEER",
+                                    style: TextStyle(
+                                      fontSize: 120,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 2,
+                                      color: Colors.white.withValues(
+                                        alpha: 0.35,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              children: [
-                                TextSpan(
-                                  text: "ENGINEER",
-                                  style: TextStyle(
-                                    fontSize: 120,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 2,
-                                    color: Colors.white.withValues(
-                                      alpha: 0.35,
-                                    ),
-                                  ),
-                                ),
-                              ],
                             ),
                           ),
 
-                          Text(
-                            "Passionate about creating intuitive and engaging user experiences. Specialize in transforming ideas into beautifully crafted products.",
-                            style: TextStyle(
-                              fontSize: 18,
+                          AnimatedSection(
+                            delay: const Duration(milliseconds: 400),
+                            child: Text(
+                              "Passionate about creating intuitive and engaging user experiences. Specialize in transforming ideas into beautifully crafted products.",
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
                             ),
                           ),
-                          _buildQuickStats(context, isDesktop, isTablet),
+                          AnimatedSection(
+                            delay: const Duration(milliseconds: 500),
+                            child: _buildQuickStats(context, isDesktop, isTablet),
+                          ),
 
-                          SizedBox(
-                            height: 250,
-                            child: Row(
-                              spacing: 32,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      color: Colors.yellow,
+                          AnimatedSection(
+                            delay: const Duration(milliseconds: 600),
+                            child: SizedBox(
+                              height: 250,
+                              child: Row(
+                                spacing: 32,
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      padding: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        color: Colors.yellow,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Icon(
+                                            Icons.tab_rounded,
+                                            size: 32,
+                                            color: Colors.black,
+                                          ),
+                                          Text(
+                                            "FLUTTER, DART, FIREBASE, SUPABASE",
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 28,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: AlignmentGeometry.bottomRight,
+                                            child: Container(
+                                              padding: EdgeInsets.all(5),
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(8),
+                                                border: Border.all(color: Colors.black, width: 1.5),
+                                              ),
+                                              child: Icon(
+                                                Icons.arrow_forward_rounded,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      color: Colors.red,
+                                  Expanded(
+                                    child: Container(
+                                      padding: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        color: Colors.red,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Icon(
+                                            Icons.layers_outlined,
+                                            size: 32,
+                                            color: Colors.white,
+                                          ),
+                                          Text(
+                                            "MOBILE APPLICATION DEVELOPMENT",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 28,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: AlignmentGeometry.bottomRight,
+                                            child: Container(
+                                              padding: EdgeInsets.all(5),
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(8),
+                                                border: Border.all(color: Colors.white, width: 1.5),
+                                              ),
+                                              child: Icon(
+                                                Icons.arrow_forward_rounded,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
 
                           SizedBox(height: 100),
 
-                          RichText(
-                            text: TextSpan(
-                              text: "RECENT\n",
-                              style: GoogleFonts.urbanist().copyWith(
-                                fontSize: 120,
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 2,
-                                color: Colors.white,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: "PROJECTS",
-                                  style: TextStyle(
-                                    fontSize: 120,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 2,
-                                    color: Colors.white.withValues(alpha: 0.35),
-                                  ),
+                          AnimatedSection(
+                            delay: const Duration(milliseconds: 700),
+                            child: RichText(
+                              text: TextSpan(
+                                text: "RECENT\n",
+                                style: GoogleFonts.urbanist().copyWith(
+                                  fontSize: 120,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 2,
+                                  color: Colors.white,
                                 ),
-                              ],
+                                children: [
+                                  TextSpan(
+                                    text: "PROJECTS",
+                                    style: TextStyle(
+                                      fontSize: 120,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 2,
+                                      color: Colors.white.withValues(alpha: 0.35),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           ...projects.asMap().entries.map((entry) {
@@ -297,94 +384,93 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            Column(
+              spacing: 12,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(
-                  Icons.send_rounded,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                const SizedBox(width: 12),
-                Text(
-                  'Send Message',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
+                Text("Name"),
+                TextFormField(
+                  controller: _nameController,
+                  decoration: InputDecoration(
+                    hintText: "Your Name",
+                    hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.4)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Colors.white.withValues(alpha: 0.1),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your name';
+                    }
+                    return null;
+                  },
                 ),
               ],
             ),
-            const SizedBox(height: 24),
-            TextFormField(
-              controller: _nameController,
-              decoration: InputDecoration(
-                labelText: 'Your Name',
-                prefixIcon: const Icon(Icons.person_rounded),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+            const SizedBox(height: 20),
+            Column(
+              spacing: 12,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Email"),
+                TextFormField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    hintText: "abc@email.com",
+                    hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.4)),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white.withValues(alpha: 0.1),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your email';
+                    }
+                    if (!RegExp(
+                      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                    ).hasMatch(value)) {
+                      return 'Please enter a valid email';
+                    }
+                    return null;
+                  },
                 ),
-                filled: true,
-                fillColor: Theme.of(
-                  context,
-                ).colorScheme.surfaceContainerHighest,
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your name';
-                }
-                return null;
-              },
+              ],
             ),
             const SizedBox(height: 20),
-            TextFormField(
-              controller: _emailController,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: 'Email Address',
-                prefixIcon: const Icon(Icons.email_rounded),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+            Column(
+              spacing: 12,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Message"),
+                TextFormField(
+                  controller: _messageController,
+                  maxLines: 5,
+                  decoration: InputDecoration(
+                    hintText: "Message",
+                    hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.4)),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white.withValues(alpha: 0.1),
+                    alignLabelWithHint: true,
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your message';
+                    }
+                    return null;
+                  },
                 ),
-                filled: true,
-                fillColor: Theme.of(
-                  context,
-                ).colorScheme.surfaceContainerHighest,
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your email';
-                }
-                if (!RegExp(
-                  r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-                ).hasMatch(value)) {
-                  return 'Please enter a valid email';
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: 20),
-            TextFormField(
-              controller: _messageController,
-              maxLines: 5,
-              decoration: InputDecoration(
-                labelText: 'Message',
-                prefixIcon: const Padding(
-                  padding: EdgeInsets.only(bottom: 80),
-                  child: Icon(Icons.message_rounded),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                filled: true,
-                fillColor: Theme.of(
-                  context,
-                ).colorScheme.surfaceContainerHighest,
-                alignLabelWithHint: true,
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your message';
-                }
-                return null;
-              },
+              ],
             ),
             const SizedBox(height: 32),
             SizedBox(
@@ -392,12 +478,13 @@ class _HomeScreenState extends State<HomeScreen> {
               child: TextButton(
                 onPressed: _sendMessage,
                 style: TextButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  backgroundColor: Colors.white,
                   foregroundColor: Theme.of(context).colorScheme.onPrimary,
                   padding: const EdgeInsets.symmetric(vertical: 24),
                 ),
                 child: Text(
-                  'Send Message',
+                  'Submit',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: Theme.of(context).colorScheme.onPrimary,
                     fontWeight: FontWeight.bold,
@@ -701,13 +788,11 @@ class _HomeScreenState extends State<HomeScreen> {
             spacing: 8,
             runSpacing: 8,
             children: project.technologies.map<Widget>((tech) {
-              return Chip(
-                label: Text(
-                  tech,
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                    fontWeight: FontWeight.w500,
-                  ),
+              return Text(
+                tech,
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  fontWeight: FontWeight.w500,
                 ),
               );
             }).toList(),
@@ -733,7 +818,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   style: TextButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    backgroundColor: Colors.white,
                     foregroundColor: Theme.of(context).colorScheme.onPrimary,
                     padding: const EdgeInsets.symmetric(
                       vertical: 16,
@@ -847,17 +933,17 @@ class _HomeScreenState extends State<HomeScreen> {
     final socialLinks = [
       {
         'name': 'LinkedIn',
-        'icon': 'assets/icons/linkedin.png',
+        'icon': 'assets/icons/linkedin_icon.svg',
         'url': 'https://www.linkedin.com/in/amarjit-mallick/',
       },
       {
         'name': 'GitHub',
-        'icon': 'assets/icons/github.png',
+        'icon': 'assets/icons/github_icon.svg',
         'url': 'https://github.com/amarjitmallick',
       },
       {
         'name': 'Twitter',
-        'icon': 'assets/icons/twitter.png',
+        'icon': 'assets/icons/x_icon.svg',
         'url': 'https://x.com/amarjitmallick_',
       },
     ];
@@ -872,17 +958,24 @@ class _HomeScreenState extends State<HomeScreen> {
             spacing: 16,
             children: socialLinks.map((link) {
               return IconButton(
+                style: IconButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                // tooltip: link['name'],
                 onPressed: () {
                   launchUrl(
                     Uri.parse(link['url'] as String),
                     mode: LaunchMode.externalApplication,
                   );
                 },
-                icon: Image.asset(
+                icon: SvgPicture.asset(
                   link['icon'] as String,
                   width: 36,
                   height: 36,
                   fit: BoxFit.contain,
+                  colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
                 ),
               );
             }).toList(),
