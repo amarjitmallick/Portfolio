@@ -56,7 +56,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     flex: 3,
                     child: SingleChildScrollView(
                       primary: true,
-                      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 30),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 50,
+                        vertical: 30,
+                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,7 +103,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           AnimatedSection(
                             delay: const Duration(milliseconds: 500),
-                            child: _buildQuickStats(context, isDesktop, isTablet),
+                            child: _buildQuickStats(
+                              context,
+                              isDesktop,
+                              isTablet,
+                            ),
                           ),
 
                           AnimatedSection(
@@ -111,86 +118,110 @@ class _HomeScreenState extends State<HomeScreen> {
                                 spacing: 32,
                                 children: [
                                   Expanded(
-                                    child: Container(
-                                      padding: EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
-                                        color: Colors.yellow,
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Icon(
-                                            Icons.tab_rounded,
-                                            size: 32,
-                                            color: Colors.black,
+                                    child: InkWell(
+                                      onTap: () {},
+                                      child: Container(
+                                        padding: EdgeInsets.all(20),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            12,
                                           ),
-                                          Text(
-                                            "FLUTTER, DART, FIREBASE, SUPABASE",
-                                            style: TextStyle(
+                                          color: Colors.yellow,
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Icon(
+                                              Icons.tab_rounded,
+                                              size: 32,
                                               color: Colors.black,
-                                              fontSize: 28,
-                                              fontWeight: FontWeight.w600,
                                             ),
-                                          ),
-                                          Align(
-                                            alignment: AlignmentGeometry.bottomRight,
-                                            child: Container(
-                                              padding: EdgeInsets.all(5),
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(8),
-                                                border: Border.all(color: Colors.black, width: 1.5),
-                                              ),
-                                              child: Icon(
-                                                Icons.arrow_forward_rounded,
+                                            Text(
+                                              "FLUTTER, DART, FIREBASE, SUPABASE",
+                                              style: TextStyle(
                                                 color: Colors.black,
+                                                fontSize: 28,
+                                                fontWeight: FontWeight.w600,
                                               ),
                                             ),
-                                          ),
-                                        ],
+                                            Align(
+                                              alignment:
+                                                  AlignmentGeometry.bottomRight,
+                                              child: Container(
+                                                padding: EdgeInsets.all(5),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  border: Border.all(
+                                                    color: Colors.black,
+                                                    width: 1.5,
+                                                  ),
+                                                ),
+                                                child: Icon(
+                                                  Icons.arrow_forward_rounded,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                   Expanded(
-                                    child: Container(
-                                      padding: EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
-                                        color: Colors.red,
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Icon(
-                                            Icons.layers_outlined,
-                                            size: 32,
-                                            color: Colors.white,
+                                    child: InkWell(
+                                      onTap: () {},
+                                      child: Container(
+                                        padding: EdgeInsets.all(20),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            12,
                                           ),
-                                          Text(
-                                            "MOBILE APPLICATION DEVELOPMENT",
-                                            style: TextStyle(
+                                          color: Colors.red,
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Icon(
+                                              Icons.layers_outlined,
+                                              size: 32,
                                               color: Colors.white,
-                                              fontSize: 28,
-                                              fontWeight: FontWeight.w600,
                                             ),
-                                          ),
-                                          Align(
-                                            alignment: AlignmentGeometry.bottomRight,
-                                            child: Container(
-                                              padding: EdgeInsets.all(5),
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(8),
-                                                border: Border.all(color: Colors.white, width: 1.5),
-                                              ),
-                                              child: Icon(
-                                                Icons.arrow_forward_rounded,
+                                            Text(
+                                              "MOBILE APPLICATION DEVELOPMENT",
+                                              style: TextStyle(
                                                 color: Colors.white,
+                                                fontSize: 28,
+                                                fontWeight: FontWeight.w600,
                                               ),
                                             ),
-                                          ),
-                                        ],
+                                            Align(
+                                              alignment:
+                                                  AlignmentGeometry.bottomRight,
+                                              child: Container(
+                                                padding: EdgeInsets.all(5),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  border: Border.all(
+                                                    color: Colors.white,
+                                                    width: 1.5,
+                                                  ),
+                                                ),
+                                                child: Icon(
+                                                  Icons.arrow_forward_rounded,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -219,7 +250,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       fontSize: 120,
                                       fontWeight: FontWeight.bold,
                                       letterSpacing: 2,
-                                      color: Colors.white.withValues(alpha: 0.35),
+                                      color: Colors.white.withValues(
+                                        alpha: 0.35,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -340,7 +373,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             isTablet,
                           ),
                           SizedBox(
-                            height: 240,
+                            height: 80,
                           ),
                         ],
                       ),
@@ -393,7 +426,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   controller: _nameController,
                   decoration: InputDecoration(
                     hintText: "Your Name",
-                    hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.4)),
+                    hintStyle: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.4),
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide.none,
@@ -421,7 +456,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     hintText: "abc@email.com",
-                    hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.4)),
+                    hintStyle: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.4),
+                    ),
                     border: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(8),
@@ -454,7 +491,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   maxLines: 5,
                   decoration: InputDecoration(
                     hintText: "Message",
-                    hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.4)),
+                    hintStyle: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.4),
+                    ),
                     border: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(12),
@@ -478,7 +517,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child: TextButton(
                 onPressed: _sendMessage,
                 style: TextButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   backgroundColor: Colors.white,
                   foregroundColor: Theme.of(context).colorScheme.onPrimary,
                   padding: const EdgeInsets.symmetric(vertical: 24),
@@ -549,7 +590,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildTimelineItem(BuildContext context, CareerItem careerItem, bool isLast) {
+  Widget _buildTimelineItem(
+    BuildContext context,
+    CareerItem careerItem,
+    bool isLast,
+  ) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(24),
@@ -595,15 +640,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.white.withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
                   careerItem.duration,
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    color: Colors.white,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -663,10 +711,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         Expanded(
                           child: Text(
                             achievement,
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              height: 1.5,
-                              color: Colors.white.withValues(alpha: 0.8),
-                            ),
+                            style: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(
+                                  height: 1.5,
+                                  color: Colors.white.withValues(alpha: 0.8),
+                                ),
                           ),
                         ),
                       ],
@@ -818,7 +867,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     backgroundColor: Colors.white,
                     foregroundColor: Theme.of(context).colorScheme.onPrimary,
                     padding: const EdgeInsets.symmetric(
@@ -1029,7 +1080,9 @@ class _HomeScreenState extends State<HomeScreen> {
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
-              mainAxisAlignment: isDesktop ? MainAxisAlignment.center : MainAxisAlignment.start,
+              mainAxisAlignment: isDesktop
+                  ? MainAxisAlignment.center
+                  : MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -1140,18 +1193,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Text(
                           link['title'] as String,
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           link['subtitle'] as String,
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.onSurface.withValues(alpha: 0.6),
-                          ),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurface.withValues(alpha: 0.6),
+                              ),
                         ),
                       ],
                     ),

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/data/portfolio_data.dart';
+import 'package:portfolio/models/portfolio_models.dart';
 import 'package:portfolio/widgets/animated_section.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -16,80 +20,247 @@ class AboutScreen extends StatelessWidget {
     final isMobile = screenSize.width < 768;
 
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(
-          isDesktop
-              ? 40
-              : isTablet
-              ? 24
-              : 16,
-        ),
-        child: Center(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: isDesktop ? double.infinity : 900,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AnimatedSection(
-                  delay: const Duration(milliseconds: 200),
-                  child: _buildHeader(context),
-                ),
-                SizedBox(
-                  height: isDesktop
-                      ? 50
-                      : isTablet
-                      ? 32
-                      : 24,
-                ),
-                AnimatedSection(
-                  delay: const Duration(milliseconds: 400),
-                  child: _buildAboutContent(
-                    context,
-                    personalInfo,
-                    isDesktop,
-                    isTablet,
+      body: Center(
+        child: Column(
+          children: [
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: AnimatedSection(
+                      delay: const Duration(milliseconds: 200),
+                      child: _buildHeroImage(context, personalInfo),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: isDesktop
-                      ? 80
-                      : isTablet
-                      ? 60
-                      : 40,
-                ),
-                AnimatedSection(
-                  delay: const Duration(milliseconds: 600),
-                  child: _buildSkillsSection(
-                    context,
-                    skills,
-                    isDesktop,
-                    isTablet,
-                  ),
-                ),
-                if (isMobile) ...[
-                  SizedBox(
-                    height: isDesktop
-                        ? 80
-                        : isTablet
-                        ? 60
-                        : 40,
-                  ),
-                  AnimatedSection(
-                    delay: const Duration(milliseconds: 800),
-                    child: _buildCareerSection(
-                      context,
-                      careerItems,
-                      isDesktop,
-                      isTablet,
+                  Expanded(
+                    flex: 3,
+                    child: SingleChildScrollView(
+                      primary: true,
+                      padding: EdgeInsets.all(
+                        isDesktop
+                            ? 40
+                            : isTablet
+                            ? 24
+                            : 16,
+                      ),
+                      child: Center(
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: isDesktop ? double.infinity : 900,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AnimatedSection(
+                                delay: const Duration(milliseconds: 200),
+                                child: _buildHeader(context),
+                              ),
+                              SizedBox(
+                                height: isDesktop
+                                    ? 50
+                                    : isTablet
+                                    ? 32
+                                    : 24,
+                              ),
+                              AnimatedSection(
+                                delay: const Duration(milliseconds: 400),
+                                child: _buildAboutContent(
+                                  context,
+                                  personalInfo,
+                                  isDesktop,
+                                  isTablet,
+                                ),
+                              ),
+                              SizedBox(
+                                height: isDesktop
+                                    ? 50
+                                    : isTablet
+                                    ? 60
+                                    : 40,
+                              ),
+                              AnimatedSection(
+                                delay: const Duration(milliseconds: 600),
+                                child: _buildSkillsSection(
+                                  context,
+                                  skills,
+                                  isDesktop,
+                                  isTablet,
+                                ),
+                              ),
+                              SizedBox(
+                                height: isDesktop
+                                    ? 80
+                                    : isTablet
+                                    ? 60
+                                    : 40,
+                              ),
+                              if (isMobile) ...[
+                                SizedBox(
+                                  height: isDesktop
+                                      ? 80
+                                      : isTablet
+                                      ? 60
+                                      : 40,
+                                ),
+                                AnimatedSection(
+                                  delay: const Duration(milliseconds: 800),
+                                  child: _buildCareerSection(
+                                    context,
+                                    careerItems,
+                                    isDesktop,
+                                    isTablet,
+                                  ),
+                                ),
+                              ],
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],
-              ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeroImage(BuildContext context, PersonalInfo personalInfo) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(32),
+      ),
+      margin: EdgeInsets.symmetric(vertical: 50, horizontal: 80),
+      padding: EdgeInsets.all(40),
+      constraints: const BoxConstraints(maxWidth: 300),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AspectRatio(
+            aspectRatio: 1,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.shadow.withValues(alpha: 0.1),
+                    blurRadius: 20,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(24),
+                child: Image.asset(
+                  personalInfo.profileImage,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Icon(
+                        Icons.person,
+                        size: 100,
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      ),
+                    );
+                  },
+                ),
+              ),
             ),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Text(
+              "Amarjit Mallick",
+              style: TextStyle(
+                fontSize: 42,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 2,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Text(
+              "A Software Engineer who has developed countless innovative solutions",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+              ),
+            ),
+          ),
+          _buildSocialLinks(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSocialLinks(
+    BuildContext context,
+  ) {
+    final socialLinks = [
+      {
+        'name': 'LinkedIn',
+        'icon': 'assets/icons/linkedin_icon.svg',
+        'url': 'https://www.linkedin.com/in/amarjit-mallick/',
+      },
+      {
+        'name': 'GitHub',
+        'icon': 'assets/icons/github_icon.svg',
+        'url': 'https://github.com/amarjitmallick',
+      },
+      {
+        'name': 'Twitter',
+        'icon': 'assets/icons/x_icon.svg',
+        'url': 'https://x.com/amarjitmallick_',
+      },
+    ];
+
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 600),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 16,
+            children: socialLinks.map((link) {
+              return IconButton(
+                style: IconButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                // tooltip: link['name'],
+                onPressed: () {
+                  launchUrl(
+                    Uri.parse(link['url'] as String),
+                    mode: LaunchMode.externalApplication,
+                  );
+                },
+                icon: SvgPicture.asset(
+                  link['icon'] as String,
+                  width: 36,
+                  height: 36,
+                  fit: BoxFit.contain,
+                  colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                ),
+              );
+            }).toList(),
+          ),
+        ],
       ),
     );
   }
@@ -101,11 +272,31 @@ class AboutScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          isMobile ? 'About & Career' : 'About Me & Skills',
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.onSurface,
+        AnimatedSection(
+          delay: const Duration(milliseconds: 300),
+          child: RichText(
+            text: TextSpan(
+              text: "ABOUT ME\n",
+              style: GoogleFonts.urbanist().copyWith(
+                fontSize: 120,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 2,
+                color: Colors.white,
+              ),
+              children: [
+                TextSpan(
+                  text: "& SKILLS",
+                  style: TextStyle(
+                    fontSize: 120,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2,
+                    color: Colors.white.withValues(
+                      alpha: 0.35,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         const SizedBox(height: 8),
@@ -113,11 +304,7 @@ class AboutScreen extends StatelessWidget {
           isMobile
               ? 'Get to know me, my skills, and professional journey'
               : 'Get to know me better and explore my technical expertise',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Theme.of(
-              context,
-            ).colorScheme.onSurface.withValues(alpha: 0.7),
-          ),
+          style: TextStyle(fontSize: 18),
         ),
       ],
     );
@@ -135,12 +322,7 @@ class AboutScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  flex: 2,
                   child: _buildAboutText(context, personalInfo),
-                ),
-                const SizedBox(width: 40),
-                Expanded(
-                  child: _buildPersonalInfo(context, personalInfo),
                 ),
               ],
             )
@@ -163,20 +345,12 @@ class AboutScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Icon(
-                Icons.person_outline_rounded,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                'About Me',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
+          Text(
+            'About Me',
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.w600,
+              fontSize: 32,
+            ),
           ),
           const SizedBox(height: 16),
           Text(
@@ -323,46 +497,57 @@ class AboutScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Icon(
-                Icons.code_rounded,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                'Technical Skills',
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
+          Text(
+            'Technical Skills',
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.w600,
+              fontSize: 32,
+            ),
           ),
           const SizedBox(height: 24),
-          ...groupedSkills.entries.map((entry) {
-            return AnimatedSection(
-              delay: Duration(
-                milliseconds:
-                    200 * groupedSkills.keys.toList().indexOf(entry.key),
-              ),
-              child: Padding(
-                padding: EdgeInsets.only(
-                  bottom: isDesktop
-                      ? 40
-                      : isTablet
-                      ? 32
-                      : 24,
-                ),
-                child: _buildSkillCategory(
-                  context,
-                  entry.key,
-                  entry.value,
-                  isDesktop,
-                  isTablet,
-                ),
-              ),
-            );
-          }),
+          Table(
+            border: TableBorder.all(
+              color: Colors.white.withValues(alpha: 0.2),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            children: [
+              ...groupedSkills.entries.map((entry) {
+                return TableRow(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 12,
+                      ),
+                      child: Text(
+                        entry.key,
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 12,
+                      ),
+                      child: Row(
+                        spacing: 10,
+                        children: entry.value
+                            .map(
+                              (skill) => Text(
+                                skill.name,
+                                style: Theme.of(context).textTheme.titleMedium
+                                    ?.copyWith(fontWeight: FontWeight.w600),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ),
+                  ],
+                );
+              }),
+            ],
+          ),
         ],
       ),
     );
