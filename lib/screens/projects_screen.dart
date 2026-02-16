@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:portfolio/core/constants.dart';
 import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/data/repository/blog_repository.dart';
 import 'package:portfolio/widgets/animated_section.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:portfolio/widgets/profile_hero.dart';
+import 'package:portfolio/widgets/project_card.dart';
 
 import '../models/portfolio_models.dart';
 
@@ -33,7 +35,10 @@ class ProjectsScreen extends StatelessWidget {
                     flex: 2,
                     child: AnimatedSection(
                       delay: const Duration(milliseconds: 200),
-                      child: _buildHeroImage(context, personalInfo),
+                      child: ProfileHero(
+                        personalInfo: personalInfo,
+                        socialLinks: socialLinks,
+                      ),
                     ),
                   ),
                   Expanded(
@@ -68,7 +73,9 @@ class ProjectsScreen extends StatelessWidget {
                               final index = entry.key;
                               final project = entry.value;
                               return AnimatedSection(
-                                delay: Duration(milliseconds: 400 + (index * 200)),
+                                delay: Duration(
+                                  milliseconds: 400 + (index * 200),
+                                ),
                                 child: Padding(
                                   padding: EdgeInsets.only(
                                     bottom: isDesktop
@@ -77,12 +84,10 @@ class ProjectsScreen extends StatelessWidget {
                                         ? 32
                                         : 24,
                                   ),
-                                  child: _buildProjectCard(
-                                    context,
-                                    project,
-                                    isDesktop,
-                                    isTablet,
-                                    index.isEven,
+                                  child: ProjectCard(
+                                    project: project,
+                                    isDesktop: isDesktop,
+                                    isTablet: isTablet,
                                   ),
                                 ),
                               );
@@ -116,135 +121,6 @@ class ProjectsScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildHeroImage(BuildContext context, PersonalInfo personalInfo) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(32),
-      ),
-      margin: EdgeInsets.symmetric(vertical: 50, horizontal: 80),
-      padding: EdgeInsets.all(40),
-      constraints: const BoxConstraints(maxWidth: 300),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          AspectRatio(
-            aspectRatio: 1,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24),
-                boxShadow: [
-                  BoxShadow(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.shadow.withValues(alpha: 0.1),
-                    blurRadius: 20,
-                    offset: const Offset(0, 10),
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(24),
-                child: Image.asset(
-                  personalInfo.profileImage,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryContainer,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Icon(
-                        Icons.person,
-                        size: 100,
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: Text(
-              "Amarjit Mallick",
-              style: TextStyle(
-                fontSize: 42,
-                fontWeight: FontWeight.w800,
-                letterSpacing: 2,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: Text(
-              "A Software Engineer who has developed countless innovative solutions",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-              ),
-            ),
-          ),
-          _buildSocialLinks(context),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSocialLinks(
-    BuildContext context,
-  ) {
-    final socialLinks = [
-      {
-        'name': 'LinkedIn',
-        'icon': 'assets/icons/linkedin.png',
-        'url': 'https://www.linkedin.com/in/amarjit-mallick/',
-      },
-      {
-        'name': 'GitHub',
-        'icon': 'assets/icons/github.png',
-        'url': 'https://github.com/amarjitmallick',
-      },
-      {
-        'name': 'Twitter',
-        'icon': 'assets/icons/twitter.png',
-        'url': 'https://x.com/amarjitmallick_',
-      },
-    ];
-
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 600),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 16,
-            children: socialLinks.map((link) {
-              return IconButton(
-                onPressed: () {
-                  launchUrl(
-                    Uri.parse(link['url'] as String),
-                    mode: LaunchMode.externalApplication,
-                  );
-                },
-                icon: Image.asset(
-                  link['icon'] as String,
-                  width: 36,
-                  height: 36,
-                  fit: BoxFit.contain,
-                ),
-              );
-            }).toList(),
-          ),
-        ],
       ),
     );
   }
@@ -294,185 +170,6 @@ class ProjectsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildProjectCard(
-    BuildContext context,
-    project,
-    bool isDesktop,
-    bool isTablet,
-    bool isEven,
-  ) {
-    final imageWidget = _buildProjectImage(context, project);
-    final contentWidget = _buildProjectContent(
-      context,
-      project,
-      isDesktop,
-      isTablet,
-    );
-
-    return Container(
-      constraints: const BoxConstraints(maxWidth: double.infinity),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: isDesktop
-              ? IntrinsicHeight(
-                  child: Row(
-                    children: [
-                      imageWidget,
-                      Expanded(child: contentWidget),
-                    ],
-                  ),
-                )
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    imageWidget,
-                    contentWidget,
-                  ],
-                ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildProjectImage(BuildContext context, project) {
-    return Container(
-      height: 250,
-      width: 250,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        image: DecorationImage(
-          image: AssetImage(project.imageUrl),
-          fit: BoxFit.fitHeight,
-        ),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Theme.of(context).colorScheme.primary.withValues(alpha: 0.8),
-            Theme.of(context).colorScheme.secondary.withValues(alpha: 0.6),
-          ],
-        ),
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.transparent,
-              Colors.black.withValues(alpha: 0.3),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildProjectContent(
-    BuildContext context,
-    project,
-    bool isDesktop,
-    bool isTablet,
-  ) {
-    return Container(
-      padding: EdgeInsets.all(
-        isDesktop
-            ? 40
-            : isTablet
-            ? 32
-            : 24,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            project.title,
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
-          ),
-          SizedBox(height: isDesktop ? 16 : 12),
-          Text(
-            project.description,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              height: 1.6,
-              color: Theme.of(
-                context,
-              ).colorScheme.onSurface.withValues(alpha: 0.8),
-            ),
-          ),
-          SizedBox(height: isDesktop ? 20 : 16),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: project.technologies.map<Widget>((tech) {
-              return Text(
-                tech,
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  fontWeight: FontWeight.w500,
-                ),
-              );
-            }).toList(),
-          ),
-          SizedBox(height: isDesktop ? 24 : 20),
-          Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: [
-              if (project.demoUrl != null)
-                TextButton.icon(
-                  onPressed: () {
-                    launchUrl(
-                      Uri.parse(project.demoUrl),
-                      mode: LaunchMode.externalApplication,
-                    );
-                  },
-                  icon: const Icon(Icons.android_rounded),
-                  label: const Text(
-                    'Check Application',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                    backgroundColor: Colors.white,
-                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 16,
-                      horizontal: 32,
-                    ),
-                  ),
-                ),
-              if (project.githubUrl != null)
-                OutlinedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.code),
-                  label: const Text('Source Code'),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: Theme.of(context).colorScheme.primary,
-                    side: BorderSide(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildPublicationsSection(
     BuildContext context,
     bool isDesktop,
@@ -509,9 +206,10 @@ class ProjectsScreen extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       'Publications',
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                     ),
                   ],
                 ),

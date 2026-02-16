@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/screens/about_screen.dart';
 import 'package:portfolio/screens/career_screen.dart';
 import 'package:portfolio/screens/contact_screen.dart';
@@ -28,12 +29,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   ];
 
   final List<NavigationItem> _navigationItems = [
-    NavigationItem(icon: Icons.home_rounded, label: 'Home'),
-    NavigationItem(icon: Icons.person_rounded, label: 'About'),
-    NavigationItem(icon: Icons.work_rounded, label: 'Projects'),
-    NavigationItem(icon: Icons.article_rounded, label: 'Publications'),
-    NavigationItem(icon: Icons.timeline_rounded, label: 'Career'),
-    NavigationItem(icon: Icons.contact_mail_rounded, label: 'Contact'),
+    NavigationItem(icon: FontAwesomeIcons.solidHouse, label: 'Home'),
+    NavigationItem(icon: FontAwesomeIcons.solidUser, label: 'About'),
+    NavigationItem(icon: FontAwesomeIcons.laptopCode, label: 'Projects'),
+    NavigationItem(
+      icon: FontAwesomeIcons.solidNewspaper,
+      label: 'Publications',
+    ),
+    NavigationItem(icon: FontAwesomeIcons.briefcase, label: 'Career'),
+    NavigationItem(icon: FontAwesomeIcons.solidEnvelope, label: 'Contact'),
   ];
 
   final List<NavigationItem> _mobileNavigationItems = [
@@ -197,15 +201,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 tooltip: item.label,
                 onPressed: () => _onNavigationTap(index),
                 style: TextButton.styleFrom(
-                  backgroundColor: isSelected ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.15) : null,
+                  backgroundColor: isSelected
+                      ? Theme.of(
+                          context,
+                        ).colorScheme.primary.withValues(alpha: 0.15)
+                      : null,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                icon: Icon(
+                icon: FaIcon(
                   item.icon,
-                  color: isSelected ? Colors.white : Theme.of(context).colorScheme.onSurface,
-                  size: 20,
+                  color: isSelected
+                      ? Colors.white
+                      : Theme.of(context).colorScheme.onSurface,
+                  size: 18,
                 ),
               ),
             );
@@ -232,7 +242,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   context,
                 ).colorScheme.onSurface.withValues(alpha: 0.6),
               ),
-              selectedIcon: Icon(
+              selectedIcon: FaIcon(
                 item.icon,
                 size: 26,
               ),

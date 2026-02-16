@@ -61,6 +61,16 @@ class FontSizes {
 
 ThemeData get lightTheme => ThemeData(
   useMaterial3: true,
+  tooltipTheme: TooltipThemeData(
+    decoration: BoxDecoration(
+      color: Colors.indigo, // Global background color
+      borderRadius: BorderRadius.circular(20), // Global rounded corners
+    ),
+    textStyle: const TextStyle(
+      color: Colors.white, // Global text color
+      fontWeight: FontWeight.bold,
+    ),
+  ),
   colorScheme: ColorScheme.light(
     primary: LightModeColors.lightPrimary,
     onPrimary: LightModeColors.lightOnPrimary,
@@ -151,6 +161,18 @@ ThemeData get lightTheme => ThemeData(
 
 ThemeData get darkTheme => ThemeData(
   useMaterial3: true,
+  tooltipTheme: TooltipThemeData(
+    margin: EdgeInsets.only(top: 8),
+    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+    decoration: BoxDecoration(
+      color: Colors.white.withValues(alpha: 0.2),
+      borderRadius: BorderRadius.circular(20),
+    ),
+    textStyle: const TextStyle(
+      color: Colors.white,
+      fontWeight: FontWeight.w400,
+    ),
+  ),
   colorScheme: ColorScheme.dark(
     primary: DarkModeColors.darkPrimary,
     onPrimary: DarkModeColors.darkOnPrimary,

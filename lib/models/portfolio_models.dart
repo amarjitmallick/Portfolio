@@ -77,3 +77,28 @@ class CareerItem {
     required this.achievements,
   });
 }
+
+class SocialLink {
+  final String name;
+  final String icon;
+  final String url;
+
+  const SocialLink({
+    required this.name,
+    required this.icon,
+    required this.url,
+  });
+}
+
+class StatItem {
+  final String number;
+  final String label;
+  final dynamic
+  icon; // Can be IconData or String asset path if needed, keeping generic for now
+
+  const StatItem({
+    required this.number,
+    required this.label,
+    this.icon,
+  });
+}

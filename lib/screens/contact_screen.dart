@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/core/constants.dart';
 import 'package:portfolio/data/portfolio_data.dart';
-import 'package:portfolio/models/portfolio_models.dart';
 import 'package:portfolio/widgets/animated_section.dart';
+import 'package:portfolio/widgets/profile_hero.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactScreen extends StatefulWidget {
@@ -46,7 +47,10 @@ class _ContactScreenState extends State<ContactScreen> {
                     flex: 2,
                     child: AnimatedSection(
                       delay: const Duration(milliseconds: 200),
-                      child: _buildHeroImage(context, personalInfo),
+                      child: ProfileHero(
+                        personalInfo: personalInfo,
+                        socialLinks: socialLinks,
+                      ),
                     ),
                   ),
                   Expanded(
@@ -89,12 +93,19 @@ class _ContactScreenState extends State<ContactScreen> {
                                 : Column(
                                     children: [
                                       AnimatedSection(
-                                        delay: const Duration(milliseconds: 400),
-                                        child: _buildContactInfo(context, personalInfo),
+                                        delay: const Duration(
+                                          milliseconds: 400,
+                                        ),
+                                        child: _buildContactInfo(
+                                          context,
+                                          personalInfo,
+                                        ),
                                       ),
                                       SizedBox(height: isTablet ? 40 : 32),
                                       AnimatedSection(
-                                        delay: const Duration(milliseconds: 600),
+                                        delay: const Duration(
+                                          milliseconds: 600,
+                                        ),
                                         child: _buildContactForm(
                                           context,
                                           isDesktop,
@@ -113,135 +124,6 @@ class _ContactScreenState extends State<ContactScreen> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildHeroImage(BuildContext context, PersonalInfo personalInfo) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(32),
-      ),
-      margin: EdgeInsets.symmetric(vertical: 50, horizontal: 80),
-      padding: EdgeInsets.all(40),
-      constraints: const BoxConstraints(maxWidth: 300),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          AspectRatio(
-            aspectRatio: 1,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24),
-                boxShadow: [
-                  BoxShadow(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.shadow.withValues(alpha: 0.1),
-                    blurRadius: 20,
-                    offset: const Offset(0, 10),
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(24),
-                child: Image.asset(
-                  personalInfo.profileImage,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryContainer,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Icon(
-                        Icons.person,
-                        size: 100,
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: Text(
-              "Amarjit Mallick",
-              style: TextStyle(
-                fontSize: 42,
-                fontWeight: FontWeight.w800,
-                letterSpacing: 2,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: Text(
-              "A Software Engineer who has developed countless innovative solutions",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-              ),
-            ),
-          ),
-          _buildSocialLinks(context),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSocialLinks(
-    BuildContext context,
-  ) {
-    final socialLinks = [
-      {
-        'name': 'LinkedIn',
-        'icon': 'assets/icons/linkedin.png',
-        'url': 'https://www.linkedin.com/in/amarjit-mallick/',
-      },
-      {
-        'name': 'GitHub',
-        'icon': 'assets/icons/github.png',
-        'url': 'https://github.com/amarjitmallick',
-      },
-      {
-        'name': 'Twitter',
-        'icon': 'assets/icons/twitter.png',
-        'url': 'https://x.com/amarjitmallick_',
-      },
-    ];
-
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 600),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 16,
-            children: socialLinks.map((link) {
-              return IconButton(
-                onPressed: () {
-                  launchUrl(
-                    Uri.parse(link['url'] as String),
-                    mode: LaunchMode.externalApplication,
-                  );
-                },
-                icon: Image.asset(
-                  link['icon'] as String,
-                  width: 36,
-                  height: 36,
-                  fit: BoxFit.contain,
-                ),
-              );
-            }).toList(),
-          ),
-        ],
       ),
     );
   }
@@ -314,7 +196,9 @@ class _ContactScreenState extends State<ContactScreen> {
                   controller: _nameController,
                   decoration: InputDecoration(
                     hintText: "Your Name",
-                    hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.4)),
+                    hintStyle: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.4),
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide.none,
@@ -342,7 +226,9 @@ class _ContactScreenState extends State<ContactScreen> {
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     hintText: "abc@email.com",
-                    hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.4)),
+                    hintStyle: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.4),
+                    ),
                     border: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(8),
@@ -375,7 +261,9 @@ class _ContactScreenState extends State<ContactScreen> {
                   maxLines: 5,
                   decoration: InputDecoration(
                     hintText: "Message",
-                    hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.4)),
+                    hintStyle: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.4),
+                    ),
                     border: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(12),
@@ -399,7 +287,9 @@ class _ContactScreenState extends State<ContactScreen> {
               child: TextButton(
                 onPressed: _sendMessage,
                 style: TextButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   backgroundColor: Colors.white,
                   foregroundColor: Theme.of(context).colorScheme.onPrimary,
                   padding: const EdgeInsets.symmetric(vertical: 24),
@@ -489,18 +379,23 @@ class _ContactScreenState extends State<ContactScreen> {
                           children: [
                             Text(
                               item['label'] as String,
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: Theme.of(context).colorScheme.onPrimaryContainer.withValues(alpha: 0.8),
-                              ),
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onPrimaryContainer
+                                        .withValues(alpha: 0.8),
+                                  ),
                             ),
                             Text(
                               item['value'] as String,
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                color: Theme.of(
-                                  context,
-                                ).colorScheme.onPrimaryContainer,
-                              ),
+                              style: Theme.of(context).textTheme.bodyMedium
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onPrimaryContainer,
+                                  ),
                             ),
                           ],
                         ),
