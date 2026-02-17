@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/data/portfolio_data.dart';
+import 'package:portfolio/models/portfolio_models.dart';
 import 'package:portfolio/widgets/animated_section.dart';
+import 'package:portfolio/widgets/profile_hero.dart';
+import 'package:portfolio/widgets/section_header.dart';
+import 'package:portfolio/widgets/skills_section.dart';
+import 'package:portfolio/widgets/timeline_card.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -15,117 +20,190 @@ class AboutScreen extends StatelessWidget {
     final isTablet = screenSize.width >= 768 && screenSize.width < 1024;
     final isMobile = screenSize.width < 768;
 
+    final socialLinks = [
+      const SocialLink(
+        name: 'LinkedIn',
+        icon: 'assets/icons/linkedin_icon.svg',
+        url: 'https://www.linkedin.com/in/amarjit-mallick/',
+      ),
+      const SocialLink(
+        name: 'GitHub',
+        icon: 'assets/icons/github_icon.svg',
+        url: 'https://github.com/amarjitmallick',
+      ),
+      const SocialLink(
+        name: 'Twitter',
+        icon: 'assets/icons/x_icon.svg',
+        url: 'https://x.com/amarjitmallick_',
+      ),
+    ];
+
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(
-          isDesktop
-              ? 40
-              : isTablet
-              ? 24
-              : 16,
-        ),
-        child: Center(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: isDesktop ? double.infinity : 900,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AnimatedSection(
-                  delay: const Duration(milliseconds: 200),
-                  child: _buildHeader(context),
-                ),
-                SizedBox(
-                  height: isDesktop
-                      ? 50
-                      : isTablet
-                      ? 32
-                      : 24,
-                ),
-                AnimatedSection(
-                  delay: const Duration(milliseconds: 400),
-                  child: _buildAboutContent(
-                    context,
-                    personalInfo,
-                    isDesktop,
-                    isTablet,
+      body: Center(
+        child: Column(
+          children: [
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: AnimatedSection(
+                      delay: const Duration(milliseconds: 200),
+                      child: ProfileHero(
+                        personalInfo: personalInfo,
+                        socialLinks: socialLinks,
+                      ),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: isDesktop
-                      ? 80
-                      : isTablet
-                      ? 60
-                      : 40,
-                ),
-                AnimatedSection(
-                  delay: const Duration(milliseconds: 600),
-                  child: _buildSkillsSection(
-                    context,
-                    skills,
-                    isDesktop,
-                    isTablet,
-                  ),
-                ),
-                if (isMobile) ...[
-                  SizedBox(
-                    height: isDesktop
-                        ? 80
-                        : isTablet
-                        ? 60
-                        : 40,
-                  ),
-                  AnimatedSection(
-                    delay: const Duration(milliseconds: 800),
-                    child: _buildCareerSection(
-                      context,
-                      careerItems,
-                      isDesktop,
-                      isTablet,
+                  Expanded(
+                    flex: 3,
+                    child: SingleChildScrollView(
+                      primary: true,
+                      padding: EdgeInsets.all(
+                        isDesktop
+                            ? 40
+                            : isTablet
+                            ? 24
+                            : 16,
+                      ),
+                      child: Center(
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: isDesktop ? double.infinity : 900,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AnimatedSection(
+                                delay: const Duration(milliseconds: 200),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SectionHeader(
+                                      title: "ABOUT ME",
+                                      subtitle: "& SKILLS",
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      isMobile
+                                          ? 'Get to know me, my skills, and professional journey'
+                                          : 'Get to know me better and explore my technical expertise',
+                                      style: const TextStyle(fontSize: 18),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: isDesktop
+                                    ? 50
+                                    : isTablet
+                                    ? 32
+                                    : 24,
+                              ),
+                              AnimatedSection(
+                                delay: const Duration(milliseconds: 400),
+                                child: _buildAboutContent(
+                                  context,
+                                  personalInfo,
+                                  isDesktop,
+                                  isTablet,
+                                ),
+                              ),
+                              SizedBox(
+                                height: isDesktop
+                                    ? 50
+                                    : isTablet
+                                    ? 60
+                                    : 40,
+                              ),
+                              AnimatedSection(
+                                delay: const Duration(milliseconds: 600),
+                                child: SkillsSection(skills: skills),
+                              ),
+                              SizedBox(
+                                height: isDesktop
+                                    ? 80
+                                    : isTablet
+                                    ? 60
+                                    : 40,
+                              ),
+                              if (isMobile) ...[
+                                SizedBox(
+                                  height: isDesktop
+                                      ? 80
+                                      : isTablet
+                                      ? 60
+                                      : 40,
+                                ),
+                                AnimatedSection(
+                                  delay: const Duration(milliseconds: 800),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.timeline,
+                                            color: Theme.of(
+                                              context,
+                                            ).colorScheme.primary,
+                                          ),
+                                          const SizedBox(width: 8),
+                                          Text(
+                                            'Career Journey',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineMedium
+                                                ?.copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 24),
+                                      ...careerItems.asMap().entries.map((
+                                        entry,
+                                      ) {
+                                        final index = entry.key;
+                                        final item = entry.value;
+                                        return AnimatedSection(
+                                          delay: Duration(
+                                            milliseconds: 200 * index,
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                              bottom: isTablet ? 24 : 20,
+                                            ),
+                                            child: TimelineCard(
+                                              careerItem: item,
+                                            ),
+                                          ),
+                                        );
+                                      }),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildHeader(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final isMobile = screenSize.width < 768;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          isMobile ? 'About & Career' : 'About Me & Skills',
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          isMobile
-              ? 'Get to know me, my skills, and professional journey'
-              : 'Get to know me better and explore my technical expertise',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Theme.of(
-              context,
-            ).colorScheme.onSurface.withValues(alpha: 0.7),
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _buildAboutContent(
     BuildContext context,
-    personalInfo,
+    PersonalInfo personalInfo,
     bool isDesktop,
     bool isTablet,
   ) {
@@ -135,12 +213,7 @@ class AboutScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  flex: 2,
                   child: _buildAboutText(context, personalInfo),
-                ),
-                const SizedBox(width: 40),
-                Expanded(
-                  child: _buildPersonalInfo(context, personalInfo),
                 ),
               ],
             )
@@ -154,7 +227,7 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildAboutText(BuildContext context, personalInfo) {
+  Widget _buildAboutText(BuildContext context, PersonalInfo personalInfo) {
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surfaceContainerHighest,
@@ -163,20 +236,12 @@ class AboutScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Icon(
-                Icons.person_outline_rounded,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                'About Me',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
+          Text(
+            'About Me',
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.w600,
+              fontSize: 32,
+            ),
           ),
           const SizedBox(height: 16),
           Text(
@@ -204,7 +269,7 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildPersonalInfo(BuildContext context, personalInfo) {
+  Widget _buildPersonalInfo(BuildContext context, PersonalInfo personalInfo) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -295,289 +360,6 @@ class AboutScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w500,
                   ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSkillsSection(
-    BuildContext context,
-    List skills,
-    bool isDesktop,
-    bool isTablet,
-  ) {
-    final groupedSkills = <String, List>{};
-    for (final skill in skills) {
-      groupedSkills.putIfAbsent(skill.category, () => []).add(skill);
-    }
-
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                Icons.code_rounded,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                'Technical Skills',
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 24),
-          ...groupedSkills.entries.map((entry) {
-            return AnimatedSection(
-              delay: Duration(
-                milliseconds:
-                    200 * groupedSkills.keys.toList().indexOf(entry.key),
-              ),
-              child: Padding(
-                padding: EdgeInsets.only(
-                  bottom: isDesktop
-                      ? 40
-                      : isTablet
-                      ? 32
-                      : 24,
-                ),
-                child: _buildSkillCategory(
-                  context,
-                  entry.key,
-                  entry.value,
-                  isDesktop,
-                  isTablet,
-                ),
-              ),
-            );
-          }),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSkillCategory(
-    BuildContext context,
-    String category,
-    List categorySkills,
-    bool isDesktop,
-    bool isTablet,
-  ) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          category,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-        ),
-        SizedBox(height: isDesktop ? 20 : 16),
-        SizedBox(
-          height: 50,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: categorySkills.length,
-            itemBuilder: (context, index) {
-              final skill = categorySkills[index];
-              return _buildSkillItem(context, skill);
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return SizedBox(
-                width: 10,
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSkillItem(BuildContext context, skill) {
-    return Chip(
-      label: Text(
-        skill.name,
-        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCareerSection(
-    BuildContext context,
-    List careerItems,
-    bool isDesktop,
-    bool isTablet,
-  ) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Icon(
-              Icons.timeline,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            const SizedBox(width: 8),
-            Text(
-              'Career Journey',
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 24),
-        ...careerItems.asMap().entries.map((entry) {
-          final index = entry.key;
-          final item = entry.value;
-          return AnimatedSection(
-            delay: Duration(milliseconds: 200 * index),
-            child: Padding(
-              padding: EdgeInsets.only(bottom: isTablet ? 24 : 20),
-              child: _buildCareerItem(context, item),
-            ),
-          );
-        }),
-      ],
-    );
-  }
-
-  Widget _buildCareerItem(BuildContext context, item) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
-        ),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 8,
-                height: 8,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary,
-                  shape: BoxShape.circle,
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  item.position,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  item.company,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  item.duration,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.onSurface.withValues(alpha: 0.7),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  item.description,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    height: 1.5,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.star,
-                          size: 16,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          'Key Achievements',
-                          style: Theme.of(context).textTheme.titleSmall
-                              ?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                color: Theme.of(context).colorScheme.onSurface,
-                              ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    ...item.achievements.map<Widget>((achievement) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(top: 6),
-                              width: 4,
-                              height: 4,
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.primary,
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Text(
-                                achievement,
-                                style: Theme.of(context).textTheme.bodyMedium
-                                    ?.copyWith(
-                                      height: 1.5,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSurface
-                                          .withValues(alpha: 0.8),
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }),
-                  ],
                 ),
               ],
             ),
