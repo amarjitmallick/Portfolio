@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:portfolio/core/constants.dart';
+import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/data/repository/blog_repository.dart';
+import 'package:portfolio/widgets/profile_hero.dart';
 
 import '../models/portfolio_models.dart';
 import '../widgets/animated_section.dart';
@@ -10,85 +14,134 @@ class PublicationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final personalInfo = PortfolioData.personalInfo;
     List<Publication> publications;
     final screenSize = MediaQuery.of(context).size;
     final isDesktop = screenSize.width >= 1024;
     final isTablet = screenSize.width >= 768 && screenSize.width < 1024;
 
     return Scaffold(
-      body: FutureBuilder<List<dynamic>>(
-        future: BlogRepository().fetchBlogs(),
-        builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasData) {
-            if (snapshot.data != null && snapshot.data!.isNotEmpty) {
-              publications = snapshot.data!.map((blog) {
-                return Publication(
-                  title: blog["node"]["title"],
-                  description: blog["node"]["brief"],
-                  blogUrl: blog["node"]["url"],
-                  imageUrl: blog["node"]["coverImage"]["url"],
-                  year: blog["node"]["publishedAt"],
-                );
-              }).toList();
-              return SingleChildScrollView(
-                padding: EdgeInsets.all(
-                  isDesktop
-                      ? 40
-                      : isTablet
-                      ? 24
-                      : 16,
-                ),
-                child: Center(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: isDesktop ? 1400 : 900),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AnimatedSection(
-                          delay: const Duration(milliseconds: 200),
-                          child: _buildHeader(context),
-                        ),
-                        SizedBox(
-                          height: isDesktop
-                              ? 50
-                              : isTablet
-                              ? 32
-                              : 24,
-                        ),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: publications.length,
-                          itemBuilder: (context, index) {
-                            return AnimatedSection(
-                              delay: Duration(milliseconds: 400 + (index * 200)),
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 24),
-                                child: _buildPublicationCard(context, publications[index]),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
+      body: Center(
+        child: Column(
+          children: [
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: AnimatedSection(
+                      delay: const Duration(milliseconds: 200),
+                      child: ProfileHero(
+                        personalInfo: personalInfo,
+                        socialLinks: socialLinks,
+                      ),
                     ),
                   ),
-                ),
-              );
-            } else {
-              return Center(
-                child: Text("No Blogs to show"),
-              );
-            }
-          } else {
-            return Center(
-              child: Text("Something went wrong"),
-            );
-          }
-        },
+                  Expanded(
+                    flex: 3,
+                    child: FutureBuilder<List<dynamic>>(
+                      future: BlogRepository().fetchBlogs(),
+                      builder:
+                          (
+                            BuildContext context,
+                            AsyncSnapshot<List<dynamic>> snapshot,
+                          ) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            } else if (snapshot.hasData) {
+                              if (snapshot.data != null &&
+                                  snapshot.data!.isNotEmpty) {
+                                publications = snapshot.data!.map((blog) {
+                                  return Publication(
+                                    title: blog["node"]["title"],
+                                    description: blog["node"]["brief"],
+                                    blogUrl: blog["node"]["url"],
+                                    imageUrl: blog["node"]["coverImage"]["url"],
+                                    year: blog["node"]["publishedAt"],
+                                  );
+                                }).toList();
+                                return SingleChildScrollView(
+                                  padding: EdgeInsets.all(
+                                    isDesktop
+                                        ? 40
+                                        : isTablet
+                                        ? 24
+                                        : 16,
+                                  ),
+                                  child: Center(
+                                    child: ConstrainedBox(
+                                      constraints: BoxConstraints(
+                                        maxWidth: isDesktop ? 1400 : 900,
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          AnimatedSection(
+                                            delay: const Duration(
+                                              milliseconds: 200,
+                                            ),
+                                            child: _buildHeader(context),
+                                          ),
+                                          SizedBox(
+                                            height: isDesktop
+                                                ? 50
+                                                : isTablet
+                                                ? 32
+                                                : 24,
+                                          ),
+                                          ListView.builder(
+                                            shrinkWrap: true,
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            itemCount: publications.length,
+                                            itemBuilder: (context, index) {
+                                              return AnimatedSection(
+                                                delay: Duration(
+                                                  milliseconds:
+                                                      400 + (index * 200),
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                        bottom: 24,
+                                                      ),
+                                                  child: _buildPublicationCard(
+                                                    context,
+                                                    publications[index],
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                return Center(
+                                  child: Text("No Blogs to show"),
+                                );
+                              }
+                            } else {
+                              return Center(
+                                child: Text("Something went wrong"),
+                              );
+                            }
+                          },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -97,18 +150,26 @@ class PublicationsScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Publications',
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'Blogs and articles',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+        RichText(
+          text: TextSpan(
+            text: "BLOGS &\n",
+            style: GoogleFonts.urbanist().copyWith(
+              fontSize: 120,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 2,
+              color: Colors.white,
+            ),
+            children: [
+              TextSpan(
+                text: "ARTICLES",
+                style: TextStyle(
+                  fontSize: 120,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2,
+                  color: Colors.white.withValues(alpha: 0.35),
+                ),
+              ),
+            ],
           ),
         ),
       ],
@@ -117,7 +178,7 @@ class PublicationsScreen extends StatelessWidget {
 
   Widget _buildPublicationCard(BuildContext context, Publication publication) {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
@@ -137,45 +198,37 @@ class PublicationsScreen extends StatelessWidget {
         children: [
           Expanded(
             flex: 2,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.network(publication.imageUrl),
+            ),
+          ),
+          Expanded(
+            flex: 3,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                Column(
+                  spacing: 4,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryContainer,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Icon(
-                        Icons.article,
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                        size: 24,
+                    Text(
+                      publication.title,
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onSurface,
+                        height: 1.3,
                       ),
                     ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        spacing: 4,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            publication.title,
-                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.onSurface,
-                              height: 1.3,
-                            ),
-                          ),
-                          Text(
-                            DateFormat("MMM dd, yyyy").format(DateTime.parse(publication.year)),
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                        ],
+                    Text(
+                      DateFormat(
+                        "MMM dd, yyyy",
+                      ).format(DateTime.parse(publication.year)),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withValues(alpha: 0.6),
+                        fontStyle: FontStyle.italic,
                       ),
                     ),
                   ],
@@ -183,9 +236,11 @@ class PublicationsScreen extends StatelessWidget {
                 const SizedBox(height: 12),
                 Text(
                   publication.description,
-                  maxLines: 3,
+                  maxLines: 1,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.8),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -196,18 +251,15 @@ class PublicationsScreen extends StatelessWidget {
                     icon: const Icon(Icons.read_more_rounded),
                     label: const Text('Read More'),
                     style: TextButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      backgroundColor: Colors.white,
                       foregroundColor: Theme.of(context).colorScheme.onPrimary,
                     ),
                   ),
                 ],
               ],
-            ),
-          ),
-          Expanded(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.network(publication.imageUrl),
             ),
           ),
         ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/screens/about_screen.dart';
 import 'package:portfolio/screens/career_screen.dart';
 import 'package:portfolio/screens/contact_screen.dart';
@@ -28,12 +29,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   ];
 
   final List<NavigationItem> _navigationItems = [
-    NavigationItem(icon: Icons.home_rounded, label: 'Home'),
-    NavigationItem(icon: Icons.person_rounded, label: 'About'),
-    NavigationItem(icon: Icons.work_rounded, label: 'Projects'),
-    NavigationItem(icon: Icons.article_rounded, label: 'Publications'),
-    NavigationItem(icon: Icons.timeline_rounded, label: 'Career'),
-    NavigationItem(icon: Icons.contact_mail_rounded, label: 'Contact'),
+    NavigationItem(icon: FontAwesomeIcons.solidHouse, label: 'Home'),
+    NavigationItem(icon: FontAwesomeIcons.solidUser, label: 'About'),
+    NavigationItem(icon: FontAwesomeIcons.laptopCode, label: 'Projects'),
+    NavigationItem(
+      icon: FontAwesomeIcons.solidNewspaper,
+      label: 'Publications',
+    ),
+    NavigationItem(icon: FontAwesomeIcons.briefcase, label: 'Career'),
+    NavigationItem(icon: FontAwesomeIcons.solidEnvelope, label: 'Contact'),
   ];
 
   final List<NavigationItem> _mobileNavigationItems = [
@@ -170,9 +174,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   Widget _buildDesktopNavigation() {
     return Container(
-      height: 80,
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+      margin: EdgeInsets.symmetric(vertical: 20),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+        //color: Colors.white.withValues(alpha: 0.05),
+        borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
             color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.1),
@@ -181,62 +187,40 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
         ],
       ),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1400),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Row(
-              children: [
-                Text(
-                  'Portfolio',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ..._navigationItems.asMap().entries.map((entry) {
+            final index = entry.key;
+            final item = entry.value;
+            final isSelected = index == _currentIndex;
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: IconButton(
+                tooltip: item.label,
+                onPressed: () => _onNavigationTap(index),
+                style: TextButton.styleFrom(
+                  backgroundColor: isSelected
+                      ? Theme.of(
+                          context,
+                        ).colorScheme.primary.withValues(alpha: 0.15)
+                      : null,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                const Spacer(),
-                ..._navigationItems.asMap().entries.map((entry) {
-                  final index = entry.key;
-                  final item = entry.value;
-                  final isSelected = index == _currentIndex;
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: TextButton.icon(
-                      onPressed: () => _onNavigationTap(index),
-                      style: TextButton.styleFrom(
-                        side: isSelected
-                            ? BorderSide(
-                                color: Theme.of(context).colorScheme.primary,
-                              )
-                            : null,
-                      ),
-                      icon: Icon(
-                        item.icon,
-                        color: isSelected
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(context).colorScheme.onSurface,
-                        size: 20,
-                      ),
-                      label: Text(
-                        item.label,
-                        style: TextStyle(
-                          color: isSelected
-                              ? Theme.of(context).colorScheme.primary
-                              : Theme.of(context).colorScheme.onSurface,
-                          fontWeight: isSelected
-                              ? FontWeight.w600
-                              : FontWeight.normal,
-                        ),
-                      ),
-                    ),
-                  );
-                }),
-                const SizedBox(width: 16),
-              ],
-            ),
-          ),
-        ),
+                icon: FaIcon(
+                  item.icon,
+                  color: isSelected
+                      ? Colors.white
+                      : Theme.of(context).colorScheme.onSurface,
+                  size: 18,
+                ),
+              ),
+            );
+          }),
+        ],
       ),
     );
   }
@@ -258,7 +242,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   context,
                 ).colorScheme.onSurface.withValues(alpha: 0.6),
               ),
-              selectedIcon: Icon(
+              selectedIcon: FaIcon(
                 item.icon,
                 size: 26,
               ),

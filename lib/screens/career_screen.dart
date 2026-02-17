@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/core/constants.dart';
 import 'package:portfolio/data/portfolio_data.dart';
 import 'package:portfolio/widgets/animated_section.dart';
+import 'package:portfolio/widgets/profile_hero.dart';
 
 import '../models/portfolio_models.dart';
 
@@ -9,41 +12,75 @@ class CareerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final personalInfo = PortfolioData.personalInfo;
     final careerItems = PortfolioData.careerItems;
     final screenSize = MediaQuery.of(context).size;
     final isDesktop = screenSize.width >= 1024;
     final isTablet = screenSize.width >= 768 && screenSize.width < 1024;
 
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(
-          isDesktop
-              ? 40
-              : isTablet
-              ? 24
-              : 16,
-        ),
-        child: Center(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: isDesktop ? 1400 : 900),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AnimatedSection(
-                  delay: const Duration(milliseconds: 200),
-                  child: _buildHeader(context),
-                ),
-                SizedBox(
-                  height: isDesktop
-                      ? 50
-                      : isTablet
-                      ? 32
-                      : 24,
-                ),
-                _buildTimeline(context, careerItems, isDesktop, isTablet),
-              ],
+      body: Center(
+        child: Column(
+          children: [
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: AnimatedSection(
+                      delay: const Duration(milliseconds: 200),
+                      child: ProfileHero(
+                        personalInfo: personalInfo,
+                        socialLinks: socialLinks,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: SingleChildScrollView(
+                      padding: EdgeInsets.all(
+                        isDesktop
+                            ? 40
+                            : isTablet
+                            ? 24
+                            : 16,
+                      ),
+                      child: Center(
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: isDesktop ? 1400 : 900,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AnimatedSection(
+                                delay: const Duration(milliseconds: 200),
+                                child: _buildHeader(context),
+                              ),
+                              SizedBox(
+                                height: isDesktop
+                                    ? 50
+                                    : isTablet
+                                    ? 32
+                                    : 24,
+                              ),
+                              _buildTimeline(
+                                context,
+                                careerItems,
+                                isDesktop,
+                                isTablet,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
@@ -53,25 +90,47 @@ class CareerScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Career Journey',
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.onSurface,
+        RichText(
+          text: TextSpan(
+            text: "3 YEARS OF\n",
+            style: GoogleFonts.urbanist().copyWith(
+              fontSize: 120,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 2,
+              color: Colors.white,
+            ),
+            children: [
+              TextSpan(
+                text: "EXPERIENCE",
+                style: TextStyle(
+                  fontSize: 120,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2,
+                  color: Colors.white.withValues(alpha: 0.35),
+                ),
+              ),
+            ],
           ),
         ),
         const SizedBox(height: 8),
         Text(
           'My professional experience and career progression',
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurface.withValues(alpha: 0.7),
           ),
         ),
       ],
     );
   }
 
-  Widget _buildTimeline(BuildContext context, List<CareerItem> careerItems, bool isDesktop, bool isTablet) {
+  Widget _buildTimeline(
+    BuildContext context,
+    List<CareerItem> careerItems,
+    bool isDesktop,
+    bool isTablet,
+  ) {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -88,7 +147,11 @@ class CareerScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTimelineItem(BuildContext context, CareerItem careerItem, bool isLast) {
+  Widget _buildTimelineItem(
+    BuildContext context,
+    CareerItem careerItem,
+    bool isLast,
+  ) {
     return IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,7 +171,9 @@ class CareerScreen extends StatelessWidget {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.3),
                       blurRadius: 8,
                       spreadRadius: 2,
                     ),
@@ -119,7 +184,9 @@ class CareerScreen extends StatelessWidget {
                 Expanded(
                   child: Container(
                     width: 2,
-                    color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.outline.withValues(alpha: 0.3),
                     margin: const EdgeInsets.symmetric(vertical: 8),
                   ),
                 ),
@@ -135,11 +202,15 @@ class CareerScreen extends StatelessWidget {
                 color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                  color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.outline.withValues(alpha: 0.2),
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.05),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.shadow.withValues(alpha: 0.05),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -156,34 +227,46 @@ class CareerScreen extends StatelessWidget {
                           children: [
                             Text(
                               careerItem.position,
-                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.onSurface,
-                              ),
+                              style: Theme.of(context).textTheme.titleLarge
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onSurface,
+                                  ),
                             ),
                             const SizedBox(height: 4),
                             Text(
                               careerItem.company,
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: Theme.of(context).textTheme.titleMedium
+                                  ?.copyWith(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                             ),
                           ],
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.primaryContainer,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           careerItem.duration,
-                          style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimaryContainer,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style: Theme.of(context).textTheme.labelMedium
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onPrimaryContainer,
+                                fontWeight: FontWeight.w600,
+                              ),
                         ),
                       ),
                     ],
@@ -194,7 +277,9 @@ class CareerScreen extends StatelessWidget {
                       careerItem.description,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         height: 1.6,
-                        color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withValues(alpha: 0.8),
                       ),
                     ),
                   ],
@@ -214,10 +299,13 @@ class CareerScreen extends StatelessWidget {
                             const SizedBox(width: 8),
                             Text(
                               'Key Achievements',
-                              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                color: Theme.of(context).colorScheme.onSurface,
-                              ),
+                              style: Theme.of(context).textTheme.titleSmall
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onSurface,
+                                  ),
                             ),
                           ],
                         ),
@@ -233,7 +321,9 @@ class CareerScreen extends StatelessWidget {
                                   width: 4,
                                   height: 4,
                                   decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.primary,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -241,10 +331,16 @@ class CareerScreen extends StatelessWidget {
                                 Expanded(
                                   child: Text(
                                     achievement,
-                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                      height: 1.5,
-                                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
-                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(
+                                          height: 1.5,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSurface
+                                              .withValues(alpha: 0.8),
+                                        ),
                                   ),
                                 ),
                               ],
