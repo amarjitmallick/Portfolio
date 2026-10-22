@@ -1,23 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/home_page.dart';
-import 'package:portfolio/theme.dart';
+import 'package:flutter/semantics.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+import 'app/app.dart';
+import 'core/theme/theme_controller.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Amarjit Mallick | Portfolio',
-      debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      themeMode: ThemeMode.dark,
-      home: const HomePage(),
-    );
-  }
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  usePathUrlStrategy();
+  // Build the semantics tree up front: screen readers work without the
+  // "enable accessibility" button, and crawlers that run JS see real text.
+  SemanticsBinding.instance.ensureSemantics();
+  final theme = await ThemeController.load();
+  runApp(PortfolioApp(theme: theme));
 }

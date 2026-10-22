@@ -1,38 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="$FLUTTER_BASE_HREF">
-
   <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amarjit Mallick | Flutter engineer</title>
+  <meta name="description" content="Flutter engineer with 5+ years designing, building, shipping and maintaining Android, iOS and web apps. Offline-first, secure, production-proven.">
+  <meta name="theme-color" content="#E6A100">
+  <meta name="color-scheme" content="dark light">
+  <link rel="canonical" href="%SITE_URL%">
 
-  <!-- iOS meta tags & icons -->
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Amarjit Mallick">
+  <meta property="og:url" content="%SITE_URL%">
+  <meta property="og:title" content="Amarjit Mallick: Flutter engineer">
+  <meta property="og:description" content="5+ years shipping Flutter apps. Three production apps as sole or lead developer. Names redacted, architecture not.">
+  <meta property="og:image" content="%SITE_URL%og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Amarjit Mallick, Flutter engineer.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Amarjit Mallick: Flutter engineer">
+  <meta name="twitter:description" content="5+ years shipping Flutter apps. Three production apps as sole or lead developer. Names redacted, architecture not.">
+  <meta name="twitter:image" content="%SITE_URL%og-image.jpg">
+
+  <!-- iOS / PWA -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="portfolio">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Amarjit">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="logo.png"/>
-
-  <title>portfolio</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="icons/favicon-96.png">
   <link rel="manifest" href="manifest.json">
+  <link rel="preload" href="assets/assets/fonts/Urbanist-Variable.ttf" as="font" type="font/ttf" crossorigin>
+
+  <style>
+    @font-face { font-family: Urbanist; src: url("assets/assets/fonts/Urbanist-Variable.ttf") format("truetype"); font-weight: 100 900; font-display: swap; }
+    html, body { margin: 0; height: 100%; background: #141210; color: #EAE1D9; }
+    #boot { position: fixed; inset: 0; display: grid; place-items: center; font-family: Urbanist, system-ui, sans-serif; transition: opacity .35s ease; }
+    #boot.gone { opacity: 0; pointer-events: none; }
+    #boot .wrap { display: flex; flex-direction: column; align-items: center; gap: 22px; }
+    #boot .blob { width: 64px; height: 64px; background: #E6A100; animation: morph 1.6s ease-in-out infinite, spin 2.4s linear infinite; }
+    #boot .msg { font-size: 15px; font-weight: 600; letter-spacing: .02em; color: #D3C4B2; }
+    #boot code { font-family: inherit; color: #FFB94F; }
+    @keyframes morph {
+      0%, 100% { border-radius: 42% 58% 60% 40% / 45% 45% 55% 55%; }
+      33% { border-radius: 70% 30% 46% 54% / 30% 60% 40% 70%; }
+      66% { border-radius: 30% 70% 70% 30% / 50% 30% 70% 50%; }
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { #boot .blob { animation: none; border-radius: 50%; } }
+    .fallback { max-width: 720px; margin: 0 auto; padding: 48px 20px; font-family: system-ui, sans-serif; line-height: 1.55; }
+    .fallback a { color: #FFB94F; }
+  </style>
 </head>
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+  <div id="boot" role="status" aria-live="polite">
+    <div class="wrap">
+      <div class="blob" aria-hidden="true"></div>
+      <div class="msg">Running <code>flutter pub get</code>…</div>
+    </div>
+  </div>
+
+  <noscript>
+    <style>#boot { display: none; }</style>
+    <main class="fallback">
+      <h1>Amarjit Mallick. Flutter engineer.</h1>
+      <p>5+ years building and shipping Flutter apps for Android, iOS and the web.</p>
+      <h2>Selected work</h2>
+      <ul>
+        <li>Case file 01 (Android tablet, under NDA): <code>feat: on-device document pipeline</code></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.hosachiguru.farmops">FarmOps</a>: <code>feat: field app for agronomists</code></li>
+        <li>Case file 02 (Android field-operations app, under NDA): <code>feat: field app with hardware payments</code></li>
+        <li><a href="https://play.google.com/store/apps/details?id=me.amarjitmallick.xpense">Xpense</a>: <code>feat: offline-first expense tracker</code></li>
+        <li>Case file 03 (iPad app, under NDA): <code>feat: offline-first iPad app (v1.0 → v2.0)</code></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.amarjitmallick.gdg_siliguri">GDG Siliguri App</a>: <code>feat: live-updating event app</code></li>
+      </ul>
+      <h2>Let's work together</h2>
+      <p>Email: <a href="mailto:mallickamarjit@gmail.com">mallickamarjit@gmail.com</a> · India</p>
+      <p><a href="https://www.linkedin.com/in/amarjit-mallick/">LinkedIn</a> · <a href="https://github.com/amarjitmallick">GitHub</a> · <a href="https://x.com/amarjitmallick_">X</a> · <a href="https://amarjitmallick.hashnode.dev/">Blog</a></p>
+      <p>This site is built with Flutter and needs JavaScript.</p>
+    </main>
+  </noscript>
+
+  <script>
+    {{flutter_js}}
+    {{flutter_build_config}}
+    _flutter.loader.load({
+      onEntrypointLoaded: async function (engineInitializer) {
+        const appRunner = await engineInitializer.initializeEngine();
+        await appRunner.runApp();
+        const boot = document.getElementById('boot');
+        boot.classList.add('gone');
+        setTimeout(function () { boot.remove(); }, 400);
+      }
+    });
+  </script>
 </body>
 </html>
